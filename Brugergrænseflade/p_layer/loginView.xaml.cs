@@ -23,5 +23,10 @@ namespace p_layer
         {
             InitializeComponent();
         }
+
+        private void LoginB_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

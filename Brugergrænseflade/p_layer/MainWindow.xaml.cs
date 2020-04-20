@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using LiveCharts;
+using LiveCharts.Wpf;
 
 namespace p_layer
 {
@@ -20,9 +22,18 @@ namespace p_layer
     /// </summary>
     public partial class MainWindow : Window
     {
+        public SeriesCollection MyCollectionBS { get; set; }
+        private LineSeries bsLine;
         public MainWindow()
         {
             InitializeComponent();
+
+            bsLine = new LineSeries();
+
+            MyCollectionBS = new SeriesCollection();
+
+            MyCollectionBS.Add(bsLine);
+            DataContext = this;
         }
     }
 }
