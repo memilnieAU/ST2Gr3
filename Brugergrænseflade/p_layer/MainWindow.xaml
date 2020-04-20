@@ -23,7 +23,18 @@
                 <lvc:Axis Title="Tidspunkt" Labels="{Binding tidspunktBS}"></lvc:Axis>
             </lvc:CartesianChart.AxisX>
         </lvc:CartesianChart>
-        <ListBox Grid.Column="3" HorizontalAlignment="Left" Height="341" Grid.Row="0"   VerticalAlignment="Top" Width="212" Margin="0.4,69,-0.4,0" Grid.RowSpan="2"/>
-        <Label Content="Label" Grid.Column="3" HorizontalAlignment="Left" Margin="10.4,10,0,0" VerticalAlignment="Top"/>
+        <ListBox x:Name="CprLB" Grid.Column="3" HorizontalAlignment="Left" Height="343" Grid.Row="0"   VerticalAlignment="Top" Width="212" Margin="0.4,67,-0.4,0" Grid.RowSpan="2"/>
+        <Label x:Name="VælgCprL" Content="Vælg CPR" Grid.Column="3" HorizontalAlignment="Left" Margin="10.4,36,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="FindNyPatientB" Content="Find ny patient" HorizontalAlignment="Left" Margin="10,29.8,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Grid.Column="2" RenderTransformOrigin="0.502,2.419"/>
+        <Button x:Name="UploadMålingB" Content="Upload måling" HorizontalAlignment="Left" Margin="39,49.8,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Hent patient informationer" HorizontalAlignment="Left" Margin="10.4,50.8,0,0" Grid.Row="1" VerticalAlignment="Top" Width="153" Height="25" Grid.Column="1"/>
+        <Button x:Name="LogAfB" Content="Log af" Grid.Column="2" HorizontalAlignment="Left" Margin="133,44.8,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75"/>
+        <TextBlock x:Name="IndikationAfSygdomTBL" Grid.Column="2" HorizontalAlignment="Left" Margin="27,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="81" Width="147" Text="Indikation af sygdom"/>
+        <TextBox x:Name="SPKommentar" Grid.Column="2" HorizontalAlignment="Left" Height="57" Margin="27,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="147"/>
+        <Label x:Name="TilføjKommentarL" Content="Tilføj evt kommentar" Grid.Column="2" HorizontalAlignment="Left" Margin="27,147,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="TilføjKommentarB" Content="Tilføj kommentar" Grid.Column="2" HorizontalAlignment="Left" Margin="101,249,0,0" VerticalAlignment="Top" Width="107" Height="43"/>
+        <TextBlock x:Name="NyeMålingerTBL" Grid.Column="3" HorizontalAlignment="Left" Margin="31.4,10,0,0" TextWrapping="Wrap" Text="Der er  målinger i databasen" VerticalAlignment="Top" Height="21" Width="153"/>
+
+
     </Grid>
 </Window>
