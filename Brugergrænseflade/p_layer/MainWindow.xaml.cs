@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using LiveCharts;
 using LiveCharts.Wpf;
+using l_layer;
 
 namespace p_layer
 {
@@ -22,11 +23,16 @@ namespace p_layer
     /// </summary>
     public partial class MainWindow : Window
     {
+        //i stedet for at hide mainwindow har vi i App.xaml sat StartupUri="loginView.xaml", dette gør at programmet starter i loginView og derefter opretter mainWindow
         public SeriesCollection MyCollectionBS { get; set; }
         private LineSeries bsLine;
-        public MainWindow()
+        public MainWindow(loginView LoginRef, Logic1 logicRef)
         {
             InitializeComponent();
+            
+
+
+
 
             bsLine = new LineSeries();
 

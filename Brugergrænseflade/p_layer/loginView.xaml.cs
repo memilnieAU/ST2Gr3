@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using l_layer;
 
 namespace p_layer
 {
@@ -19,14 +20,32 @@ namespace p_layer
     /// </summary>
     public partial class loginView : Window
     {
+        private Logic1 logicObj;
+        private MainWindow mainWRef;
         public loginView()
         {
             InitializeComponent();
         }
-
+        
         private void LoginB_Click(object sender, RoutedEventArgs e)
         {
+            logicObj = new Logic1();
+                      
+                if (logicObj.checkLogin(BrugernavnTB.Text, PasswordPW.Password) == true)
+                {
 
+                this.Hide();
+                MainWindow mainWRef = new MainWindow (this, logicObj);
+                mainWRef.Show();
+            }
+                else
+                {
+                    MessageBox.Show("Enten Brugernavn eller password er forkert. Prøv igen");
+                }
+
+            
         }
+
+      
     }
 }
