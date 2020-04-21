@@ -26,7 +26,7 @@ namespace p_layer
         //i stedet for at hide mainwindow har vi i App.xaml sat StartupUri="loginView.xaml", dette gør at programmet starter i loginView og derefter opretter mainWindow
         public SeriesCollection MyCollectionBS { get; set; }
         private LineSeries bsLine;
-        public MainWindow(loginView LoginRef, Logic logicRef)
+        public MainWindow(loginView LoginRef, Logic1 logicRef)
         {
             InitializeComponent();
             

@@ -20,7 +20,7 @@ namespace p_layer
     /// </summary>
     public partial class loginView : Window
     {
-        private Logic logicObj;
+        private Logic1 logicObj;
         private MainWindow mainWRef;
         public loginView()
         {
@@ -29,7 +29,7 @@ namespace p_layer
         
         private void LoginB_Click(object sender, RoutedEventArgs e)
         {
-            logicObj = new Logic();
+            logicObj = new Logic1();
                       
                 if (logicObj.checkLogin(BrugernavnTB.Text, PasswordPW.Password) == true)
                 {
