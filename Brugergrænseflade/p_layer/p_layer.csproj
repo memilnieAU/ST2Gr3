@@ -108,5 +108,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\l_layer\l_layer.csproj">
+      <Project>{91b28fb0-a5d4-4767-94cb-6b3b0dc978a5}</Project>
+      <Name>l_layer</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
