@@ -29,17 +29,40 @@ namespace p_layer
         public MainWindow(loginView LoginRef, Logic1 logicRef)
         {
             InitializeComponent();
-            
-
 
 
 
             bsLine = new LineSeries();
-
+            bsLine.Values = new ChartValues<double> { };
             MyCollectionBS = new SeriesCollection();
 
             MyCollectionBS.Add(bsLine);
             DataContext = this;
+
+           //DummyOpstartAnalyse();
+           //DummyTilføjPunkterTilGraf();
         }
+
+
+        #region DummyOpstartAnalyse
+
+        EKG_HentDummyData eKG_HentDummyData;
+
+        private void DummyOpstartAnalyse()
+        {
+            eKG_HentDummyData = new EKG_HentDummyData();
+        }
+
+        private void DummyTilføjPunkterTilGraf()
+        {
+            Dictionary<string, double> måling = eKG_HentDummyData.GetOneSampel(0);
+            foreach (double item in måling.Values)
+            {
+                bsLine.Values.Add(item);
+            }
+           //eKG_HentDummyData.GetOneSampel(0);
+        }
+
+        #endregion
     }
 }

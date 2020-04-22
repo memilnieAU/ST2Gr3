@@ -10,23 +10,26 @@ namespace DTOs
     {
         static int ekgTestIdStatic = 1;
         int ekgTestId = 0;
-        int størelse;
-        DateTime tid;
+      
 
-        Dictionary<DateTime, int> målepunkter;
+        public Dictionary<string, double> målepunkter;
 
         public DTO_EkgMåling()
         {
             ekgTestIdStatic++;
             ekgTestId = ekgTestIdStatic;
 
-            målepunkter = new Dictionary<DateTime, int>();
+            målepunkter = new Dictionary<string, double>();
         }
 
-        public void Tilføjmålepunkt(DateTime tid, int størelse)
+        public void Tilføjmålepunkt(string tid, double størelse)
         {
             målepunkter.Add(tid, størelse);
 
+        }
+        public Dictionary<string, double> FåAlleMålePunkter()
+        {
+            return målepunkter;
         }
 
     }

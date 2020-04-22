@@ -40,7 +40,7 @@ namespace p_layer
             }
                 else
                 {
-                    MessageBox.Show("Enten Brugernavn eller password er forkert. Prøv igen");
+                    MessageBox.Show("Enten Brugernavn eller password er forkert. Prøv igen\n (BrugerNavn == \"999999 - 0000\" && pw == \"testpw\")");
                 }
 
             

@@ -14,12 +14,13 @@ namespace l_layer
     /// På sigt skal den skal dataen komme fra en database (Lokal/Offentlig)
     /// 
     /// </summary>
-    class EKG_HentDummyData
+    public class EKG_HentDummyData
     {
         List<DTO_EkgMåling> AllSampels;
         public EKG_HentDummyData()
         {
             AllSampels = new List<DTO_EkgMåling>();
+            HentFraCsvFil();
         }
 
 
@@ -35,7 +36,7 @@ namespace l_layer
 
 
             // opret de nødvendige stream-objekter
-            FileStream input = new FileStream("Test_Atrieflimmer_1.txt", FileMode.Open, FileAccess.Read);
+            FileStream input = new FileStream("Test_Atrieflimmer_1.csv", FileMode.OpenOrCreate, FileAccess.Read);
             StreamReader fileReader = new StreamReader(input);
 
 
@@ -43,13 +44,25 @@ namespace l_layer
             while ((inputRecord = fileReader.ReadLine()) != null)
             {
                 // split data op i fornavn, efternavn og telefonnummer
-                inputFields = inputRecord.Split(';');
+                inputFields = inputRecord.Split(',');
+                for (int i = 0; i < inputFields.Length; i++)
+                {
+                    inputFields[i] = inputFields[i].Trim('\'');
+
+                }
 
                 // gem data i listen
-                if (Convert.ToDateTime(inputFields[0]) != null)
+                try
                 {
-                    AllSampels[sidsteTilføjet].Tilføjmålepunkt(Convert.ToDateTime(inputFields[0]), Convert.ToInt32(inputFields[1]));
+                    AllSampels[sidsteTilføjet].Tilføjmålepunkt(inputFields[0], Convert.ToDouble(inputFields[1]));
+
                 }
+                catch (Exception)
+                {
+
+                   // throw;
+                }
+                
             }
 
             // luk adgang til filen
@@ -64,6 +77,11 @@ namespace l_layer
             //}
 
             //Console.WriteLine();
+        }
+
+        public Dictionary<string,double> GetOneSampel(int id)
+        {
+            return AllSampels[id].FåAlleMålePunkter();
         }
 
     }
