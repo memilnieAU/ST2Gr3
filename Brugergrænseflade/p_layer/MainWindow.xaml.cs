@@ -34,13 +34,16 @@ namespace p_layer
 
             bsLine = new LineSeries();
             bsLine.Values = new ChartValues<double> { };
+            bsLine.PointGeometry = null;
+            bsLine.StrokeThickness = 0.2;
+            
             MyCollectionBS = new SeriesCollection();
-
             MyCollectionBS.Add(bsLine);
             DataContext = this;
 
-           //DummyOpstartAnalyse();
-           //DummyTilføjPunkterTilGraf();
+            DummyOpstartAnalyse();
+            DummyTilføjPunkterTilGraf();
+            AnalyserData();
         }
 
 
@@ -50,17 +53,30 @@ namespace p_layer
 
         private void DummyOpstartAnalyse()
         {
+            //Denne oprrettelse henter automatisk data fra en bestemt fil
             eKG_HentDummyData = new EKG_HentDummyData();
         }
-
+        Dictionary<string, double> råMåling;
         private void DummyTilføjPunkterTilGraf()
         {
-            Dictionary<string, double> måling = eKG_HentDummyData.GetOneSampel(0);
-            foreach (double item in måling.Values)
+            råMåling = eKG_HentDummyData.GetOneSampel(0);
+            int i = 0;
+
+            foreach (double item in råMåling.Values)
             {
                 bsLine.Values.Add(item);
+                i++;
+                if (i > 1000)
+                {
+                    break;
+                }
             }
-           //eKG_HentDummyData.GetOneSampel(0);
+            //eKG_HentDummyData.GetOneSampel(0);
+        }
+        EKG_Analyser ekg_Analyse;
+        private void AnalyserData()
+        {
+            ekg_Analyse = new EKG_Analyser(råMåling);
         }
 
         #endregion

@@ -54,7 +54,7 @@ namespace l_layer
                 // gem data i listen
                 try
                 {
-                    AllSampels[sidsteTilføjet].Tilføjmålepunkt(inputFields[0], Convert.ToDouble(inputFields[1]));
+                    AllSampels[sidsteTilføjet].Tilføjmålepunkt(inputFields[0], Convert.ToDouble(inputFields[1])*0.001);
 
                 }
                 catch (Exception)
@@ -68,15 +68,7 @@ namespace l_layer
             // luk adgang til filen
             fileReader.Close();
 
-            // udskriv de indlæste data på skærmen
-            //Console.WriteLine("Disse kontakter blev indlæst:\n");
-
-            //foreach (Person p in contacts)
-            //{
-            //    Console.WriteLine(p);
-            //}
-
-            //Console.WriteLine();
+           
         }
 
         public Dictionary<string,double> GetOneSampel(int id)
