@@ -34,6 +34,7 @@ namespace l_layer
                 else
                 {
                     hoizontalHistogram.Add(afrundetTal, 1);
+
                 }
             }
         }
