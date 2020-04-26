@@ -36,9 +36,11 @@ namespace l_layer
 
 
             // opret de nødvendige stream-objekter
-            FileStream input = new FileStream("Test_Atrieflimmer_1.csv", FileMode.OpenOrCreate, FileAccess.Read);
-            StreamReader fileReader = new StreamReader(input);
+            //FileStream input = new FileStream("Test_Atrieflimmer_1.csv", FileMode.OpenOrCreate, FileAccess.Read);
+            FileStream input = new FileStream("Alm80bpm.csv", FileMode.OpenOrCreate, FileAccess.Read);
 
+            StreamReader fileReader = new StreamReader(input);
+            
 
             // indlæs sålænge der er data i filen
             while ((inputRecord = fileReader.ReadLine()) != null)
