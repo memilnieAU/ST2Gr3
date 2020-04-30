@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace d_layer
+namespace l_layer
 {
-    class Local_DownloadEkg
+    class TestDownload
     {
         public double[] hentData(int index)
         {
