@@ -73,6 +73,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="cprEksempel.cs" />
     <Compile Include="loginView.xaml.cs">
       <DependentUpon>loginView.xaml</DependentUpon>
     </Compile>

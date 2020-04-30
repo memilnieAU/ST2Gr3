@@ -26,12 +26,13 @@ namespace p_layer
         //i stedet for at hide mainwindow har vi i App.xaml sat StartupUri="loginView.xaml", dette gør at programmet starter i loginView og derefter opretter mainWindow
         public SeriesCollection MyCollectionBS { get; set; }
         private LineSeries bsLine;
+        List<cprEksempel> cpreks;
         public MainWindow(loginView LoginRef, Logic1 logicRef)
         {
             InitializeComponent();
 
-
-
+            
+          
             bsLine = new LineSeries();
             bsLine.Values = new ChartValues<double> { };
             bsLine.PointGeometry = null;
@@ -44,6 +45,14 @@ namespace p_layer
             DummyOpstartAnalyse();
             DummyTilføjPunkterTilGraf();
             AnalyserData();
+
+            cpreks = new List<cprEksempel>();
+            cpreks.Add(new cprEksempel("210397-1554", 1));
+            cpreks.Add(new cprEksempel("345678-1554", 2));
+
+            CprLB.Items.Add(cpreks[0]);
+            CprLB.Items.Add(cpreks[1]);
+            //CurrentcprEksempel = cpreks[0];
         }
 
 
