@@ -23,6 +23,9 @@ namespace l_layer
             HentAlleMålingerFraLocalDB();
 
         }
+        /// <summary>
+        /// Denne metoede vil hente alle "nye" målinger sendt fra EKG_måleren
+        /// </summary>
         private void HentAlleMålingerFraLocalDB()
         {
 
@@ -36,6 +39,11 @@ namespace l_layer
                 AllSampels[sidsteTilføjet].TilføjArrayAfPunkter(downloadEkg.hentEkgData(i));
             }
         }
+
+        /// <summary>
+        /// Denne metode vil kun hente en specifik måling i databasen
+        /// </summary>
+        /// <param name="ID"></param>
         private void HentEnMålingFraLocalDB(int ID)
         {
             AllSampels.Add(new DTO_EkgMåling());
@@ -45,6 +53,11 @@ namespace l_layer
             AllSampels[sidsteTilføjet].TilføjArrayAfPunkter(downloadEkg.hentEkgData(ID));
         }
 
+        /// <summary>
+        /// Denne metode returnere en specifik måling ud fra dem der er hentet fra databasen tidligere
+        /// </summary>
+        /// <param name="MåleID"></param>
+        /// <returns></returns>
         public DTO_EkgMåling Hent1Måling(int MåleID)
         {
             return AllSampels[MåleID];

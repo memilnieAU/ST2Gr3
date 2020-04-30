@@ -7,12 +7,14 @@ using System.Threading.Tasks;
 namespace l_layer
 {
     /// <summary>
-    /// Denne klasse er til at teste 
+    /// Denne klasse vil kunne analysere et ekg signal
+    /// Jeg finder baseline ved at inddele alle punkter i grupper af 0.1mV
+    /// Et Dictionary er et 2Dimensionelt liste/array system som er, som er hurtigt at søge igennem
     /// </summary>
     public class EKG_Analyser
     {
         Dictionary<double, int> hoizontalHistogram; //fordeling af amplityder
-        Dictionary<string, double> verticalHistogram; 
+        Dictionary<string, double> verticalHistogram;
         double[] råMåling;
         public EKG_Analyser(double[] målingTilAnalyse)
         {

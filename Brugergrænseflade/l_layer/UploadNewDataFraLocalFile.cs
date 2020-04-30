@@ -23,17 +23,27 @@ namespace l_layer
             //HentDataFraFil();
             //UploadDateTilLocalDB();
         }
+        /// <summary>
+        /// Denne metode vil hente fra en given fil
+        /// filnavnet skal skrives som parameter i HentFraCsvFil("****")
+        /// Den filerne skal være placeret i p_layer\bin\debug mappen
+        /// </summary>
         private void HentDataFraFil()
         {
             midArr = downloadFraLocalFile.HentFraCsvFil("Alm80bpm.csv");
         }
-      private void UploadDateTilLocalDB()
+        /// <summary>
+        /// Denne metode uploader den hentede csv fil den lokale database som også EKG-måleren uploader data til
+        /// 
+        /// Denne Metode er ikke færdig endnu, da den skal kunne udfylde dummydata i de tomme felter
+        /// </summary>
+        private void UploadDateTilLocalDB()
         {
-        local_Upload.uploadNewEKG(midArr);
+            local_Upload.uploadNewEKG(midArr);
 
         }
 
-        
-            
+
+
     }
 }

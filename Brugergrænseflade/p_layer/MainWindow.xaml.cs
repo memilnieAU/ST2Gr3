@@ -39,19 +39,19 @@ namespace p_layer
             };
 
 
-           /* bsLine = new LineSeries
-            {
-                Values = new ChartValues<double> { },
-                PointGeometry = null,
-                StrokeThickness = 0.2
-            };
-            */
+            /* bsLine = new LineSeries
+             {
+                 Values = new ChartValues<double> { },
+                 PointGeometry = null,
+                 StrokeThickness = 0.2
+             };
+             */
             MyCollectionBS = new SeriesCollection();
-           //MyCollectionBS.Add(bsLine);
+            //MyCollectionBS.Add(bsLine);
             MyCollectionBS.Add(testLine);
             DataContext = this;
 
-            
+
             //DummyTilføjPunkterTilGraf();
             //DownloadTestData();
             DummyOpstartAnalyse();
@@ -78,15 +78,22 @@ namespace p_layer
             //Henter data fra Den lokaleDB 
             hentNyeMålinger = new HentNyeMålinger();
         }
-
         double[] råMåling;
         EKG_Analyser ekg_Analyse;
+        /// <summary>
+        /// Denne metode vil analysere en given måling 
+        /// </summary>
+        /// <param name="id"></param>
         private void AnalyserData(int id)
         {
             råMåling = hentNyeMålinger.Hent1Måling(id).målepunkterArr;
             ekg_Analyse = new EKG_Analyser(råMåling);
 
         }
+        /// <summary>
+        /// Denne metode tilføjer alle punkter til grafen
+        /// Denne metode er midlertidig
+        /// </summary>
         private void DummyTilføjPunkterTilGraf()
         {
             int i = 0;
@@ -100,9 +107,9 @@ namespace p_layer
                     break;
                 }
             }
-            
+
         }
-      
+
 
         #endregion
     }
