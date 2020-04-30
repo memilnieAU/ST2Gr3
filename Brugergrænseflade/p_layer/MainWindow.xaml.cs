@@ -51,11 +51,13 @@ namespace p_layer
             MyCollectionBS.Add(testLine);
             DataContext = this;
 
-            //UploadTestData();
+            
             //DummyTilføjPunkterTilGraf();
-            DownloadTestData();
+            //DownloadTestData();
             DummyOpstartAnalyse();
-           // AnalyserData();
+            AnalyserData(1/*Her kan man skrive det id som man gerne vil bruge*/);
+            DummyTilføjPunkterTilGraf();
+
 
             cpreks = new List<cprEksempel>();
             cpreks.Add(new cprEksempel("210397-1554", 1));
@@ -69,64 +71,39 @@ namespace p_layer
 
         #region DummyOpstartAnalyse
 
-        EKG_HentDummyData eKG_HentDummyData;
+        HentNyeMålinger hentNyeMålinger;
 
         private void DummyOpstartAnalyse()
         {
-            //Denne oprrettelse henter automatisk data fra en bestemt fil
-            eKG_HentDummyData = new EKG_HentDummyData();
+            //Henter data fra Den lokaleDB 
+            hentNyeMålinger = new HentNyeMålinger();
         }
-        Dictionary<string, double> råMåling;
-        private void DummyTilføjPunkterTilGraf()
-        {
-            råMåling = eKG_HentDummyData.GetOneSampel(0);
-            int i = 0;
 
-            foreach (double item in råMåling.Values)
-            {
-                testLine.Values.Add(item);
-                i++;
-                if (i > 1000)
-                {
-                    break;
-                }
-            }
-            //eKG_HentDummyData.GetOneSampel(0);
-        }
+        double[] råMåling;
         EKG_Analyser ekg_Analyse;
-        private void AnalyserData()
+        private void AnalyserData(int id)
         {
+            råMåling = hentNyeMålinger.Hent1Måling(id).målepunkterArr;
             ekg_Analyse = new EKG_Analyser(råMåling);
 
         }
-       private static Local_UploadEKG local_uploadEKG;
-
-        private void UploadTestData()
+        private void DummyTilføjPunkterTilGraf()
         {
-            local_uploadEKG = new Local_UploadEKG();
-            //local_UploadEKG.uploadNewEKG(råMåling.Values.ToArray());
-            local_uploadEKG.uploadNewEKG(råMåling.Values.ToArray());
-            
-        }
-        Local_DownloadEKG local_DownloadEKG;
-            double[] testmåling;
-        private void DownloadTestData()
-        {
-            local_DownloadEKG = new Local_DownloadEKG();
-            testmåling = local_DownloadEKG.hentData(3);
             int i = 0;
 
-            foreach (double item in testmåling)
+            foreach (double item in råMåling)
             {
                 testLine.Values.Add(item);
                 i++;
-                if (i > 1000)
+                if (i > 2000)
                 {
                     break;
                 }
             }
-
+            
         }
+      
+
         #endregion
     }
 }

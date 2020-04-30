@@ -13,8 +13,8 @@ namespace l_layer
     {
         Dictionary<double, int> hoizontalHistogram; //fordeling af amplityder
         Dictionary<string, double> verticalHistogram; 
-        Dictionary<string, double> råMåling;
-        public EKG_Analyser(Dictionary<string, double> målingTilAnalyse)
+        double[] råMåling;
+        public EKG_Analyser(double[] målingTilAnalyse)
         {
             hoizontalHistogram = new Dictionary<double, int>();
             hoizontalHistogram.Add(0, 0);
@@ -24,7 +24,7 @@ namespace l_layer
 
         private void HoizontalHistogram()
         {
-            foreach (double item in råMåling.Values)
+            foreach (double item in råMåling)
             {
                 double afrundetTal = Math.Round(item, 1);
                 if (hoizontalHistogram.ContainsKey(afrundetTal))

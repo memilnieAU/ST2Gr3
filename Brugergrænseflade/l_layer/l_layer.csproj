@@ -48,15 +48,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EKG_Analyser.cs" />
-    <Compile Include="EKG_HentDummyData.cs" />
+    <Compile Include="HentNyeMålinger.cs" />
     <Compile Include="Logic1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestDownload.cs" />
+    <Compile Include="UploadNewDataFraLocalFile.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DTOs\DTOs.csproj">
       <Project>{e3e1a00d-8a9d-464c-93fa-044e48268195}</Project>
       <Name>DTOs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\d_layer\d_layer.csproj">
+      <Project>{4b8c82f0-fac1-468e-ac95-286ae8b6aa61}</Project>
+      <Name>d_layer</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

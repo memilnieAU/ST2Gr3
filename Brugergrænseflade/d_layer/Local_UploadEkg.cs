@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace p_layer
+namespace d_layer
 {
-    public class Local_UploadEKG
+    public class Local_UploadEkg
     {
-
         public int uploadNewEKG(double[] arr)
         {
             SqlConnection conn;
@@ -23,7 +23,7 @@ namespace p_layer
                 cmd.Parameters.AddWithValue("@data",
                 arr.SelectMany(value =>
                 BitConverter.GetBytes(value)).ToArray());
-               
+
                 retur = (int)cmd.ExecuteScalar();
             }
             conn.Close();
