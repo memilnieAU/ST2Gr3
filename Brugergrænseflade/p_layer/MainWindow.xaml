@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         
         xmlns:local="clr-namespace:p_layer"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
@@ -39,7 +40,7 @@
         <TextBox x:Name="loginInfoTB" HorizontalAlignment="Left" Height="45" Margin="10,41,0,0" TextWrapping="Wrap" Text="navn/id" VerticalAlignment="Top" Width="120"/>
         <Label x:Name="loginInfoL" Content="Login-information" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Label x:Name="indSygdomL" Content="Indikation af sygdom" Grid.Column="1" HorizontalAlignment="Left" Margin="61.667,120,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="148"/>
-
+        <lvc:CartesianChart Name="test" Series="{Binding Path=MyCollectionBS}" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="61.667,36,27.333,145.667" Grid.Column="1" />
 
     </Grid>
 </Window>

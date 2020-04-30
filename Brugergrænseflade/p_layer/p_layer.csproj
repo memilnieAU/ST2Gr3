@@ -74,6 +74,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="cprEksempel.cs" />
+    <Compile Include="Local_DownloadEKG.cs" />
+    <Compile Include="Local_UploadEKG.cs" />
     <Compile Include="loginView.xaml.cs">
       <DependentUpon>loginView.xaml</DependentUpon>
     </Compile>

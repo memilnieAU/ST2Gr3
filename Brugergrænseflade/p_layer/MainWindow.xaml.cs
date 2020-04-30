@@ -26,25 +26,36 @@ namespace p_layer
         //i stedet for at hide mainwindow har vi i App.xaml sat StartupUri="loginView.xaml", dette gør at programmet starter i loginView og derefter opretter mainWindow
         public SeriesCollection MyCollectionBS { get; set; }
         private LineSeries bsLine;
+        private LineSeries testLine;
         List<cprEksempel> cpreks;
         public MainWindow(loginView LoginRef, Logic1 logicRef)
         {
             InitializeComponent();
+            testLine = new LineSeries
+            {
+                Values = new ChartValues<double> { },
+                PointGeometry = null,
+                StrokeThickness = 0.2
+            };
 
-            
-          
-            bsLine = new LineSeries();
-            bsLine.Values = new ChartValues<double> { };
-            bsLine.PointGeometry = null;
-            bsLine.StrokeThickness = 0.2;
-            
+
+           /* bsLine = new LineSeries
+            {
+                Values = new ChartValues<double> { },
+                PointGeometry = null,
+                StrokeThickness = 0.2
+            };
+            */
             MyCollectionBS = new SeriesCollection();
-            MyCollectionBS.Add(bsLine);
+           //MyCollectionBS.Add(bsLine);
+            MyCollectionBS.Add(testLine);
             DataContext = this;
 
+            //UploadTestData();
+            //DummyTilføjPunkterTilGraf();
+            DownloadTestData();
             DummyOpstartAnalyse();
-            DummyTilføjPunkterTilGraf();
-            AnalyserData();
+           // AnalyserData();
 
             cpreks = new List<cprEksempel>();
             cpreks.Add(new cprEksempel("210397-1554", 1));
@@ -73,7 +84,7 @@ namespace p_layer
 
             foreach (double item in råMåling.Values)
             {
-                bsLine.Values.Add(item);
+                testLine.Values.Add(item);
                 i++;
                 if (i > 1000)
                 {
@@ -86,8 +97,36 @@ namespace p_layer
         private void AnalyserData()
         {
             ekg_Analyse = new EKG_Analyser(råMåling);
-        }
 
+        }
+       private static Local_UploadEKG local_uploadEKG;
+
+        private void UploadTestData()
+        {
+            local_uploadEKG = new Local_UploadEKG();
+            //local_UploadEKG.uploadNewEKG(råMåling.Values.ToArray());
+            local_uploadEKG.uploadNewEKG(råMåling.Values.ToArray());
+            
+        }
+        Local_DownloadEKG local_DownloadEKG;
+            double[] testmåling;
+        private void DownloadTestData()
+        {
+            local_DownloadEKG = new Local_DownloadEKG();
+            testmåling = local_DownloadEKG.hentData(3);
+            int i = 0;
+
+            foreach (double item in testmåling)
+            {
+                testLine.Values.Add(item);
+                i++;
+                if (i > 1000)
+                {
+                    break;
+                }
+            }
+
+        }
         #endregion
     }
 }
