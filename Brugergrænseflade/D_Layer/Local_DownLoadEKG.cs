@@ -9,7 +9,7 @@ namespace d_layer
 {
     public class Local_DownloadEkg
     {
-        public double[] hentEkgData(int index)
+        public double[] HentEkgData(int index)
         {
             SqlConnection conn;
             const String db = "F20ST2ITS2201908775";
@@ -33,7 +33,7 @@ namespace d_layer
             conn.Close();
             return tal;
         }
-        public int hentAntalletAfMålinger()
+        public int HentAntalletAfMålinger()
         {
             SqlConnection conn;
             const String db = "F20ST2ITS2201908775";
@@ -41,7 +41,7 @@ namespace d_layer
             conn = new SqlConnection("Data Source = st-i4dab.uni.au.dk;Initial Catalog = " + db + ";Persist Security Info = True;User ID = " + db + ";Password = " + db + "");
             conn.Open();
             SqlDataReader rdr;
-           
+
             int tal = 0;
             string selectString = "Select COUNT(id_måling) as AntalMålinger From SP_NyeEkger";
             using (SqlCommand cmd = new SqlCommand(selectString, conn))
@@ -55,6 +55,6 @@ namespace d_layer
             conn.Close();
             return tal;
         }
-        
+
     }
 }

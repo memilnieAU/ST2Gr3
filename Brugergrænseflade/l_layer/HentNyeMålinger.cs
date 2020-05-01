@@ -30,13 +30,13 @@ namespace l_layer
         {
 
             downloadEkg = new Local_DownloadEkg();
-            int antalmålinger = downloadEkg.hentAntalletAfMålinger();
+            int antalmålinger = downloadEkg.HentAntalletAfMålinger();
             for (int i = 0; i < antalmålinger; i++)
             {
                 AllSampels.Add(new DTO_EkgMåling());
                 int sidsteTilføjet = AllSampels.Count - 1;
 
-                AllSampels[sidsteTilføjet].TilføjArrayAfPunkter(downloadEkg.hentEkgData(i));
+                AllSampels[sidsteTilføjet].TilføjArrayAfPunkter(downloadEkg.HentEkgData(i));
             }
         }
 
@@ -50,7 +50,7 @@ namespace l_layer
             int sidsteTilføjet = AllSampels.Count - 1;
 
             downloadEkg = new Local_DownloadEkg();
-            AllSampels[sidsteTilføjet].TilføjArrayAfPunkter(downloadEkg.hentEkgData(ID));
+            AllSampels[sidsteTilføjet].TilføjArrayAfPunkter(downloadEkg.HentEkgData(ID));
         }
 
         /// <summary>
