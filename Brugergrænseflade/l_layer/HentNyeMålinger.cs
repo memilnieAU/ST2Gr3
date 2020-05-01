@@ -8,17 +8,25 @@ using System.Threading.Tasks;
 
 namespace l_layer
 {
-    public class HentNyeMålinger
+    public class HentNyeMålingerFraLocalDB
     {
+
+        public int id_måling { get; set; }
+        public string id_medarbejder { get; set; }
+        public string borger_cprnr { get; set; }
+        public DateTime start_tidspunkt { get; set; }
+        public double[] raa_maalepunkter { get; set; }
+        public double samplerate_hz { get; set; }
         /// <summary>
         /// Denne klasse skal kunne hente Målinger fra den lokale database tabel "SP_NyeEkger"
         /// </summary>
         List<DTO_EkgMåling> AllSampels;
         Local_DownloadEkg downloadEkg;
-        public HentNyeMålinger()
+        public HentNyeMålingerFraLocalDB()
         {
             AllSampels = new List<DTO_EkgMåling>();
-            //HentDataFraCVS();
+            downloadEkg = new Local_DownloadEkg();
+            
             //HentEnMålingFraLocalDB(1);
             HentAlleMålingerFraLocalDB();
 
@@ -29,14 +37,11 @@ namespace l_layer
         private void HentAlleMålingerFraLocalDB()
         {
 
-            downloadEkg = new Local_DownloadEkg();
-            int antalmålinger = downloadEkg.HentAntalletAfMålinger();
-            for (int i = 0; i < antalmålinger; i++)
+            int antalmålinger = downloadEkg.hentAntalletAfMålinger();
+            for (int i = 1; i < antalmålinger; i++)
             {
-                AllSampels.Add(new DTO_EkgMåling());
-                int sidsteTilføjet = AllSampels.Count - 1;
-
-                AllSampels[sidsteTilføjet].TilføjArrayAfPunkter(downloadEkg.HentEkgData(i));
+                
+                AllSampels.Add(downloadEkg.hentMåling(i));
             }
         }
 
@@ -46,11 +51,8 @@ namespace l_layer
         /// <param name="ID"></param>
         private void HentEnMålingFraLocalDB(int ID)
         {
-            AllSampels.Add(new DTO_EkgMåling());
-            int sidsteTilføjet = AllSampels.Count - 1;
-
-            downloadEkg = new Local_DownloadEkg();
-            AllSampels[sidsteTilføjet].TilføjArrayAfPunkter(downloadEkg.HentEkgData(ID));
+         
+            AllSampels.Add(downloadEkg.hentMåling(ID));
         }
 
         /// <summary>
@@ -60,7 +62,7 @@ namespace l_layer
         /// <returns></returns>
         public DTO_EkgMåling Hent1Måling(int MåleID)
         {
-            return AllSampels[MåleID];
+            return AllSampels[MåleID-1];
         }
     }
 }

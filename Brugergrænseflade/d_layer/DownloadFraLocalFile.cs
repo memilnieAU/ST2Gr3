@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DTOs;
 
 namespace d_layer
 {
@@ -11,7 +12,7 @@ namespace d_layer
     {
         List<double> midlertidigePunkter;
 
-        public double[] HentFraCsvFil(String FilNavn)  //Henter data fra en måling og tilføjer punkter til en liste
+        public DTO_EkgMåling HentFraCsvFil(String FilNavn)  //Henter data fra en måling og tilføjer punkter til en liste
         {
             midlertidigePunkter = new List<double>();
 
@@ -54,8 +55,9 @@ namespace d_layer
 
             // luk adgang til filen
             fileReader.Close();
+            DTO_EkgMåling nyMåling = new DTO_EkgMåling(0, midlertidigePunkter.ToArray());
 
-            return midlertidigePunkter.ToArray();
+            return nyMåling;
         }
     }
 }

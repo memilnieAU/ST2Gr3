@@ -54,10 +54,11 @@ namespace p_layer
 
             //DummyTilføjPunkterTilGraf();
             //DownloadTestData();
-            DummyOpstartAnalyse();
-            AnalyserData(1/*Her kan man skrive det id som man gerne vil bruge*/);
-            DummyTilføjPunkterTilGraf();
-
+            //DummyOpstartAnalyse();
+           // AnalyserData(1/*Her kan man skrive det id som man gerne vil bruge*/);
+           // DummyTilføjPunkterTilGraf();
+            UploadNewDataFraLocalFile uploadNewDataFraLocalFile = new UploadNewDataFraLocalFile();
+            
 
             cpreks = new List<cprEksempel>();
             cpreks.Add(new cprEksempel("210397-1554", 1));
@@ -71,12 +72,12 @@ namespace p_layer
 
         #region DummyOpstartAnalyse
 
-        HentNyeMålinger hentNyeMålinger;
+        HentNyeMålingerFraLocalDB hentNyeMålinger;
 
         private void DummyOpstartAnalyse()
         {
             //Henter data fra Den lokaleDB 
-            hentNyeMålinger = new HentNyeMålinger();
+            hentNyeMålinger = new HentNyeMålingerFraLocalDB();
         }
         double[] råMåling;
         EKG_Analyser ekg_Analyse;
@@ -86,7 +87,7 @@ namespace p_layer
         /// <param name="id"></param>
         private void AnalyserData(int id)
         {
-            råMåling = hentNyeMålinger.Hent1Måling(id).målepunkterArr;
+            råMåling = hentNyeMålinger.Hent1Måling(id).raa_data;
             ekg_Analyse = new EKG_Analyser(råMåling);
 
         }

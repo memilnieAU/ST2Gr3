@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using d_layer;
+using DTOs;
 
 namespace l_layer
 {
@@ -15,13 +16,13 @@ namespace l_layer
     {
         Local_UploadEkg local_Upload;
         DownloadFraLocalFile downloadFraLocalFile;
-        double[] midArr;
+        DTO_EkgMåling nyMåling;
         public UploadNewDataFraLocalFile()
         {
             downloadFraLocalFile = new DownloadFraLocalFile();
             local_Upload = new Local_UploadEkg();
-            //HentDataFraFil();
-            //UploadDateTilLocalDB();
+            HentDataFraFil();
+            UploadDateTilLocalDB();
         }
         /// <summary>
         /// Denne metode vil hente fra en given fil
@@ -30,7 +31,7 @@ namespace l_layer
         /// </summary>
         private void HentDataFraFil()
         {
-            midArr = downloadFraLocalFile.HentFraCsvFil("Alm80bpm.csv");
+            nyMåling = downloadFraLocalFile.HentFraCsvFil("Alm80bpm.csv");
         }
         /// <summary>
         /// Denne metode uploader den hentede csv fil den lokale database som også EKG-måleren uploader data til
@@ -39,7 +40,8 @@ namespace l_layer
         /// </summary>
         private void UploadDateTilLocalDB()
         {
-            local_Upload.uploadNewEKG(midArr);
+            
+            local_Upload.UploadNewEKGFromFile(nyMåling);
 
         }
 
