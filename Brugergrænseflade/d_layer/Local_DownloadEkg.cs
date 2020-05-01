@@ -97,7 +97,7 @@ namespace d_layer
                         målingFraDB.borger_cprnr = (string)rdr["borger_cprnr"];
 
                     if (rdr["start_tidspunkt"] != DBNull.Value)
-                        målingFraDB.start_tidspunkt = (DateTime)rdr["start_tidspunkt"];
+              //          målingFraDB.start_tidspunkt = Convert.ToDateTime( rdr["start_tidspunkt"]);
                     if (rdr["antal_maalepunkter"] != DBNull.Value)
                         målingFraDB.antal_maalepunkter = (int)rdr["antal_maalepunkter"];
                     if (rdr["samplerate_hz"] != DBNull.Value)
