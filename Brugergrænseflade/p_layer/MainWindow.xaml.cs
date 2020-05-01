@@ -28,6 +28,11 @@ namespace p_layer
         private LineSeries bsLine;
         private LineSeries testLine;
         List<cprEksempel> cpreks;
+
+
+        HentNyeMålingerFraLocalDB hentNyeMålinger;
+
+
         public MainWindow(loginView LoginRef, Logic1 logicRef)
         {
             InitializeComponent();
@@ -51,13 +56,15 @@ namespace p_layer
             MyCollectionBS.Add(testLine);
             DataContext = this;
 
-
-            //DummyTilføjPunkterTilGraf();
-            //DownloadTestData();
-            //DummyOpstartAnalyse();
-           // AnalyserData(1/*Her kan man skrive det id som man gerne vil bruge*/);
-           // DummyTilføjPunkterTilGraf();
+            //Denne henter data fra en lokal fil og sætter det ind i databasen
             UploadNewDataFraLocalFile uploadNewDataFraLocalFile = new UploadNewDataFraLocalFile();
+
+
+            //Henter data fra Den lokaleDB 
+            hentNyeMålinger = new HentNyeMålingerFraLocalDB();
+            
+            AnalyserData(7/*Her kan man skrive det id som man gerne vil bruge*/);
+            DummyTilføjPunkterTilGraf();
             
 
             cpreks = new List<cprEksempel>();
@@ -72,13 +79,8 @@ namespace p_layer
 
         #region DummyOpstartAnalyse
 
-        HentNyeMålingerFraLocalDB hentNyeMålinger;
 
-        private void DummyOpstartAnalyse()
-        {
-            //Henter data fra Den lokaleDB 
-            hentNyeMålinger = new HentNyeMålingerFraLocalDB();
-        }
+        
         double[] råMåling;
         EKG_Analyser ekg_Analyse;
         /// <summary>

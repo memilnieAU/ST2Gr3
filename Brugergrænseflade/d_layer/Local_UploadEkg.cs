@@ -17,7 +17,7 @@ namespace d_layer
             conn = new SqlConnection("Data Source = st-i4dab.uni.au.dk;Initial Catalog = " + db + ";Persist Security Info = True;User ID = " + db + ";Password = " + db + "");
             conn.Open();
             int t = 2;
-            string insertStringParam = $"INSERT INTO SP_NyeEkger ([raa_data],[id_medarbejder],[borger_cprnr],[start_tidspunkt],[antal_maalepunkter]) OUTPUT INSERTED.id_måling VALUES(@data,'{nyMåling.id_medarbejder}','{nyMåling.borger_cprnr}','{nyMåling.start_tidspunkt.ToString()}',{nyMåling.antal_maalepunkter})";
+            string insertStringParam = $"INSERT INTO SP_NyeEkger ([raa_data],[id_medarbejder],[borger_cprnr],[start_tidspunkt],[antal_maalepunkter]) OUTPUT INSERTED.id_måling VALUES(@data,'{nyMåling.id_medarbejder}','{nyMåling.borger_cprnr}','{nyMåling.start_tidspunkt.ToLongDateString()}',{nyMåling.antal_maalepunkter})";
             using (SqlCommand cmd = new SqlCommand(insertStringParam, conn))
             {
                 cmd.Parameters.AddWithValue("@data",
