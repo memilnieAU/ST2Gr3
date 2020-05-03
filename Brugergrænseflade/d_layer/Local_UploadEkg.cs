@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -16,13 +17,13 @@ namespace d_layer
             int retur;
             conn = new SqlConnection("Data Source = st-i4dab.uni.au.dk;Initial Catalog = " + db + ";Persist Security Info = True;User ID = " + db + ";Password = " + db + "");
             conn.Open();
-            int t = 2;
-            string insertStringParam = $"INSERT INTO SP_NyeEkger ([raa_data],[id_medarbejder],[borger_cprnr],[start_tidspunkt],[antal_maalepunkter]) OUTPUT INSERTED.id_måling VALUES(@data,'{nyMåling.id_medarbejder}','{nyMåling.borger_cprnr}','{nyMåling.start_tidspunkt.ToLongDateString()}',{nyMåling.antal_maalepunkter})";
+            string insertStringParam = $"INSERT INTO SP_NyeEkger ([raa_data],[id_medarbejder],[borger_cprnr],[start_tidspunkt],[antal_maalepunkter],[samplerate_hz]) OUTPUT INSERTED.id_måling VALUES(@data,'{nyMåling.id_medarbejder}','{nyMåling.borger_cprnr}','{nyMåling.start_tidspunkt.ToBinary()}',{nyMåling.antal_maalepunkter},@hz)";
             using (SqlCommand cmd = new SqlCommand(insertStringParam, conn))
             {
                 cmd.Parameters.AddWithValue("@data",
                 nyMåling.raa_data.SelectMany(value =>
                 BitConverter.GetBytes(value)).ToArray());
+                cmd.Parameters.AddWithValue("@hz", nyMåling.samplerate_hz);
 
                 retur = (int)cmd.ExecuteScalar();
             }

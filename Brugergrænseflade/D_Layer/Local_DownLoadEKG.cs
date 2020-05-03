@@ -16,6 +16,7 @@ namespace d_layer
         public DateTime start_tidspunkt { get; set; }
         public double[] raa_maalepunkter { get; set; }
         public double samplerate_hz { get; set; }
+
         DTO_EkgMåling målingFraDB;
 
         public Local_DownloadEkg()
@@ -71,6 +72,33 @@ namespace d_layer
             conn.Close();
             return tal;
         }
+        public int[] hentID_MålingerAfMålinger()
+        {
+            SqlConnection conn;
+            const String db = "F20ST2ITS2201908775";
+
+            conn = new SqlConnection("Data Source = st-i4dab.uni.au.dk;Initial Catalog = " + db + ";Persist Security Info = True;User ID = " + db + ";Password = " + db + "");
+            conn.Open();
+            SqlDataReader rdr;
+
+            List<int> tal = new List<int>();
+            
+            string selectString = "Select id_måling From SP_NyeEkger";
+            using (SqlCommand cmd = new SqlCommand(selectString, conn))
+            {
+                rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    tal.Add((int)rdr["id_måling"]);
+
+                }
+                //tal = (int)rdr["AntalMålinger"];
+            }
+            conn.Close();
+            return tal.ToArray();
+        }
+
+        //Select id_måling From SP_NyeEkger
 
         public DTO_EkgMåling hentMåling(int id_måling)
         {
@@ -89,6 +117,7 @@ namespace d_layer
                 rdr = cmd.ExecuteReader();
                 if (rdr.Read())
                 {
+                    målingFraDB.id_måling = (int)rdr["id_måling"];
                     if (rdr["id_medarbejder"] != DBNull.Value)
                         målingFraDB.id_medarbejder = (string)rdr["id_medarbejder"];
 
@@ -97,11 +126,14 @@ namespace d_layer
                         målingFraDB.borger_cprnr = (string)rdr["borger_cprnr"];
 
                     if (rdr["start_tidspunkt"] != DBNull.Value)
-              //          målingFraDB.start_tidspunkt = Convert.ToDateTime( rdr["start_tidspunkt"]);
+                    {
+                        string tid = (string)rdr["start_tidspunkt"];
+                        målingFraDB.start_tidspunkt = DateTime.FromBinary(long.Parse(tid));
+                    }
                     if (rdr["antal_maalepunkter"] != DBNull.Value)
                         målingFraDB.antal_maalepunkter = (int)rdr["antal_maalepunkter"];
                     if (rdr["samplerate_hz"] != DBNull.Value)
-                        målingFraDB.samplerate_hz = (double)rdr["samplerate_hz"];
+                        målingFraDB.samplerate_hz = Convert.ToDouble( rdr["samplerate_hz"]);
 
 
                 }

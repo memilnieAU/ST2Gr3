@@ -16,17 +16,36 @@ namespace l_layer
         Dictionary<double, int> hoizontalHistogram; //fordeling af amplityder
         Dictionary<string, double> verticalHistogram;
         double[] råMåling;
-        public EKG_Analyser(double[] målingTilAnalyse)
+        private DTOs.DTO_EkgMåling måling;
+
+        public DTOs.DTO_EkgMåling  Måling
         {
+            get { return måling; }
+            private set { måling = value; }
+        }
+
+        
+        public EKG_Analyser()
+        {
+        }
+        /// <summary>
+        /// Analysere en graf og retunere dianosen
+        /// </summary>
+        /// <param name="målingTilAnalyse"></param>
+        /// <returns></returns>
+        public string AnalyserEnMåling(DTOs.DTO_EkgMåling målingTilAnalyse)
+        {
+            måling = målingTilAnalyse;
             hoizontalHistogram = new Dictionary<double, int>();
             hoizontalHistogram.Add(0, 0);
-            råMåling = målingTilAnalyse;
+            
             HoizontalHistogram();
+            return "Sygdom";
         }
 
         private void HoizontalHistogram()
         {
-            foreach (double item in råMåling)
+            foreach (double item in måling.raa_data)
             {
                 double afrundetTal = Math.Round(item, 1);
                 if (hoizontalHistogram.ContainsKey(afrundetTal))
@@ -36,7 +55,6 @@ namespace l_layer
                 else
                 {
                     hoizontalHistogram.Add(afrundetTal, 1);
-
                 }
             }
         }

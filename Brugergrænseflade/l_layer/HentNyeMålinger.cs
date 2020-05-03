@@ -27,29 +27,36 @@ namespace l_layer
             AllSampels = new List<DTO_EkgMåling>();
             downloadEkg = new Local_DownloadEkg();
             
-            //HentEnMålingFraLocalDB(1);
-            HentAlleMålingerFraLocalDB();
+            
 
         }
         /// <summary>
         /// Denne metoede vil hente alle "nye" målinger sendt fra EKG_måleren
         /// </summary>
-        private void HentAlleMålingerFraLocalDB()
+        public void HentAlleMålingerFraLocalDB()
         {
 
-            int antalmålinger = downloadEkg.hentAntalletAfMålinger();
-            for (int i = 1; i < antalmålinger; i++)
-            {
+            //int antalmålinger = downloadEkg.hentAntalletAfMålinger();
+            //for (int i = 1; i < antalmålinger; i++)
+            //{
                 
-                AllSampels.Add(downloadEkg.hentMåling(i));
+            //    AllSampels.Add(downloadEkg.hentMåling(i));
+            //}
+
+            int[] id_målinger = downloadEkg.hentID_MålingerAfMålinger();
+            foreach (int item in id_målinger)
+            {
+                AllSampels.Add(downloadEkg.hentMåling(item));
+
             }
+            
         }
 
         /// <summary>
         /// Denne metode vil kun hente en specifik måling i databasen
         /// </summary>
         /// <param name="ID"></param>
-        private void HentEnMålingFraLocalDB(int ID)
+        public void HentEnMålingFraLocalDB(int ID)
         {
          
             AllSampels.Add(downloadEkg.hentMåling(ID));
@@ -62,7 +69,14 @@ namespace l_layer
         /// <returns></returns>
         public DTO_EkgMåling Hent1Måling(int MåleID)
         {
-            return AllSampels[MåleID-1];
+            foreach (DTO_EkgMåling item in AllSampels)
+            {
+                if (item.id_måling == MåleID)
+                {
+                    return item;
+                }
+            }
+            return AllSampels[0];
         }
     }
 }

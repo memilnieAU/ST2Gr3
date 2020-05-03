@@ -31,6 +31,7 @@ namespace p_layer
 
 
         HentNyeMålingerFraLocalDB hentNyeMålinger;
+        EKG_Analyser ekg_Analyse;
 
 
         public MainWindow(loginView LoginRef, Logic1 logicRef)
@@ -59,11 +60,18 @@ namespace p_layer
             //Denne henter data fra en lokal fil og sætter det ind i databasen
             UploadNewDataFraLocalFile uploadNewDataFraLocalFile = new UploadNewDataFraLocalFile();
 
+            uploadNewDataFraLocalFile.HentDataFraFil();
+            uploadNewDataFraLocalFile.UploadDateTilLocalDB();
 
             //Henter data fra Den lokaleDB 
             hentNyeMålinger = new HentNyeMålingerFraLocalDB();
+            //hentNyeMålinger.HentEnMålingFraLocalDB(16);
+            hentNyeMålinger.HentAlleMålingerFraLocalDB();
+
+            ekg_Analyse = new EKG_Analyser();
             
-            AnalyserData(7/*Her kan man skrive det id som man gerne vil bruge*/);
+            ekg_Analyse.AnalyserEnMåling(hentNyeMålinger.Hent1Måling(uploadNewDataFraLocalFile.sidsteMålingUpladede));
+
             DummyTilføjPunkterTilGraf();
             
 
@@ -79,20 +87,7 @@ namespace p_layer
 
         #region DummyOpstartAnalyse
 
-
-        
-        double[] råMåling;
-        EKG_Analyser ekg_Analyse;
-        /// <summary>
-        /// Denne metode vil analysere en given måling 
-        /// </summary>
-        /// <param name="id"></param>
-        private void AnalyserData(int id)
-        {
-            råMåling = hentNyeMålinger.Hent1Måling(id).raa_data;
-            ekg_Analyse = new EKG_Analyser(råMåling);
-
-        }
+       
         /// <summary>
         /// Denne metode tilføjer alle punkter til grafen
         /// Denne metode er midlertidig
@@ -101,7 +96,7 @@ namespace p_layer
         {
             int i = 0;
 
-            foreach (double item in råMåling)
+            foreach (double item in ekg_Analyse.Måling.raa_data)
             {
                 testLine.Values.Add(item);
                 i++;
