@@ -110,5 +110,12 @@ namespace p_layer
 
 
         #endregion
+
+        private void LogAfB_Click(object sender, RoutedEventArgs e)
+        {
+            //denne kode genstarter programmet, jeg leder lige efter en smartere måde, men det her gør sådanset hvad der skal ske
+            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+            Application.Current.Shutdown();
+        }
     }
 }

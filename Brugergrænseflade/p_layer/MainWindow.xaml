@@ -29,7 +29,7 @@
         <Button x:Name="FindNyPatientB" Content="Find ny patient" HorizontalAlignment="Left" Margin="109.667,197,0,0" Grid.Row="1" VerticalAlignment="Top" Width="92" Grid.Column="3" RenderTransformOrigin="0.502,2.419" Height="20"/>
         <Button x:Name="UploadMålingB" Content="Upload måling" HorizontalAlignment="Left" Margin="180.667,220,0,0" Grid.Row="1" VerticalAlignment="Top" Width="110" Height="24" Grid.Column="2" Grid.ColumnSpan="2"/>
         <Button Content="Hent patient informationer" HorizontalAlignment="Left" Margin="10,170,0,0" Grid.Row="1" VerticalAlignment="Top" Width="153" Height="25"/>
-        <Button x:Name="LogAfB" Content="Log af" Grid.Column="3" HorizontalAlignment="Left" Margin="109.667,224,0,0" Grid.Row="1" VerticalAlignment="Top" Width="92" Height="20"/>
+        <Button x:Name="LogAfB" Content="Log af" Grid.Column="3" HorizontalAlignment="Left" Margin="109.667,224,0,0" Grid.Row="1" VerticalAlignment="Top" Width="92" Height="20" Click="LogAfB_Click"/>
         <TextBox x:Name="SPKommentar" Grid.Column="2" HorizontalAlignment="Left" Height="57" Margin="54.667,154,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="236" Grid.Row="1" Grid.ColumnSpan="2"/>
         <TextBox x:Name="IndiSygdomTB" Margin="61.667,154,168.333,49.667" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1"></TextBox>
         <Label x:Name="TilføjKommentarL" Content="Tilføj evt kommentar" Grid.Column="2" HorizontalAlignment="Left" Margin="54.667,120,0,0" VerticalAlignment="Top" Height="27" Width="119" Grid.Row="1"/>
