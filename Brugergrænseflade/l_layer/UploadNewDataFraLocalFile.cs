@@ -30,7 +30,9 @@ namespace l_layer
         /// </summary>
         public void HentDataFraFil()
         {
-            nyMåling = downloadFraLocalFile.HentFraCsvFil("Alm80bpm.csv");
+            nyMåling = downloadFraLocalFile.HentFraCsvFil("Alm30bpm.csv");
+            // nyMåling = downloadFraLocalFile.HentFraCsvFil("Alm80bpm.csv");
+            //nyMåling = downloadFraLocalFile.HentFraCsvFil("Test_Atrieflimmer_1.csv");
         }
         /// <summary>
         /// Denne metode uploader den hentede csv fil den lokale database som også EKG-måleren uploader data til
@@ -39,7 +41,7 @@ namespace l_layer
         /// </summary>
         public void UploadDateTilLocalDB()
         {
-            
+
             sidsteMålingUpladede = local_Upload.UploadNewEKGFromFile(nyMåling);
 
         }

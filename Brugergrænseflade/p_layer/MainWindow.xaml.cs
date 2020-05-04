@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using LiveCharts;
 using LiveCharts.Wpf;
 using l_layer;
+using DTOs;
 
 namespace p_layer
 {
@@ -68,19 +69,24 @@ namespace p_layer
             //hentNyeMålinger.HentEnMålingFraLocalDB(16);
             hentNyeMålinger.HentAlleMålingerFraLocalDB();
 
-            ekg_Analyse = new EKG_Analyser();
-            
-            ekg_Analyse.AnalyserEnMåling(hentNyeMålinger.Hent1Måling(uploadNewDataFraLocalFile.sidsteMålingUpladede));
+            //ekg_Analyse = new EKG_Analyser();
 
-            DummyTilføjPunkterTilGraf();
+            //DTOs.DTO_EkgMåling ekgMåling = hentNyeMålinger.Hent1Måling(uploadNewDataFraLocalFile.sidsteMålingUpladede);
             
+            //IndiSygdomTB.Text = ekg_Analyse.AnalyserEnMåling(ekgMåling);
+            //DummyTilføjPunkterTilGraf(ekgMåling);
+            
+            foreach (var item in hentNyeMålinger.AllSampels)
+            {
+                CprLB.Items.Add("cpr:" +  item.borger_cprnr +" MåleId: " + item.id_måling);
+            }
 
             cpreks = new List<cprEksempel>();
             cpreks.Add(new cprEksempel("210397-1554", 1));
             cpreks.Add(new cprEksempel("345678-1554", 2));
 
-            CprLB.Items.Add(cpreks[0]);
-            CprLB.Items.Add(cpreks[1]);
+            CprLB.Items.Add(cpreks[0].CPR);
+            CprLB.Items.Add(cpreks[1].CPR);
             //CurrentcprEksempel = cpreks[0];
         }
 
@@ -92,15 +98,16 @@ namespace p_layer
         /// Denne metode tilføjer alle punkter til grafen
         /// Denne metode er midlertidig
         /// </summary>
-        private void DummyTilføjPunkterTilGraf()
+        private void DummyTilføjPunkterTilGraf(DTO_EkgMåling ekgMåling)
         {
+            testLine.Values.Clear();
             int i = 0;
 
-            foreach (double item in ekg_Analyse.Måling.raa_data)
+            foreach (double item in ekgMåling.raa_data)
             {
                 testLine.Values.Add(item);
                 i++;
-                if (i > 2000)
+                if (i > 1500)
                 {
                     break;
                 }
@@ -117,5 +124,19 @@ namespace p_layer
             System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
             Application.Current.Shutdown();
         }
+
+        
+
+        private void CprB_Click(object sender, RoutedEventArgs e)
+        {
+            EKG_Analyser analyserEnMåling = new EKG_Analyser();
+
+            DTOs.DTO_EkgMåling ekgMåling = hentNyeMålinger.Hent1Måling(Convert.ToInt32(CprLB.SelectedItem.ToString().Substring(CprLB.SelectedItem.ToString().Length - 2)));
+            IndiSygdomTB.Text = analyserEnMåling.AnalyserEnMåling(ekgMåling);
+            DummyTilføjPunkterTilGraf(ekgMåling);
+            
+        }
+
+      
     }
 }

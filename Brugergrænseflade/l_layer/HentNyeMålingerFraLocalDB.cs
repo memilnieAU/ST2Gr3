@@ -20,7 +20,7 @@ namespace l_layer
         /// <summary>
         /// Denne klasse skal kunne hente Målinger fra den lokale database tabel "SP_NyeEkger"
         /// </summary>
-        List<DTO_EkgMåling> AllSampels;
+        public List<DTO_EkgMåling> AllSampels;
         Local_DownloadEkg downloadEkg;
         public HentNyeMålingerFraLocalDB()
         {
@@ -77,6 +77,10 @@ namespace l_layer
                 }
             }
             return AllSampels[0];
+        }
+        public DTO_EkgMåling Hent1MålingUdFraAll(int placering)
+        {
+            return AllSampels[placering];
         }
     }
 }
