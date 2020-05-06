@@ -28,11 +28,44 @@ namespace l_layer
         /// filnavnet skal skrives som parameter i HentFraCsvFil("****")
         /// Den filerne skal være placeret i p_layer\bin\debug mappen
         /// </summary>
-        public void HentDataFraFil()
+        public void HentDataFraFil(int nummer)
         {
-            nyMåling = downloadFraLocalFile.HentFraCsvFil("Alm30bpm.csv");
-            // nyMåling = downloadFraLocalFile.HentFraCsvFil("Alm80bpm.csv");
-            //nyMåling = downloadFraLocalFile.HentFraCsvFil("Test_Atrieflimmer_1.csv");
+            string filNavn = "";
+            int filnummer = nummer;
+            
+            switch (filnummer)
+            {
+                default:
+                case 1:
+                    {
+                        filNavn = "1. Normal 30 BPM.csv";
+                        break;
+                    }
+                case 2:
+                    {
+                        filNavn = "2. Normal 80 BPM.csv";
+                        break;
+                    }
+                case 16:
+                    {
+
+                        filNavn = "16. Atrial flutter.csv";
+                        break;
+                    }
+                case 17:
+                    {
+                        filNavn = "17. Coarse atrial fibrillation.csv";
+                        break;
+                    }
+                case 18:
+                    {
+                        filNavn = "18. Fine atrial fibrillation.csv";
+                        break;
+                    }
+            }
+
+            nyMåling = downloadFraLocalFile.HentFraCsvFil(filNavn);
+            UploadDateTilLocalDB();
         }
         /// <summary>
         /// Denne metode uploader den hentede csv fil den lokale database som også EKG-måleren uploader data til

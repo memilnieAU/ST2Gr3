@@ -22,7 +22,7 @@
             <RowDefinition Height="160*"/>
             <RowDefinition Height="261*"/>
         </Grid.RowDefinitions>
-        <ListBox x:Name="CprLB" Grid.Column="0" HorizontalAlignment="Left" Height="179"   VerticalAlignment="Top" Width="153" Margin="10,122,0,0" Grid.RowSpan="2"/>
+        <ListBox x:Name="CprLB" Grid.Column="0" HorizontalAlignment="Left" Height="179"   VerticalAlignment="Top" Width="153" Margin="10,122,0,0" Grid.RowSpan="2" SelectionChanged="CprLB_SelectionChanged"/>
         <Label x:Name="VælgCprL" Content="Vælg CPR" HorizontalAlignment="Left" Margin="10,91,0,0" VerticalAlignment="Top" Height="26" Width="61"/>
         <Button x:Name="FindNyPatientB" Content="Find ny patient" HorizontalAlignment="Left" Margin="109.667,197,0,0" Grid.Row="1" VerticalAlignment="Top" Width="92" Grid.Column="3" RenderTransformOrigin="0.502,2.419" Height="20"/>
         <Button x:Name="UploadMålingB" Content="Upload måling" HorizontalAlignment="Left" Margin="180.667,220,0,0" Grid.Row="1" VerticalAlignment="Top" Width="110" Height="24" Grid.Column="2" Grid.ColumnSpan="2"/>

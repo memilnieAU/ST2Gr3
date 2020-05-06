@@ -23,7 +23,7 @@ namespace d_layer
                 cmd.Parameters.AddWithValue("@data",
                 nyMåling.raa_data.SelectMany(value =>
                 BitConverter.GetBytes(value)).ToArray());
-                cmd.Parameters.AddWithValue("@hz", nyMåling.samplerate_hz);
+                cmd.Parameters.AddWithValue("@hz", (float)nyMåling.samplerate_hz);
 
                 retur = (int)cmd.ExecuteScalar();
             }

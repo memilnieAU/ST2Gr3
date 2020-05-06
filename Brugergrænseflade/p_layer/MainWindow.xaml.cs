@@ -58,11 +58,17 @@ namespace p_layer
             MyCollectionBS.Add(testLine);
             DataContext = this;
 
+
+            
             //Denne henter data fra en lokal fil og sætter det ind i databasen
             UploadNewDataFraLocalFile uploadNewDataFraLocalFile = new UploadNewDataFraLocalFile();
 
-            uploadNewDataFraLocalFile.HentDataFraFil();
-            uploadNewDataFraLocalFile.UploadDateTilLocalDB();
+            //uploadNewDataFraLocalFile.HentDataFraFil(1);
+            //uploadNewDataFraLocalFile.HentDataFraFil(2);
+            //uploadNewDataFraLocalFile.HentDataFraFil(16);
+            //uploadNewDataFraLocalFile.HentDataFraFil(17);
+            //uploadNewDataFraLocalFile.HentDataFraFil(18);
+            
 
             //Henter data fra Den lokaleDB 
             hentNyeMålinger = new HentNyeMålingerFraLocalDB();
@@ -125,18 +131,21 @@ namespace p_layer
             Application.Current.Shutdown();
         }
 
-        
 
+        DTO_EkgMåling ekgMåling;
         private void CprB_Click(object sender, RoutedEventArgs e)
         {
-            EKG_Analyser analyserEnMåling = new EKG_Analyser();
-
-            DTOs.DTO_EkgMåling ekgMåling = hentNyeMålinger.Hent1Måling(Convert.ToInt32(CprLB.SelectedItem.ToString().Substring(CprLB.SelectedItem.ToString().Length - 2)));
-            IndiSygdomTB.Text = analyserEnMåling.AnalyserEnMåling(ekgMåling);
             DummyTilføjPunkterTilGraf(ekgMåling);
             
         }
 
-      
+        private void CprLB_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ekgMåling = hentNyeMålinger.Hent1Måling(Convert.ToInt32(CprLB.SelectedItem.ToString().Substring(CprLB.SelectedItem.ToString().Length - 2)));
+            EKG_Analyser analyserEnMåling = new EKG_Analyser();
+
+            IndiSygdomTB.Text = analyserEnMåling.AnalyserEnMåling(ekgMåling);
+
+        }
     }
 }
