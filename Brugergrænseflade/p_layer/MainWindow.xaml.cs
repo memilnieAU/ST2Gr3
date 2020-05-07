@@ -73,13 +73,13 @@ namespace p_layer
 
 
 
-            cpreks = new List<cprEksempel>();
-            cpreks.Add(new cprEksempel("210397-1554", 1));
-            cpreks.Add(new cprEksempel("345678-1554", 2));
+            //cpreks = new List<cprEksempel>();
+            //cpreks.Add(new cprEksempel("210397-1554", 1));
+            //cpreks.Add(new cprEksempel("345678-1554", 2));
 
-            CprLB.Items.Add(cpreks[0].CPR);
-            CprLB.Items.Add(cpreks[1].CPR);
-            //CurrentcprEksempel = cpreks[0];
+            //CprLB.Items.Add(cpreks[0].CPR);
+            //CprLB.Items.Add(cpreks[1].CPR);
+            ////CurrentcprEksempel = cpreks[0];
         }
 
 
@@ -139,7 +139,6 @@ namespace p_layer
                 }
 
                 FindNyPatientTrykket = false;
-
             }
             else
             {

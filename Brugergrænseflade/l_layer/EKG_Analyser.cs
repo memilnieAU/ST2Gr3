@@ -91,7 +91,10 @@ namespace l_layer
         {
             foreach (double item in måling.raa_data)
             {
+
+                //afrundetTal = 0.001       0.123       0.37
                 double afrundetTal = Math.Round(item, 1);
+                //afrundetTal = 0.0         0.1         0.4
                 if (hoizontalHistogram.ContainsKey(afrundetTal))
                 {
                     hoizontalHistogram[afrundetTal]++;
@@ -124,6 +127,9 @@ namespace l_layer
                     baseline2 = item;
                 }
             }
+
+            //  [-0.1-0.0] 1500 > [0.0-0.1]   3500*0.9=3000 ||  [0.1-0.2] 1500 > [0.0-0.1]   3500*0.9=3000
+            //  [-0.1-0.0] 1500 > [0.0-0.1]   1500*0.9=1000 ||  [0.1-0.2] 1500 > [0.0-0.1]   1500*0.9=1000
             if (baseline1.Value > baseline.Value*0.9 || baseline2.Value > baseline.Value*0.9)
             {
                 return $"Der er teng på atrieflimmer \nPuls: {pulsPrMin.ToString("f2")}";
