@@ -59,33 +59,19 @@ namespace p_layer
             DataContext = this;
 
 
-            
+
             //Denne henter data fra en lokal fil og sætter det ind i databasen
             UploadNewDataFraLocalFile uploadNewDataFraLocalFile = new UploadNewDataFraLocalFile();
 
+            // De er udkommenteret for at vi ikke overfylder vores database med samme måling 20 gange
             //uploadNewDataFraLocalFile.HentDataFraFil(1);
             //uploadNewDataFraLocalFile.HentDataFraFil(2);
             //uploadNewDataFraLocalFile.HentDataFraFil(16);
             //uploadNewDataFraLocalFile.HentDataFraFil(17);
             //uploadNewDataFraLocalFile.HentDataFraFil(18);
-            
 
-            //Henter data fra Den lokaleDB 
-            hentNyeMålinger = new HentNyeMålingerFraLocalDB();
-            //hentNyeMålinger.HentEnMålingFraLocalDB(16);
-            hentNyeMålinger.HentAlleMålingerFraLocalDB();
 
-            //ekg_Analyse = new EKG_Analyser();
 
-            //DTOs.DTO_EkgMåling ekgMåling = hentNyeMålinger.Hent1Måling(uploadNewDataFraLocalFile.sidsteMålingUpladede);
-            
-            //IndiSygdomTB.Text = ekg_Analyse.AnalyserEnMåling(ekgMåling);
-            //DummyTilføjPunkterTilGraf(ekgMåling);
-            
-            foreach (var item in hentNyeMålinger.AllSampels)
-            {
-                CprLB.Items.Add("cpr:" +  item.borger_cprnr +" MåleId: " + item.id_måling);
-            }
 
             cpreks = new List<cprEksempel>();
             cpreks.Add(new cprEksempel("210397-1554", 1));
@@ -99,7 +85,7 @@ namespace p_layer
 
         #region DummyOpstartAnalyse
 
-       
+
         /// <summary>
         /// Denne metode tilføjer alle punkter til grafen
         /// Denne metode er midlertidig
@@ -113,7 +99,7 @@ namespace p_layer
             {
                 testLine.Values.Add(item);
                 i++;
-                if (i > 1500)
+                if (i > 1000)
                 {
                     break;
                 }
@@ -135,17 +121,83 @@ namespace p_layer
         DTO_EkgMåling ekgMåling;
         private void CprB_Click(object sender, RoutedEventArgs e)
         {
-            DummyTilføjPunkterTilGraf(ekgMåling);
-            
+            if (FindNyPatientTrykket == true)
+            {
+                string cpr = (CprLB.SelectedItem.ToString().Substring(5));
+
+                CprLB.Items.Clear();
+                //Henter data fra Den lokaleDB 
+                hentNyeMålinger = new HentNyeMålingerFraLocalDB();
+                hentNyeMålinger.HentAlleMålingerFraLocalDB();
+
+                foreach (var måling in hentNyeMålinger.nyeMålinger)
+                {
+                    if (måling.borger_cprnr == cpr)
+                    {
+                        CprLB.Items.Add("Cpr: " + måling.borger_cprnr + " MåleId: " + måling.id_måling);
+                    }
+                }
+
+                FindNyPatientTrykket = false;
+
+            }
+            else
+            {
+                ekgMåling = hentNyeMålinger.Hent1Måling(Convert.ToInt32(CprLB.SelectedItem.ToString().Substring(CprLB.SelectedItem.ToString().Length - 2)));
+                EKG_Analyser analyserEnMåling = new EKG_Analyser();
+
+                IndiSygdomTB.Text = analyserEnMåling.AnalyserEnMåling(ekgMåling);
+                DummyTilføjPunkterTilGraf(ekgMåling);
+            }
+
         }
 
         private void CprLB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ekgMåling = hentNyeMålinger.Hent1Måling(Convert.ToInt32(CprLB.SelectedItem.ToString().Substring(CprLB.SelectedItem.ToString().Length - 2)));
-            EKG_Analyser analyserEnMåling = new EKG_Analyser();
+            testLine.Values.Clear();
+            SPKommentar.Text = "";
+            IndiSygdomTB.Text = "";
+        }
 
-            IndiSygdomTB.Text = analyserEnMåling.AnalyserEnMåling(ekgMåling);
 
+        private void CheckLocalDbB_Click(object sender, RoutedEventArgs e)
+        {
+            FindNyPatientTrykket = false;
+            CprLB.Items.Clear();
+            //Henter data fra Den lokaleDB 
+            hentNyeMålinger = new HentNyeMålingerFraLocalDB();
+            hentNyeMålinger.HentAlleMålingerFraLocalDB();
+
+            foreach (var måling in hentNyeMålinger.nyeMålinger)
+            {
+                if (måling.kommentar == null)
+                {
+                    CprLB.Items.Add("Cpr: " + måling.borger_cprnr + " MåleId: " + måling.id_måling);
+                }
+            }
+        }
+
+        private bool FindNyPatientTrykket = false;
+        private void FindNyPatientB_Click(object sender, RoutedEventArgs e)
+        {
+            FindNyPatientTrykket = true;
+            CprLB.Items.Clear();
+            //Henter data fra Den lokaleDB 
+            hentNyeMålinger = new HentNyeMålingerFraLocalDB();
+            hentNyeMålinger.HentAlleMålingerFraLocalDB();
+
+            foreach (var måling in hentNyeMålinger.nyeMålinger)
+            {
+                //TODO Test linje som kan tilføje en kommentar til målingens kommentar
+                måling.kommentar = "Huske at slette denne linje kode";
+                if (måling.kommentar != null)
+                {
+                    if (CprLB.Items.Contains("Cpr: " + måling.borger_cprnr) == false)
+                    {
+                        CprLB.Items.Add("Cpr: " + måling.borger_cprnr);
+                    }
+                }
+            }
         }
     }
 }

@@ -20,11 +20,12 @@ namespace l_layer
         /// <summary>
         /// Denne klasse skal kunne hente Målinger fra den lokale database tabel "SP_NyeEkger"
         /// </summary>
-        public List<DTO_EkgMåling> AllSampels;
+        public List<DTO_EkgMåling> nyeMålinger;
+
         Local_DownloadEkg downloadEkg;
         public HentNyeMålingerFraLocalDB()
         {
-            AllSampels = new List<DTO_EkgMåling>();
+            nyeMålinger = new List<DTO_EkgMåling>();
             downloadEkg = new Local_DownloadEkg();
             
             
@@ -46,7 +47,7 @@ namespace l_layer
             int[] id_målinger = downloadEkg.hentID_MålingerAfMålinger();
             foreach (int item in id_målinger)
             {
-                AllSampels.Add(downloadEkg.hentMåling(item));
+                nyeMålinger.Add(downloadEkg.hentMåling(item));
 
             }
             
@@ -59,7 +60,7 @@ namespace l_layer
         public void HentEnMålingFraLocalDB(int ID)
         {
          
-            AllSampels.Add(downloadEkg.hentMåling(ID));
+            nyeMålinger.Add(downloadEkg.hentMåling(ID));
         }
 
         /// <summary>
@@ -69,18 +70,18 @@ namespace l_layer
         /// <returns></returns>
         public DTO_EkgMåling Hent1Måling(int MåleID)
         {
-            foreach (DTO_EkgMåling item in AllSampels)
+            foreach (DTO_EkgMåling item in nyeMålinger)
             {
                 if (item.id_måling == MåleID)
                 {
                     return item;
                 }
             }
-            return AllSampels[0];
+            return nyeMålinger[0];
         }
         public DTO_EkgMåling Hent1MålingUdFraAll(int placering)
         {
-            return AllSampels[placering];
+            return nyeMålinger[placering];
         }
     }
 }

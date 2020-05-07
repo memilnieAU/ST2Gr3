@@ -15,17 +15,19 @@ namespace DTOs
         public double[] raa_data { get; set; }
         public int antal_maalepunkter { get; set; }
         public double samplerate_hz { get; set; }
-        
+        public string kommentar { get; set; } //Dette er den kommentar som kommer fra lægen
+
 
         public DTO_EkgMåling(int id_måling, double[] raa_maalepunkter)
         {
             this.id_måling = id_måling;
             this.id_medarbejder = "NaN";
-            this.borger_cprnr = "NaN";
+            this.borger_cprnr = "000000-0000";
             this.start_tidspunkt = DateTime.Now;
             this.raa_data = raa_maalepunkter;
             this.antal_maalepunkter = 0;
             this.samplerate_hz = 0;
+            this.kommentar = null;
         }
         public void TilføjArrayAfPunkter(double[] måleArray)
         {

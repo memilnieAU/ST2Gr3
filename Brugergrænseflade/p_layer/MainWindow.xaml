@@ -24,7 +24,7 @@
         </Grid.RowDefinitions>
         <ListBox x:Name="CprLB" Grid.Column="0" HorizontalAlignment="Left" Height="179"   VerticalAlignment="Top" Width="153" Margin="10,122,0,0" Grid.RowSpan="2" SelectionChanged="CprLB_SelectionChanged"/>
         <Label x:Name="VælgCprL" Content="Vælg CPR" HorizontalAlignment="Left" Margin="10,91,0,0" VerticalAlignment="Top" Height="26" Width="61"/>
-        <Button x:Name="FindNyPatientB" Content="Find ny patient" HorizontalAlignment="Left" Margin="109.667,197,0,0" Grid.Row="1" VerticalAlignment="Top" Width="92" Grid.Column="3" RenderTransformOrigin="0.502,2.419" Height="20"/>
+        <Button x:Name="FindNyPatientB" Content="Find ny patient" HorizontalAlignment="Left" Margin="109.667,197,0,0" Grid.Row="1" VerticalAlignment="Top" Width="92" Grid.Column="3" RenderTransformOrigin="0.502,2.419" Height="20" Click="FindNyPatientB_Click"/>
         <Button x:Name="UploadMålingB" Content="Upload måling" HorizontalAlignment="Left" Margin="180.667,220,0,0" Grid.Row="1" VerticalAlignment="Top" Width="110" Height="24" Grid.Column="2" Grid.ColumnSpan="2"/>
         <Button Content="Hent patient informationer" HorizontalAlignment="Left" Margin="10,170,0,0" Grid.Row="1" VerticalAlignment="Top" Width="153" Height="25"/>
         <Button x:Name="LogAfB" Content="Log af" Grid.Column="3" HorizontalAlignment="Left" Margin="109.667,224,0,0" Grid.Row="1" VerticalAlignment="Top" Width="92" Height="20" Click="LogAfB_Click"/>
@@ -39,6 +39,7 @@
         <Label x:Name="loginInfoL" Content="Login-information" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Label x:Name="indSygdomL" Content="Indikation af sygdom" Grid.Column="1" HorizontalAlignment="Left" Margin="61.667,120,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="148"/>
         <lvc:CartesianChart x:Name="test" Series="{Binding MyCollectionBS}" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="61.667,36,27.333,145.667" Grid.Column="1" />
+        <Button x:Name="CheckLocalDbB" Content="Hent nye måling" Grid.Column="3" HorizontalAlignment="Left" Margin="32,41,0,0" VerticalAlignment="Top" Width="153" Click="CheckLocalDbB_Click"/>
 
     </Grid>
 </Window>

@@ -26,26 +26,26 @@ namespace p_layer
         {
             InitializeComponent();
         }
-        
+
         private void LoginB_Click(object sender, RoutedEventArgs e)
         {
             logicObj = new Logic1();
-                      
-                if (logicObj.checkLogin(BrugernavnTB.Text, PasswordPW.Password) == true)
-                {
+
+            if (logicObj.checkLogin(BrugernavnTB.Text, PasswordPW.Password) == true)
+            {
 
                 this.Hide();
-                MainWindow mainWRef = new MainWindow (this, logicObj);
+                MainWindow mainWRef = new MainWindow(this, logicObj);
                 mainWRef.Show();
             }
-                else
-                {
-                    MessageBox.Show("Enten Brugernavn eller password er forkert. Prøv igen\n (BrugerNavn == \"999999 - 0000\" && pw == \"testpw\")");
-                }
+            else
+            {
+                MessageBox.Show("Enten Brugernavn eller password er forkert. Prøv igen\n (BrugerNavn == \"999999 - 0000\" && pw == \"testpw\")");
+            }
 
-            
+
         }
 
-      
+
     }
 }
