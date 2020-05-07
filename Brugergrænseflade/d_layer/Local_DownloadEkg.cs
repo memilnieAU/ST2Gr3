@@ -127,8 +127,8 @@ namespace d_layer
 
                     if (rdr["start_tidspunkt"] != DBNull.Value)
                     {
-                        string tid = (string)rdr["start_tidspunkt"];
-                        målingFraDB.start_tidspunkt = DateTime.FromBinary(long.Parse(tid));
+                        DateTime tid = Convert.ToDateTime(rdr["start_tidspunkt"]);
+                        målingFraDB.start_tidspunkt = tid;
                     }
                     if (rdr["antal_maalepunkter"] != DBNull.Value)
                         målingFraDB.antal_maalepunkter = (int)rdr["antal_maalepunkter"];
