@@ -17,7 +17,8 @@ namespace d_layer
             int retur;
             conn = new SqlConnection("Data Source = st-i4dab.uni.au.dk;Initial Catalog = " + db + ";Persist Security Info = True;User ID = " + db + ";Password = " + db + "");
             conn.Open();
-            string insertStringParam = $"INSERT INTO SP_NyeEkger ([raa_data],[id_medarbejder],[borger_cprnr],[start_tidspunkt],[antal_maalepunkter],[samplerate_hz]) OUTPUT INSERTED.id_måling VALUES(@data,'{nyMåling.id_medarbejder}','{nyMåling.borger_cprnr}','{nyMåling.start_tidspunkt.ToBinary()}',{nyMåling.antal_maalepunkter},@hz)";
+            string format = "yyyy-MM-dd HH:mm:ss";
+            string insertStringParam = $"INSERT INTO SP_NyeEkger ([raa_data],[id_medarbejder],[borger_cprnr],[start_tidspunkt],[antal_maalepunkter],[samplerate_hz]) OUTPUT INSERTED.id_måling VALUES(@data,'{nyMåling.id_medarbejder}','{nyMåling.borger_cprnr}','{nyMåling.start_tidspunkt.ToString(format)}',{nyMåling.antal_maalepunkter},@hz)";
             using (SqlCommand cmd = new SqlCommand(insertStringParam, conn))
             {
                 cmd.Parameters.AddWithValue("@data",
@@ -25,7 +26,8 @@ namespace d_layer
                 BitConverter.GetBytes(value)).ToArray());
 
                 cmd.Parameters.AddWithValue("@hz", (float)nyMåling.samplerate_hz);
-
+                
+                
                 retur = (int)cmd.ExecuteScalar();
             }
             conn.Close();
