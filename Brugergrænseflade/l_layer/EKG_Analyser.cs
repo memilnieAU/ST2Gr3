@@ -128,12 +128,12 @@ namespace l_layer
                 }
             }
 
-            //  [-0.1-0.0] 1500 > [0.0-0.1]   3500*0.9=3000 ||  [0.1-0.2] 1500 > [0.0-0.1]   3500*0.9=3000
-            //  [-0.1-0.0] 1500 > [0.0-0.1]   1500*0.9=1000 ||  [0.1-0.2] 1500 > [0.0-0.1]   1500*0.9=1000
+            //  [-0.2-0.1] 131 > [-0.1-0.0]   3300*0.9=3000 ||  [-0.1-0.0] 320 > [0.0-0.1]   3500*0.9=3000
+            //  [-0.1-0.0] 1288 > [0.0-0.1]   1580*0.9=1422 ||  [0.1-0.2] 1518 > [0.0-0.1]   1580*0.9=1422
+
             if (baseline1.Value > baseline.Value*0.9 || baseline2.Value > baseline.Value*0.9)
             {
                 return $"Der er teng på atrieflimmer \nPuls: {pulsPrMin.ToString("f2")}";
-
             }
             return $"Der er ingen teng på atrieflimmer \nPuls: {pulsPrMin.ToString("f2")}";
         }
