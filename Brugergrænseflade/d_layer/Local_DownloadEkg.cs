@@ -147,5 +147,6 @@ namespace d_layer
             return målingFraDB;
         }
 
+
     }
 }

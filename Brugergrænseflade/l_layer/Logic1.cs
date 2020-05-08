@@ -17,6 +17,7 @@ namespace l_layer
         public bool checkLogin(String BrugerNavn, String pw)
         {
             return dataObject.isUserRegistered(BrugerNavn, pw);
+            // return true;
         }
     }
 }
