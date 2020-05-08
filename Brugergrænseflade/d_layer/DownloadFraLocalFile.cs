@@ -14,6 +14,9 @@ namespace d_layer
         double tidstart;
         double tidslut;
 
+
+
+
         public DTO_EkgMåling HentFraCsvFil(String FilNavn)  //Henter data fra en måling og tilføjer punkter til en liste
         {
             midlertidigePunkter = new List<double>();
