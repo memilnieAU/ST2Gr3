@@ -21,7 +21,8 @@ namespace p_layer
     public partial class loginView : Window
     {
         private Logic1 logicObj;
-        private MainWindow mainWRef;
+        //private MainWindow mainWRef;
+        //private Opret_ny_bruger onbRef;
         public loginView()
         {
             InitializeComponent();
@@ -31,7 +32,7 @@ namespace p_layer
         {
             logicObj = new Logic1();
 
-            if (logicObj.checkLogin(BrugernavnTB.Text, PasswordPW.Password) == true)
+            if (logicObj.checkLogin(MedarbejderIDTB.Text, PasswordPW.Password) == true)
             {
 
                 this.Hide();
@@ -46,6 +47,12 @@ namespace p_layer
 
         }
 
-
+        private void OpretNyBrugerB_Click(object sender, RoutedEventArgs e)
+        {
+            
+            Opret_ny_bruger onbRef = new Opret_ny_bruger();
+            onbRef.Show();
+            this.Close();
+        }
     }
 }

@@ -8,13 +8,16 @@
         Title="loginView" Height="300" Width="300" Background="DarkOliveGreen">
     <Grid>
         <StackPanel>
-            <Label Content="Login" FontSize="25" HorizontalAlignment="Center"/>
-            <Label Content="Brugernavn" Margin="80 5"/>
-            <TextBox Name="BrugernavnTB" Margin="80 5" FontSize="18"/>
-            <Label Content="Password" Margin= "80 5"/>
-            <PasswordBox Name="PasswordPW" Margin="80 5" FontSize="18"/>
-            <Button Name="LoginB" Content="Login"  Margin= "100 40" FontSize="18" Click="LoginB_Click"/>
-
+            <Label x:Name="LoginL" Content="Login" Foreground="White" FontSize="25" HorizontalAlignment="Center" Margin="20"/>
+            <Label x:Name="MedarbejderIDL" Content="MedarbejderID" Margin="80 0" Foreground="White"/>
+            <TextBox Name="MedarbejderIDTB" Margin="80 0" FontSize="18" Background="DarkOliveGreen" Foreground="White"/>
+            <Label x:Name="passwordL" Content="Password" Margin= "80 5" Foreground="White"/>
+            <PasswordBox Name="PasswordPW" Margin="80 5" FontSize="18" Background="DarkOliveGreen" Foreground="White"/>
+            <TextBlock x:Name="space" Text=""/>
+            <StackPanel Orientation="Horizontal">
+                <Button Name="LoginB" Content="Login" Margin="20 0" FontSize="18" Click="LoginB_Click" Background="White" Width="93" Height="28"/>
+                <Button x:Name="OpretNyBrugerB" Content="Opret ny bruger" Margin="0 0" FontSize="18" Background="White" Width="145" Height="28" Click="OpretNyBrugerB_Click" ></Button>
+            </StackPanel>
         </StackPanel>
 
     </Grid>

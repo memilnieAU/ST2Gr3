@@ -39,5 +39,23 @@ namespace d_layer
             return result;
 
         }
+
+        public void registerNewUser(string Brugernavn, string pw)
+        {
+            connection = new SqlConnection("Data Source=st-i4dab.uni.au.dk; Initial Catalog=" + DBlogin + "; User ID= " + DBlogin + "; Password=" + DBlogin + "; Connect Timeout=30; Encrypt=False; TrustServerCertificate=False; ApplicationIntent=ReadWrite; MultiSubnetFailover=False");
+
+            command = new SqlCommand("insert into db_owner.SP_MedarbejderID Values ( '" + Brugernavn + "', '" + pw + "')", connection);
+
+            connection.Open();
+            try
+            {
+                command.ExecuteNonQuery();
+            }
+            catch (SqlException e)
+            { throw e; }
+
+            connection.Close();
+            
+        }
     }
 }

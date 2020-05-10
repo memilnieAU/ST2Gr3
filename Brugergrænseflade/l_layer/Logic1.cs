@@ -26,6 +26,17 @@ namespace l_layer
            
             // return true;
         }
+
+        public void registerNewUser(string Brugernavn, string pw)
+        {
+
+            using (SHA512 sha512Hash = SHA512.Create())
+            {
+                string krypteret = GetHash(sha512Hash, pw);
+                dataObject.registerNewUser(Brugernavn, krypteret);
+            }
+        }
+
         private static string GetHash(HashAlgorithm hashAlgorithm, string input)
         {
 
@@ -46,7 +57,7 @@ namespace l_layer
             // Returnere hexadecimal string
             return sBuilder.ToString();
         }
-
+        
     }
 }
 
