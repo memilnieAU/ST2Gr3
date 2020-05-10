@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using d_layer;
+using System.Security.Cryptography;
 
 namespace l_layer
 {
@@ -16,8 +17,36 @@ namespace l_layer
 
         public bool checkLogin(String BrugerNavn, String pw)
         {
-            return dataObject.isUserRegistered(BrugerNavn, pw);
+           using (SHA512 sha512Hash = SHA512.Create())
+            {
+                string krypteret = GetHash(sha512Hash, pw);
+                return dataObject.isUserRegistered(BrugerNavn, krypteret);
+            }
+
+           
             // return true;
         }
+        private static string GetHash(HashAlgorithm hashAlgorithm, string input)
+        {
+
+            // Konventere indputtet (pw) til et byte array og laver hashen
+            byte[] data = hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(input));
+
+
+            // her laves en stringbuilder, der samler bytesne og laver en string
+            var sBuilder = new StringBuilder();
+
+
+            // løkker igennem hver byte af den hashede data, og formatere til en haxadecimal string
+            for (int i = 0; i < data.Length; i++)
+            {
+                sBuilder.Append(data[i].ToString("x2"));
+            }
+
+            // Returnere hexadecimal string
+            return sBuilder.ToString();
+        }
+
     }
 }
+

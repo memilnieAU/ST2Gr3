@@ -133,9 +133,9 @@ namespace l_layer
 
             if (baseline1.Value > baseline.Value*0.9 || baseline2.Value > baseline.Value*0.9)
             {
-                return $"Der er teng på atrieflimmer \nPuls: {pulsPrMin.ToString("f2")}";
+                return $"Der er tegn på atrieflimmer \nPuls: {pulsPrMin.ToString("f2")}";
             }
-            return $"Der er ingen teng på atrieflimmer \nPuls: {pulsPrMin.ToString("f2")}";
+            return $"Der er ingen tegn på atrieflimmer \nPuls: {pulsPrMin.ToString("f2")}";
         }
 
 
