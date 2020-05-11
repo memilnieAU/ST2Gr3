@@ -28,6 +28,7 @@ namespace p_layer
         public SeriesCollection MyCollectionBS { get; set; }
         private LineSeries bsLine;
         private LineSeries testLine;
+        private LineSeries Line1;
         List<cprEksempel> cpreks;
 
 
@@ -42,10 +43,17 @@ namespace p_layer
             {
                 Values = new ChartValues<double> { },
                 PointGeometry = null,
-                StrokeThickness = 0.2
+                StrokeThickness = 1,
+                Fill = Brushes.Transparent
+
             };
+            Line1 = new LineSeries
+            {
+                Values = new ChartValues<double> {1,1,1,1 },
+                PointGeometry = null,
+                StrokeThickness = 1
 
-
+            };
             /* bsLine = new LineSeries
              {
                  Values = new ChartValues<double> { },
@@ -54,8 +62,12 @@ namespace p_layer
              };
              */
             MyCollectionBS = new SeriesCollection();
+           
+           
             //MyCollectionBS.Add(bsLine);
             MyCollectionBS.Add(testLine);
+            
+            Formatter = value => "";
             DataContext = this;
 
 
@@ -71,16 +83,29 @@ namespace p_layer
             //uploadNewDataFraLocalFile.HentDataFraFil(18);
 
 
-
-
-            //cpreks = new List<cprEksempel>();
-            //cpreks.Add(new cprEksempel("210397-1554", 1));
-            //cpreks.Add(new cprEksempel("345678-1554", 2));
-
-            //CprLB.Items.Add(cpreks[0].CPR);
-            //CprLB.Items.Add(cpreks[1].CPR);
-            ////CurrentcprEksempel = cpreks[0];
         }
+        public Func<double, string> Formatter { get; set; }
+        //public SeriesCollection SeriesCollection1 { get; private set; }
+
+        //private void SetUpChart()
+        //{
+
+        //    // Create an empty series collection.
+        //    SeriesCollection1 = new SeriesCollection();
+
+        //    // Setup the axis for the first chart
+        //    ChartFile.AxisX.Add(new Axis
+        //    {
+        //        Title = "Time",
+        //        Unit = TimeSpan.FromSeconds(1).Seconds,
+        //        Separator = new LiveCharts.Wpf.Separator
+        //        {
+        //            IsEnabled = true
+        //        },
+        //        DisableAnimations = true
+
+        //    });
+        //}
 
 
         #region DummyOpstartAnalyse
@@ -95,6 +120,7 @@ namespace p_layer
             testLine.Values.Clear();
             int i = 0;
 
+           
             foreach (double item in ekgMåling.raa_data)
             {
                 testLine.Values.Add(item);

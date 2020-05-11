@@ -8,7 +8,7 @@
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:l_layer="clr-namespace:l_layer;assembly=l_layer" x:Class="p_layer.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" WindowState="Maximized">
     <Grid>
 
 
@@ -19,26 +19,85 @@
             <ColumnDefinition Width="106*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="160*"/>
-            <RowDefinition Height="261*"/>
+            <RowDefinition Height="77*"/>
+            <RowDefinition Height="116*"/>
+            <RowDefinition Height="114*"/>
+            <RowDefinition Height="198*"/>
         </Grid.RowDefinitions>
-        <ListBox x:Name="CprLB" Grid.Column="0" HorizontalAlignment="Left" Height="174"   VerticalAlignment="Top" Width="153" Margin="10,122,0,0" Grid.RowSpan="2" SelectionChanged="CprLB_SelectionChanged"/>
-        <Label x:Name="VælgCprL" Content="Vælg CPR" HorizontalAlignment="Left" Margin="10,91,0,0" VerticalAlignment="Top" Height="26" Width="61"/>
-        <Button x:Name="PatientRegisterB" Content="Patient Register" HorizontalAlignment="Left" Margin="109.667,197,0,0" Grid.Row="1" VerticalAlignment="Top" Width="92" Grid.Column="3" RenderTransformOrigin="0.502,2.419" Height="20" Click="PatientRegisterB_Click"/>
-        <Button x:Name="UploadMålingB" Content="Upload måling" HorizontalAlignment="Left" Margin="180.667,220,0,0" Grid.Row="1" VerticalAlignment="Top" Width="110" Height="24" Grid.Column="2" Grid.ColumnSpan="2"/>
-        <Button x:Name="cprB"  Grid.Row="1" Content="Vælg" Click="CprB_Click" Margin="10,142,26,93"  Width="153" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top"/> 
-        <Button Content="Hent patient informationer" HorizontalAlignment="Left" Margin="10,170,0,0" Grid.Row="1" VerticalAlignment="Top" Width="153" Height="25"/>
-        <Button x:Name="LogAfB" Content="Log af" Grid.Column="3" HorizontalAlignment="Left" Margin="109.667,224,0,0" Grid.Row="1" VerticalAlignment="Top" Width="92" Height="20" Click="LogAfB_Click"/>
-        <TextBox x:Name="SPKommentar" Grid.Column="2" HorizontalAlignment="Left" Height="57" Margin="54.667,154,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="236" Grid.Row="1" Grid.ColumnSpan="2" />
-        <TextBox x:Name="IndiSygdomTB" IsReadOnly="True" Margin="61.667,154,168.333,49.667" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1"/>
-        <Label x:Name="TilføjKommentarL" Content="Tilføj evt kommentar" Grid.Column="2" HorizontalAlignment="Left" Margin="54.667,120,0,0" VerticalAlignment="Top" Height="27" Width="119" Grid.Row="1"/>
-        <Button x:Name="TilføjKommentarB" Content="Tilføj kommentar" Grid.Column="2" HorizontalAlignment="Left" Margin="54.667,220,0,0" VerticalAlignment="Top" Width="110" Height="24" Grid.Row="1" Click="TilføjKommentarB_Click"/>
-        <TextBlock x:Name="NyeMålingerTBL" Grid.Column="3" HorizontalAlignment="Left" Margin="31.667,10,0,0" TextWrapping="Wrap" Text="Der er  målinger i databasen" VerticalAlignment="Top" Height="21" Width="153"/>
-        <TextBox x:Name="patientInfoTB" HorizontalAlignment="Left" Height="47" Margin="10,200,0,0" TextWrapping="Wrap" Text="Navn/CPR/alder/mm" VerticalAlignment="Top" Width="153" Grid.Row="1"/>
-        <TextBox x:Name="loginInfoTB" HorizontalAlignment="Left" Height="45" Margin="10,41,0,0" TextWrapping="Wrap" Text="navn/id" VerticalAlignment="Top" Width="120"/>
+        <ListBox x:Name="CprLB" Grid.Column="0" HorizontalAlignment="Left" Height="174"   VerticalAlignment="Top" Width="153" Margin="10,45.5,0,0" Grid.RowSpan="2" SelectionChanged="CprLB_SelectionChanged" Grid.Row="1"/>
+        <Label x:Name="VælgCprL" Content="Vælg CPR" HorizontalAlignment="Left" Margin="10,14.5,0,0" VerticalAlignment="Top" Height="26" Width="61" Grid.Row="1"/>
+        <Button x:Name="PatientRegisterB" Content="Patient Register" HorizontalAlignment="Left" Margin="110,83,0,0" Grid.Row="3" VerticalAlignment="Top" Width="92" Grid.Column="3" RenderTransformOrigin="0.502,2.419" Height="20" Click="PatientRegisterB_Click"/>
+        <Button x:Name="UploadMålingB" Content="Upload måling" HorizontalAlignment="Left" Margin="181,106,0,0" Grid.Row="3" VerticalAlignment="Top" Width="110" Height="24" Grid.Column="2" Grid.ColumnSpan="2"/>
+        <Button x:Name="cprB"  Grid.Row="3" Content="Vælg" Click="CprB_Click" Margin="10,28,0,0"  Width="153" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Button Content="Hent patient informationer" HorizontalAlignment="Left" Margin="10,56,0,0" Grid.Row="3" VerticalAlignment="Top" Width="153" Height="25"/>
+        <Button x:Name="LogAfB" Content="Log af" Grid.Column="3" HorizontalAlignment="Left" Margin="110,110,0,0" Grid.Row="3" VerticalAlignment="Top" Width="92" Height="20" Click="LogAfB_Click"/>
+        <TextBox x:Name="SPKommentar" Grid.Column="2" HorizontalAlignment="Left" Height="57" Margin="55,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="236" Grid.Row="3" Grid.ColumnSpan="2" />
+        <TextBox x:Name="IndiSygdomTB" IsReadOnly="True" Margin="13,37,199,53" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2"/>
+        <Label x:Name="TilføjKommentarL" Content="Tilføj evt kommentar" Grid.Column="2" HorizontalAlignment="Left" Margin="55,6,0,0" VerticalAlignment="Top" Height="27" Width="119" Grid.Row="3"/>
+        <Button x:Name="TilføjKommentarB" Content="Tilføj kommentar" Grid.Column="2" HorizontalAlignment="Left" Margin="55,106,0,0" VerticalAlignment="Top" Width="110" Height="24" Grid.Row="3" Click="TilføjKommentarB_Click"/>
+        <TextBlock x:Name="NyeMålingerTBL" Grid.Column="3" HorizontalAlignment="Left" Margin="32,10,0,0" TextWrapping="Wrap" Text="Der er  målinger i databasen" VerticalAlignment="Top" Height="21" Width="153"/>
+        <TextBox x:Name="patientInfoTB" HorizontalAlignment="Left" Height="47" Margin="10,86,0,0" TextWrapping="Wrap" Text="Navn/CPR/alder/mm" VerticalAlignment="Top" Width="153" Grid.Row="3"/>
+        <TextBox x:Name="loginInfoTB" HorizontalAlignment="Left" Height="45" Margin="10,41,0,0" TextWrapping="Wrap" Text="navn/id" VerticalAlignment="Top" Width="120" Grid.RowSpan="2"/>
         <Label x:Name="loginInfoL" Content="Login-information" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="indSygdomL" Content="Indikation af sygdom" Grid.Column="1" HorizontalAlignment="Left" Margin="61.667,120,0,0" Grid.Row="1" VerticalAlignment="Top" Grid.ColumnSpan="2" Width="148"/>
-        <lvc:CartesianChart x:Name="test" Series="{Binding MyCollectionBS}" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="61.667,36,27.333,145.667" Grid.Column="1" />
+        <Label x:Name="indSygdomL" Content="Indikation af sygdom" Grid.Column="1" HorizontalAlignment="Left" Margin="10,6,0,0" Grid.Row="3" VerticalAlignment="Top" Width="148"/>
+        <lvc:CartesianChart x:Name="test"  DisableAnimations="True" Series="{Binding MyCollectionBS}" Grid.ColumnSpan="3"  Grid.Column="1" Grid.RowSpan="2" Grid.Row="1" ToolTip="false" >
+            <lvc:CartesianChart.AxisY>
+                <lvc:AxesCollection>
+                    <lvc:Axis MinValue="-1" MaxValue="1.5" LabelFormatter="{Binding Formatter}">
+                        <lvc:Axis.Separator >
+                            <lvc:Separator Step="0.1" />
+
+                        </lvc:Axis.Separator>
+                        <lvc:Axis.Sections>
+                            <lvc:AxisSection Value="-1.0" StrokeThickness="1" Stroke="Black">
+                                <lvc:AxisSection.Fill>
+                                    <SolidColorBrush Color="Black" Opacity="1"></SolidColorBrush>
+                                </lvc:AxisSection.Fill>
+                            </lvc:AxisSection>
+                            <lvc:AxisSection Value="-0.5" StrokeThickness="1" Stroke="Black">
+                                <lvc:AxisSection.Fill>
+                                    <SolidColorBrush Color="Black" Opacity="1"></SolidColorBrush>
+                                </lvc:AxisSection.Fill>
+                            </lvc:AxisSection>
+                            <lvc:AxisSection Value="0.0" StrokeThickness="1" Stroke="Black">
+                                <lvc:AxisSection.Fill>
+                                    <SolidColorBrush Color="Black" Opacity=".4"></SolidColorBrush>
+                                </lvc:AxisSection.Fill>
+                            </lvc:AxisSection>
+
+                            <lvc:AxisSection Value="0.5" StrokeThickness="1" Stroke="Black">
+                                <lvc:AxisSection.Fill>
+                                    <SolidColorBrush Color="Black" Opacity="1"></SolidColorBrush>
+                                </lvc:AxisSection.Fill>
+                            </lvc:AxisSection>
+                            <lvc:AxisSection Value="1.0" StrokeThickness="1" Stroke="Black">
+                                <lvc:AxisSection.Fill>
+                                    <SolidColorBrush Color="Black" Opacity="1"></SolidColorBrush>
+                                </lvc:AxisSection.Fill>
+                            </lvc:AxisSection>
+                            <lvc:AxisSection Value="1.5" StrokeThickness="1" Stroke="Black">
+                                <lvc:AxisSection.Fill>
+                                    <SolidColorBrush Color="Black" Opacity="1"></SolidColorBrush>
+                                </lvc:AxisSection.Fill>
+                            </lvc:AxisSection>
+
+                        </lvc:Axis.Sections>
+                    </lvc:Axis>
+                </lvc:AxesCollection>
+
+            </lvc:CartesianChart.AxisY>
+            <lvc:CartesianChart.AxisX>
+
+                <lvc:AxesCollection>
+                    <lvc:Axis MinValue="0" MaxValue="1000">
+                        <lvc:Axis.Separator >
+                            <lvc:Separator Step="10" />
+
+                        </lvc:Axis.Separator>
+                    </lvc:Axis>
+                </lvc:AxesCollection>
+            </lvc:CartesianChart.AxisX>
+        </lvc:CartesianChart>
         <Button x:Name="CheckLocalDbB" Content="Hent nye måling" Grid.Column="3" HorizontalAlignment="Left" Margin="32,41,0,0" VerticalAlignment="Top" Width="153" Click="CheckLocalDbB_Click"/>
 
     </Grid>
