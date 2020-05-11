@@ -132,7 +132,7 @@ namespace p_layer
 
                 foreach (var måling in hentNyeMålinger.nyeMålinger)
                 {
-                    if (måling.borger_cprnr == cpr)
+                    if (måling.borger_cprnr == cpr && måling.kommentar != null)
                     {
                         CprLB.Items.Add("Cpr: " + måling.borger_cprnr + " MåleId: " + måling.id_måling);
                     }
@@ -147,6 +147,8 @@ namespace p_layer
 
                 IndiSygdomTB.Text = analyserEnMåling.AnalyserEnMåling(ekgMåling);
                 DummyTilføjPunkterTilGraf(ekgMåling);
+                
+                SPKommentar.Text = ekgMåling.kommentar;
             }
 
         }
@@ -156,6 +158,8 @@ namespace p_layer
             testLine.Values.Clear();
             SPKommentar.Text = "";
             IndiSygdomTB.Text = "";
+            TilføjKommentarL.Content = "Tilføj evt kommentar";
+            SPKommentar.IsReadOnly = false;
         }
 
 
@@ -177,7 +181,12 @@ namespace p_layer
         }
 
         private bool FindNyPatientTrykket = false;
-        private void FindNyPatientB_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Denne metode lister alle cprnummer, som fremgår i den lokale database, som har en kommentar tilknytttet 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PatientRegisterB_Click(object sender, RoutedEventArgs e)
         {
             FindNyPatientTrykket = true;
             CprLB.Items.Clear();
@@ -188,7 +197,7 @@ namespace p_layer
             foreach (var måling in hentNyeMålinger.nyeMålinger)
             {
                 //TODO Test linje som kan tilføje en kommentar til målingens kommentar
-                måling.kommentar = "Huske at slette denne linje kode";
+                //måling.kommentar = "Huske at slette denne linje kode";
                 if (måling.kommentar != null)
                 {
                     if (CprLB.Items.Contains("Cpr: " + måling.borger_cprnr) == false)
@@ -197,6 +206,23 @@ namespace p_layer
                     }
                 }
             }
+        }
+
+        OpdaterLocalDB opdaterLocalDB;
+        private void TilføjKommentarB_Click(object sender, RoutedEventArgs e)
+        {
+            opdaterLocalDB = new OpdaterLocalDB();
+            if (SPKommentar.Text != "")
+            {
+                ekgMåling.kommentar = SPKommentar.Text;
+                opdaterLocalDB.OpdaterKommentar(ekgMåling);
+
+                TilføjKommentarL.Content = "Kommentar tilføjet";
+                SPKommentar.IsReadOnly = true;
+                
+            }
+            
+
         }
     }
 }

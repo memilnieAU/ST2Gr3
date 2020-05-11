@@ -22,17 +22,17 @@
             <RowDefinition Height="160*"/>
             <RowDefinition Height="261*"/>
         </Grid.RowDefinitions>
-        <ListBox x:Name="CprLB" Grid.Column="0" HorizontalAlignment="Left" Height="179"   VerticalAlignment="Top" Width="153" Margin="10,122,0,0" Grid.RowSpan="2" SelectionChanged="CprLB_SelectionChanged"/>
+        <ListBox x:Name="CprLB" Grid.Column="0" HorizontalAlignment="Left" Height="174"   VerticalAlignment="Top" Width="153" Margin="10,122,0,0" Grid.RowSpan="2" SelectionChanged="CprLB_SelectionChanged"/>
         <Label x:Name="VælgCprL" Content="Vælg CPR" HorizontalAlignment="Left" Margin="10,91,0,0" VerticalAlignment="Top" Height="26" Width="61"/>
-        <Button x:Name="FindNyPatientB" Content="Find ny patient" HorizontalAlignment="Left" Margin="109.667,197,0,0" Grid.Row="1" VerticalAlignment="Top" Width="92" Grid.Column="3" RenderTransformOrigin="0.502,2.419" Height="20" Click="FindNyPatientB_Click"/>
+        <Button x:Name="PatientRegisterB" Content="Patient Register" HorizontalAlignment="Left" Margin="109.667,197,0,0" Grid.Row="1" VerticalAlignment="Top" Width="92" Grid.Column="3" RenderTransformOrigin="0.502,2.419" Height="20" Click="PatientRegisterB_Click"/>
         <Button x:Name="UploadMålingB" Content="Upload måling" HorizontalAlignment="Left" Margin="180.667,220,0,0" Grid.Row="1" VerticalAlignment="Top" Width="110" Height="24" Grid.Column="2" Grid.ColumnSpan="2"/>
+        <Button x:Name="cprB"  Grid.Row="1" Content="Vælg" Click="CprB_Click" Margin="10,142,26,93"  Width="153" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top"/> 
         <Button Content="Hent patient informationer" HorizontalAlignment="Left" Margin="10,170,0,0" Grid.Row="1" VerticalAlignment="Top" Width="153" Height="25"/>
         <Button x:Name="LogAfB" Content="Log af" Grid.Column="3" HorizontalAlignment="Left" Margin="109.667,224,0,0" Grid.Row="1" VerticalAlignment="Top" Width="92" Height="20" Click="LogAfB_Click"/>
-        <TextBox x:Name="SPKommentar" Grid.Column="2" HorizontalAlignment="Left" Height="57" Margin="54.667,154,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="236" Grid.Row="1" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="IndiSygdomTB" Margin="61.667,154,168.333,49.667" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1"/>
+        <TextBox x:Name="SPKommentar" Grid.Column="2" HorizontalAlignment="Left" Height="57" Margin="54.667,154,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="236" Grid.Row="1" Grid.ColumnSpan="2" />
+        <TextBox x:Name="IndiSygdomTB" IsReadOnly="True" Margin="61.667,154,168.333,49.667" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1"/>
         <Label x:Name="TilføjKommentarL" Content="Tilføj evt kommentar" Grid.Column="2" HorizontalAlignment="Left" Margin="54.667,120,0,0" VerticalAlignment="Top" Height="27" Width="119" Grid.Row="1"/>
-        <Button x:Name="TilføjKommentarB" Content="Tilføj kommentar" Grid.Column="2" HorizontalAlignment="Left" Margin="54.667,220,0,0" VerticalAlignment="Top" Width="110" Height="24" Grid.Row="1"/>
-        <Button x:Name="cprB" Margin="10,146,89.333,95.667" Grid.Row="1" Content="Vælg" Click="CprB_Click"/>
+        <Button x:Name="TilføjKommentarB" Content="Tilføj kommentar" Grid.Column="2" HorizontalAlignment="Left" Margin="54.667,220,0,0" VerticalAlignment="Top" Width="110" Height="24" Grid.Row="1" Click="TilføjKommentarB_Click"/>
         <TextBlock x:Name="NyeMålingerTBL" Grid.Column="3" HorizontalAlignment="Left" Margin="31.667,10,0,0" TextWrapping="Wrap" Text="Der er  målinger i databasen" VerticalAlignment="Top" Height="21" Width="153"/>
         <TextBox x:Name="patientInfoTB" HorizontalAlignment="Left" Height="47" Margin="10,200,0,0" TextWrapping="Wrap" Text="Navn/CPR/alder/mm" VerticalAlignment="Top" Width="153" Grid.Row="1"/>
         <TextBox x:Name="loginInfoTB" HorizontalAlignment="Left" Height="45" Margin="10,41,0,0" TextWrapping="Wrap" Text="navn/id" VerticalAlignment="Top" Width="120"/>

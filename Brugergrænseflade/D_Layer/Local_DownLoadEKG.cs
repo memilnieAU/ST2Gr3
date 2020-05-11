@@ -134,6 +134,9 @@ namespace d_layer
                         målingFraDB.antal_maalepunkter = (int)rdr["antal_maalepunkter"];
                     if (rdr["samplerate_hz"] != DBNull.Value)
                         målingFraDB.samplerate_hz = Convert.ToDouble( rdr["samplerate_hz"]);
+                    if (rdr["kommentar"] != DBNull.Value)
+                        målingFraDB.kommentar = (string)(rdr["kommentar"]);
+
 
 
                 }

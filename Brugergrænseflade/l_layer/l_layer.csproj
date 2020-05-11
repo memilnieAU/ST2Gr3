@@ -50,6 +50,7 @@
     <Compile Include="EKG_Analyser.cs" />
     <Compile Include="HentNyeMålingerFraLocalDB.cs" />
     <Compile Include="Logic1.cs" />
+    <Compile Include="OpdaterLocalDB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UploadNewDataFraLocalFile.cs" />
   </ItemGroup>
