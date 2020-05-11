@@ -5,19 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:p_layer"
         mc:Ignorable="d"
-        Title="Opret ny bruger" Height="450" Width="300" Background="BlueViolet">
+        Title="Opamp ny bruger" Height="450" Width="300">
     <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Image Source="opamp_schem.png" >
+
+        </Image>
+
         <StackPanel>
             <Label x:Name="OpretNyBrugerL" Content="Opret ny bruger:" Foreground="Black" FontSize="25" HorizontalAlignment="Center" Margin="20"/>
-            <Label x:Name="medarbejderIDL" Content="MedarbejderID" Margin="80 0" Foreground="Black"/>
-            <TextBox Name="MedarbejderIDTB" Margin="80 0" FontSize="18" Background="BlueViolet" Foreground="Black"/>
-            <Label x:Name="passwordL" Content="Password" Margin= "80 5" Foreground="Black"/>
-            <PasswordBox Name="PasswordPW" Margin="80 5" FontSize="18" Background="BlueViolet" Foreground="Black"/>
-            <Label x:Name="gentagPasword" Content="Gentag password" Margin= "80 5" Foreground="Black"/>
-            <PasswordBox Name="gentagPasswordPW" Margin="80 5" FontSize="18" Background="BlueViolet" Foreground="Black"/>
+            <Label x:Name="medarbejderIDL" Content="MedarbejderID" Margin="80 0" Foreground="Black" HorizontalAlignment="Center"/>
+            <TextBox Name="MedarbejderIDTB" Margin="80 0" FontSize="18" Background="Transparent" Foreground="Black" TextAlignment="Center"/>
+            <Label x:Name="passwordL" Content="Password" Margin= "80 5" Foreground="Black" HorizontalAlignment="Center"/>
+            <PasswordBox Name="PasswordPW" Margin="80,5,79.6,5" FontSize="18" HorizontalContentAlignment="Center" Background="Transparent" Foreground="Black" Width="134"/>
+            <Label x:Name="gentagPasword" Content="Gentag password" Margin= "80 5" HorizontalAlignment="Center" Foreground="Black"/>
+            <PasswordBox Name="gentagPasswordPW"  FontSize="18" HorizontalContentAlignment="Center" Background="Transparent" Foreground="Black" Margin="80,0,79.6,0" Width="134"/>
             <TextBlock x:Name="space" Text=""/>
-            <Button x:Name="OpretNyBrugerB" Content="Opret ny bruger" Margin="50,10,49.6,10" FontSize="18" Background="DarkViolet" Foreground="Black" Height="31" Click="OpretNyBrugerB_Click" />
-            <Button Name="AlleredeOprettetB" Content="Allerede bruger?" Margin="50,10,49.6,10" FontSize="18" Background="DarkViolet" Foreground="black" Click="AlleredeOprettetB_Click"/>
+            <Button x:Name="OpretNyBrugerB" Content="Opret ny bruger" Margin="50,10,49.6,10" FontSize="18" Background="White" Foreground="Black" Height="31" Click="OpretNyBrugerB_Click" />
+            <Button Name="AlleredeOprettetB" Content="Allerede bruger?" Margin="50,10,49.6,10" FontSize="18" Background="White" Foreground="black" Click="AlleredeOprettetB_Click"/>
 
         </StackPanel>
     </Grid>

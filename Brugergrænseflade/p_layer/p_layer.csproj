@@ -126,5 +126,11 @@
       <Name>l_layer</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Lars.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="opamp_schem.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
