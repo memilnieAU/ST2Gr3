@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:p_layer"
         mc:Ignorable="d"
-        Title="Lamo-in Window" Height="300" Width="300">
+        Title="Lam-on Window" Height="300" Width="300">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -17,7 +17,7 @@
 
 
         <StackPanel Grid.ColumnSpan="2" Margin="0,0,0,0.4">
-            <Label x:Name="LoginL" Content="Login" Foreground="White" FontSize="25" HorizontalAlignment="Center" Margin="20"/>
+            <Label x:Name="LoginL" Content="Lam-on" Foreground="White" FontSize="25" HorizontalAlignment="Center" Margin="20"/>
             <Label x:Name="MedarbejderIDL" Content="MedarbejderID" Margin="80 -3" Foreground="White" HorizontalAlignment="Center"/>
             <TextBox Name="MedarbejderIDTB" Margin="80 0" FontSize="18" Background="Transparent" TextAlignment="Center" Foreground="White" />
             <Label x:Name="passwordL" Content="Password" Margin= "80 5" Foreground="White" HorizontalAlignment="Center"/>
@@ -25,8 +25,20 @@
             <TextBlock x:Name="space" Text=""/>
             <TextBlock x:Name="space1" Text=""/>
             <StackPanel Orientation="Horizontal">
-                <Button Name="LoginB" Content="Login" Margin="20 0" FontSize="18" Click="LoginB_Click" Background="White" Width="93" Height="28"/>
-                <Button x:Name="OpretNyBrugerB" Content="Opret ny bruger" Margin="0 0" FontSize="18" Background="White" Width="145" Height="28" Click="OpretNyBrugerB_Click" ></Button>
+                <Button Name="LoginB" Content="Login" Margin="20 0" FontSize="18" Click="LoginB_Click" Background="White" Width="93" Height="28">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button x:Name="OpretNyBrugerB" Content="Opret ny bruger" Margin="0 0" FontSize="18" Background="White" Width="145" Height="28" Click="OpretNyBrugerB_Click" >
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
             </StackPanel>
         </StackPanel>
 
