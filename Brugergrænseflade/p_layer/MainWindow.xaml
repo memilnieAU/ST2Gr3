@@ -8,7 +8,7 @@
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:l_layer="clr-namespace:l_layer;assembly=l_layer" x:Class="p_layer.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" FontSize="14" WindowState="Maximized" Height="696.154" Closing="Window_Closing" >
+        Title="MainWindow" FontSize="14" WindowState="Maximized" Height="768.774" Closing="Window_Closing" Width="1289.226" >
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -43,7 +43,7 @@
             <Button Content="Hent patientinformationer" HorizontalAlignment="Left" Margin="20,20,0,0" Grid.Row="4" VerticalAlignment="Top" Width="170" Height="25"/>
             <Canvas>
                 <TextBox x:Name="cprTB" HorizontalAlignment="Left" Canvas.Top="0" Height="25" Margin="20,10,0,0" TextWrapping="Wrap" Text="000000-0000" VerticalAlignment="Top" Width="198" Grid.Row="5" Background="#FFDDE1E7" BorderBrush="{x:Null}"/>
-                <TextBox x:Name="patientInfoTB" HorizontalAlignment="Left" Canvas.Top="28" IsReadOnly="True" Height="47" Margin="20,0,0,0" TextWrapping="Wrap" Text="Navn/alder/mm" VerticalAlignment="Top" Width="198" Grid.Row="5" Background="#FFDDE1E7" BorderBrush="{x:Null}"/>
+                <TextBox x:Name="patientInfoTB" HorizontalAlignment="Left" Canvas.Top="28" IsReadOnly="True" Height="100" Margin="20,0,0,0" TextWrapping="Wrap" Text="Navn/alder/mm" VerticalAlignment="Top" Width="198" Grid.Row="5" Background="#FFDDE1E7" BorderBrush="{x:Null}"/>
             </Canvas>
         </StackPanel>
         <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0.667,163.667,-0.333">
