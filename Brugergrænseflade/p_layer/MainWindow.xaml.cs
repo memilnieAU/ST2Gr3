@@ -27,20 +27,23 @@ namespace p_layer
     public partial class MainWindow : Window
     {
         //i stedet for at hide mainwindow har vi i App.xaml sat StartupUri="loginView.xaml", dette gør at programmet starter i loginView og derefter opretter mainWindow
-        public SeriesCollection MyCollectionBS { get; set; }
-        private LineSeries bsLine;
+        public SeriesCollection MyCollectionEkg { get; set; }
+        private LineSeries ekgLine;
         private LineSeries testLine;
         private LineSeries Line1;
         List<cprEksempel> cpreks;
+        private loginView loginref;
 
 
         HentNyeMålingerFraLocalDB hentNyeMålinger;
         EKG_Analyser ekg_Analyse;
 
 
-        public MainWindow(loginView LoginRef, Logic1 logicRef)
+        public MainWindow(loginView LoginRef, LoginRequest logicRef)
         {
             InitializeComponent();
+            //TODO få tilføjet medarbejderID'et her og evt et navn, hvis dette skal med og tilføjes i databasen
+            loginInfoTB.Text = "MedarbejderID: ";
             testLine = new LineSeries
             {
                 Values = new ChartValues<double> { },
@@ -63,11 +66,11 @@ namespace p_layer
                  StrokeThickness = 0.2
              };
              */
-            MyCollectionBS = new SeriesCollection();
+            MyCollectionEkg = new SeriesCollection();
 
 
             //MyCollectionBS.Add(bsLine);
-            MyCollectionBS.Add(testLine);
+            MyCollectionEkg.Add(testLine);
 
             Formatter = value => "";
             DataContext = this;
@@ -273,5 +276,14 @@ namespace p_layer
         {
             App.Current.Shutdown();
         }
+
+
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        
     }
 }

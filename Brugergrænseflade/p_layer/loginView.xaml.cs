@@ -20,23 +20,25 @@ namespace p_layer
     /// </summary>
     public partial class loginView : Window
     {
-        private Logic1 logicObj;
+        private LoginRequest logicObj;
+        //private string MedarbejderID;
         //private MainWindow mainWRef;
         //private Opret_ny_bruger onbRef;
         public loginView()
         {
             InitializeComponent();
+            
         }
 
         private void LoginB_Click(object sender, RoutedEventArgs e)
         {
-            logicObj = new Logic1();
+            logicObj = new LoginRequest();
 
             if (logicObj.checkLogin(MedarbejderIDTB.Text, PasswordPW.Password) == true)
             {
 
-                this.Hide();
                 MainWindow mainWRef = new MainWindow(this, logicObj);
+                this.Close();
                 mainWRef.Show();
             }
             else
@@ -44,9 +46,11 @@ namespace p_layer
                 MessageBox.Show("Enten Brugernavn eller password er forkert. Prøv igen\n (BrugerNavn == \"1234\" && pw == \"1234\")");
             }
 
-
         }
-
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            App.Current.Shutdown();
+        }
         private void OpretNyBrugerB_Click(object sender, RoutedEventArgs e)
         {
             

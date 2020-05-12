@@ -145,11 +145,7 @@ namespace d_layer
             }
             conn.Close();
 
-
-
             return målingFraDB;
         }
-
-
     }
 }

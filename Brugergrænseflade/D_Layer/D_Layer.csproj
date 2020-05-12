@@ -44,7 +44,7 @@
     <Compile Include="DownloadFraLocalFile.cs" />
     <Compile Include="Local_DownloadEkg.cs" />
     <Compile Include="Local_UploadEkg.cs" />
-    <Compile Include="login.cs" />
+    <Compile Include="Local_User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

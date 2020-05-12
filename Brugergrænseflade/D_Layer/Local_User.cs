@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace d_layer
 {
-    public class login
+    public class Local_User
     {
         private SqlConnection connection;
         private SqlDataReader reader;

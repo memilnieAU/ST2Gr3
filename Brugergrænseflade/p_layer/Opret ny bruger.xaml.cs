@@ -20,7 +20,7 @@ namespace p_layer
     /// </summary>
     public partial class Opret_ny_bruger : Window
     {
-        private Logic1 logicObj;
+        private LoginRequest logicObj;
 
         public Opret_ny_bruger()
         {
@@ -29,7 +29,7 @@ namespace p_layer
 
         private void OpretNyBrugerB_Click(object sender, RoutedEventArgs e)
         {
-            logicObj = new Logic1();
+            logicObj = new LoginRequest();
             if (MedarbejderIDTB.Text.Length != 4)
             {
                 MessageBox.Show("MedarbejderID skal være fire karaktere");
@@ -52,6 +52,10 @@ namespace p_layer
             }
             
            
+        }
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            App.Current.Shutdown();
         }
 
         private void AlleredeOprettetB_Click(object sender, RoutedEventArgs e)

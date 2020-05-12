@@ -8,12 +8,12 @@ using System.Security.Cryptography;
 
 namespace l_layer
 {
-    public class Logic1
+    public class LoginRequest
     {
-        private login dataObject;
+        private Local_User dataObject;
 
-        public Logic1 ()
-        { dataObject = new login();   }
+        public LoginRequest ()
+        { dataObject = new Local_User();   }
 
         public bool checkLogin(String BrugerNavn, String pw)
         {
