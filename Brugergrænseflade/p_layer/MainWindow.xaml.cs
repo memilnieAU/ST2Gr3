@@ -33,7 +33,7 @@ namespace p_layer
         private LineSeries Line1;
         List<cprEksempel> cpreks;
         private loginView loginref;
-
+        public string medarbejderID;
 
         HentNyeMålingerFraLocalDB hentNyeMålinger;
         EKG_Analyser ekg_Analyse;
@@ -43,7 +43,6 @@ namespace p_layer
         {
             InitializeComponent();
             //TODO få tilføjet medarbejderID'et her og evt et navn, hvis dette skal med og tilføjes i databasen
-            loginInfoTB.Text = "MedarbejderID: ";
             testLine = new LineSeries
             {
                 Values = new ChartValues<double> { },
@@ -284,6 +283,10 @@ namespace p_layer
 
         }
 
-        
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            loginInfoTB.Text = "MedarbejderID: " + medarbejderID;
+
+        }
     }
 }

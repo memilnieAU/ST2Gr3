@@ -12,14 +12,16 @@
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Image Source="opamp_schem.png" >
-
+        <Image Source="århuslogo.png" >
+            <Image.Effect >
+                <BlurEffect Radius="8"/>
+            </Image.Effect>
         </Image>
 
         <StackPanel>
-            <StackPanel.Background>
+            <!--<StackPanel.Background>
                 <ImageBrush ImageSource="århuslogo.png"/>
-            </StackPanel.Background>
+            </StackPanel.Background>-->
             <Label x:Name="OpretNyBrugerL" Content="Opret ny bruger:" Foreground="Black" FontSize="25" HorizontalAlignment="Center" Margin="20"/>
             <Label x:Name="medarbejderIDL" Content="MedarbejderID" Margin="80 0" Foreground="Black" HorizontalAlignment="Center"/>
             <TextBox Name="MedarbejderIDTB" Margin="80 0" FontSize="18" Background="Transparent" Foreground="Black" TextAlignment="Center"/>

@@ -8,7 +8,7 @@
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:l_layer="clr-namespace:l_layer;assembly=l_layer" x:Class="p_layer.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" FontSize="14" WindowState="Maximized" Height="768.774" Closing="Window_Closing" Width="1289.226" >
+        Title="MainWindow" FontSize="14" WindowState="Maximized" Height="768.774" Closing="Window_Closing" Width="1289.226" Loaded="Window_Loaded" >
     <Grid>
 
         <Grid.ColumnDefinitions>

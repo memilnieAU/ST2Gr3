@@ -22,7 +22,7 @@ namespace p_layer
     {
         private LoginRequest logicObj;
         //private string MedarbejderID;
-        //private MainWindow mainWRef;
+        private MainWindow mainWRef;
         //private Opret_ny_bruger onbRef;
         public loginView()
         {
@@ -36,8 +36,8 @@ namespace p_layer
 
             if (logicObj.checkLogin(MedarbejderIDTB.Text, PasswordPW.Password) == true)
             {
-
                 MainWindow mainWRef = new MainWindow(this, logicObj);
+                mainWRef.medarbejderID= MedarbejderIDTB.Text;
                 this.Close();
                 mainWRef.Show();
             }
