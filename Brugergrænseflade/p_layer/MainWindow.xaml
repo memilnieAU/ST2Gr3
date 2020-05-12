@@ -33,7 +33,8 @@
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="6" Grid.ColumnSpan="2" Margin="0,0,163.667,-0.333">
             <Label x:Name="menuL" HorizontalAlignment="Left" Margin="20,10,0,0" Content="Menu" VerticalAlignment="Top" Height="30" Width="205" FontSize="18" FontWeight="Bold"/>
             <TextBlock x:Name="NyeMålingerTBL" HorizontalAlignment="Left" Margin="20,10,0,0" TextWrapping="Wrap" Text="Der er nye målinger i EKG-måleren" VerticalAlignment="Top" Height="21" Width="237"/>
-            <Button x:Name="CheckLocalDbB" Content="Hent nye målinger" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" Width="170" Click="CheckLocalDbB_Click" Height="25"/>
+            <Button x:Name="CheckLocalDbB"  Command="{Binding HentNyeMålingerCommand, Mode=OneWay}" Content="Hent nye målinger" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" Width="170"  Height="25"/>
+            
             <Button x:Name="PatientRegisterB" Content="Hent gemte målinger" Margin="20,10,0,0" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="170" RenderTransformOrigin="0.502,2.419" Height="25" Click="PatientRegisterB_Click"/>
             <Button x:Name="OffRegisterB" Content="Hent i offentlig database" Margin="20,10,0,0" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Width="170" Height="25"/>
             <Label x:Name="VælgCprL" Content="Vælg CPR" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top" Height="30" Width="225" Grid.Row="1"/>

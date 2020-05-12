@@ -34,23 +34,24 @@ namespace l_layer
         /// <summary>
         /// Denne metoede vil hente alle "nye" målinger sendt fra EKG_måleren
         /// </summary>
-        public void HentAlleMålingerFraLocalDB()
+        public int HentAlleMålingerFraLocalDB()
         {
 
-            //int antalmålinger = downloadEkg.hentAntalletAfMålinger();
-            //for (int i = 1; i < antalmålinger; i++)
-            //{
-                
-            //    AllSampels.Add(downloadEkg.hentMåling(i));
-            //}
-
+           
             int[] id_målinger = downloadEkg.hentID_MålingerAfMålinger();
+
+            int AntalNyeMålinger = 0;
+
             foreach (int item in id_målinger)
             {
-                nyeMålinger.Add(downloadEkg.hentMåling(item));
-
+                DTO_EkgMåling dTO_EkgMåling = (downloadEkg.hentMåling(item));
+                nyeMålinger.Add(dTO_EkgMåling);
+                if (string.IsNullOrEmpty(dTO_EkgMåling.kommentar))
+                {
+                    AntalNyeMålinger++;
+                }
             }
-            
+            return AntalNyeMålinger;
         }
 
         /// <summary>

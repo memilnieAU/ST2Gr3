@@ -16,6 +16,8 @@ using LiveCharts;
 using LiveCharts.Wpf;
 using l_layer;
 using DTOs;
+using MyCommands;
+using System.Diagnostics;
 
 namespace p_layer
 {
@@ -49,7 +51,7 @@ namespace p_layer
             };
             Line1 = new LineSeries
             {
-                Values = new ChartValues<double> {1,1,1,1 },
+                Values = new ChartValues<double> { 1, 1, 1, 1 },
                 PointGeometry = null,
                 StrokeThickness = 1
 
@@ -62,11 +64,11 @@ namespace p_layer
              };
              */
             MyCollectionBS = new SeriesCollection();
-           
-           
+
+
             //MyCollectionBS.Add(bsLine);
             MyCollectionBS.Add(testLine);
-            
+
             Formatter = value => "";
             DataContext = this;
 
@@ -81,32 +83,13 @@ namespace p_layer
             //uploadNewDataFraLocalFile.HentDataFraFil(16);
             //uploadNewDataFraLocalFile.HentDataFraFil(17);
             //uploadNewDataFraLocalFile.HentDataFraFil(18);
-
-
+            hentNyeMålinger = new HentNyeMålingerFraLocalDB();
+            antalNyeMåinger = hentNyeMålinger.HentAlleMålingerFraLocalDB();
+            NyeMålingerTBL.Text = "Der er " + antalNyeMåinger + " nye målinger";
+            
         }
         public Func<double, string> Formatter { get; set; }
-        //public SeriesCollection SeriesCollection1 { get; private set; }
-
-        //private void SetUpChart()
-        //{
-
-        //    // Create an empty series collection.
-        //    SeriesCollection1 = new SeriesCollection();
-
-        //    // Setup the axis for the first chart
-        //    ChartFile.AxisX.Add(new Axis
-        //    {
-        //        Title = "Time",
-        //        Unit = TimeSpan.FromSeconds(1).Seconds,
-        //        Separator = new LiveCharts.Wpf.Separator
-        //        {
-        //            IsEnabled = true
-        //        },
-        //        DisableAnimations = true
-
-        //    });
-        //}
-
+        
 
         #region DummyOpstartAnalyse
 
@@ -120,7 +103,7 @@ namespace p_layer
             testLine.Values.Clear();
             int i = 0;
 
-           
+
             foreach (double item in ekgMåling.raa_data)
             {
                 testLine.Values.Add(item);
@@ -158,7 +141,7 @@ namespace p_layer
 
                 foreach (var måling in hentNyeMålinger.nyeMålinger)
                 {
-                    if (måling.borger_cprnr == cpr && måling.kommentar != null)
+                    if (måling.borger_cprnr == cpr && måling.kommentar.Length > 0)
                     {
                         CprLB.Items.Add("Cpr: " + måling.borger_cprnr + " MåleId: " + måling.id_måling);
                     }
@@ -173,10 +156,9 @@ namespace p_layer
 
                 IndiSygdomTB.Text = analyserEnMåling.AnalyserEnMåling(ekgMåling);
                 DummyTilføjPunkterTilGraf(ekgMåling);
-                
+
                 SPKommentar.Text = ekgMåling.kommentar;
             }
-
         }
 
         private void CprLB_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -189,22 +171,6 @@ namespace p_layer
         }
 
 
-        private void CheckLocalDbB_Click(object sender, RoutedEventArgs e)
-        {
-            FindNyPatientTrykket = false;
-            CprLB.Items.Clear();
-            //Henter data fra Den lokaleDB 
-            hentNyeMålinger = new HentNyeMålingerFraLocalDB();
-            hentNyeMålinger.HentAlleMålingerFraLocalDB();
-
-            foreach (var måling in hentNyeMålinger.nyeMålinger)
-            {
-                if (måling.kommentar == null)
-                {
-                    CprLB.Items.Add("Cpr: " + måling.borger_cprnr + " MåleId: " + måling.id_måling);
-                }
-            }
-        }
 
         private bool FindNyPatientTrykket = false;
         /// <summary>
@@ -224,7 +190,7 @@ namespace p_layer
             {
                 //TODO Test linje som kan tilføje en kommentar til målingens kommentar
                 //måling.kommentar = "Huske at slette denne linje kode";
-                if (måling.kommentar != null)
+                if (string.IsNullOrEmpty(måling.kommentar) || string.IsNullOrWhiteSpace(måling.kommentar))
                 {
                     if (CprLB.Items.Contains("Cpr: " + måling.borger_cprnr) == false)
                     {
@@ -238,17 +204,66 @@ namespace p_layer
         private void TilføjKommentarB_Click(object sender, RoutedEventArgs e)
         {
             opdaterLocalDB = new OpdaterLocalDB();
-            if (SPKommentar.Text != "")
+            //if (string.IsNullOrEmpty(SPKommentar.Text) == false)
             {
                 ekgMåling.kommentar = SPKommentar.Text;
                 opdaterLocalDB.OpdaterKommentar(ekgMåling);
 
                 TilføjKommentarL.Content = "Kommentar tilføjet";
                 SPKommentar.IsReadOnly = true;
-                
+
             }
-            
+
+            antalNyeMåinger = hentNyeMålinger.HentAlleMålingerFraLocalDB();
+            NyeMålingerTBL.Text = "Der er " + antalNyeMåinger + " nye målinger";
 
         }
+
+        #region Hent nye målinger
+
+        ICommand hentNyeMålingerCommand;
+        public ICommand HentNyeMålingerCommand
+        {
+            get { return hentNyeMålingerCommand ?? (hentNyeMålingerCommand = new RelayCommand(HentNyeMålingerHandler, HentNyeMålingerHandlerCanExecute)); }
+        }
+
+
+        public void HentNyeMålingerHandler()
+        {
+            FindNyPatientTrykket = false;
+            CprLB.Items.Clear();
+            //Henter data fra Den lokaleDB 
+            hentNyeMålinger = new HentNyeMålingerFraLocalDB();
+            hentNyeMålinger.HentAlleMålingerFraLocalDB();
+
+            foreach (var måling in hentNyeMålinger.nyeMålinger)
+            {
+                if (string.IsNullOrEmpty(måling.kommentar) || string.IsNullOrWhiteSpace(måling.kommentar))
+                {
+                    CprLB.Items.Add("Cpr: " + måling.borger_cprnr + " MåleId: " + måling.id_måling);
+                }
+            }
+        }
+
+        Stopwatch sw = new Stopwatch();
+        int antalNyeMåinger = 0;
+        public bool HentNyeMålingerHandlerCanExecute()
+        {
+            sw.Start();
+            if (sw.ElapsedMilliseconds > 500)
+            {
+                sw.Stop();
+                sw.Reset();
+                antalNyeMåinger = hentNyeMålinger.HentAlleMålingerFraLocalDB();
+                NyeMålingerTBL.Text = "Der er " + antalNyeMåinger + " nye målinger";
+            }
+            if (antalNyeMåinger > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        #endregion
     }
 }
