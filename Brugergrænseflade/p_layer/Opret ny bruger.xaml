@@ -25,8 +25,20 @@
             <Label x:Name="gentagPasword" Content="Gentag password" Margin= "80 5" HorizontalAlignment="Center" Foreground="Black"/>
             <PasswordBox Name="gentagPasswordPW"  FontSize="18" HorizontalContentAlignment="Center" Background="Transparent" Foreground="Black" Margin="80,0,79.6,0" Width="134"/>
             <TextBlock x:Name="space" Text=""/>
-            <Button x:Name="OpretNyBrugerB" Content="Opret ny bruger" Margin="50,10,49.6,10" FontSize="18" Background="White" Foreground="Black" Height="31" Click="OpretNyBrugerB_Click" />
-            <Button Name="AlleredeOprettetB" Content="Allerede bruger?" Margin="50,10,49.6,10" FontSize="18" Background="White" Foreground="black" Click="AlleredeOprettetB_Click"/>
+            <Button x:Name="OpretNyBrugerB" Content="Opret ny bruger" Margin="50,10,49.6,10" FontSize="18" Background="White" Foreground="Black" Height="31" Click="OpretNyBrugerB_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+                </Button>
+            <Button Name="AlleredeOprettetB" Content="Allerede bruger?" Margin="50,10,49.6,10" FontSize="18" Background="White" Foreground="black" Click="AlleredeOprettetB_Click">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
 
         </StackPanel>
     </Grid>
