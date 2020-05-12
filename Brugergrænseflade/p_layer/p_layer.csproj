@@ -133,5 +133,8 @@
   <ItemGroup>
     <Resource Include="opamp_schem.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="århuslogo.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
