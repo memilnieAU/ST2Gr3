@@ -69,6 +69,7 @@
         </StackPanel>
 
         <lvc:CartesianChart x:Name="test"  DisableAnimations="True" Series="{Binding MyCollectionBS}" Grid.ColumnSpan="2" Grid.RowSpan="4" ToolTip="false" Margin="10.333,58,10.333,51" Grid.Column="1" >
+            
             <lvc:CartesianChart.AxisY>
                 <lvc:AxesCollection>
                     <lvc:Axis MinValue="-1" MaxValue="1.5" LabelFormatter="{Binding Formatter}">
