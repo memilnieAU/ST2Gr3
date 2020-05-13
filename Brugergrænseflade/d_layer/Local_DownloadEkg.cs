@@ -8,23 +8,23 @@ using DTOs;
 
 namespace d_layer
 {
+    /// <summary>
+    /// Ansvar: At hente EKG-målinger fra en lokal database
+    /// </summary>
     public class Local_DownloadEkg
     {
-        public int id_måling { get; set; }
-        public string id_medarbejder { get; set; }
-        public string borger_cprnr { get; set; }
-        public DateTime start_tidspunkt { get; set; }
-        public double[] raa_maalepunkter { get; set; }
-        public double samplerate_hz { get; set; }
 
         DTO_EkgMåling målingFraDB;
 
-        public Local_DownloadEkg()
+
+        /// <summary>
+        /// Ansvar: At hente en specifik måling i den lokale database
+        /// </summary>
+        /// <param name="måleId">MåleID på den målling man ønsker at hente</param>
+        /// <returns> Rådata fra en secifik måling </returns>
+        public double[] HentEkgDataRaaData(int måleId)
         {
 
-        }
-        public double[] hentEkgData(int index)
-        {
             SqlConnection conn;
             const String db = "F20ST2ITS2201908775";
 
@@ -33,14 +33,12 @@ namespace d_layer
             SqlDataReader rdr;
             byte[] bytesArr = new byte[8];
             double[] tal;
-            string selectString = "Select * from SP_NyeEkger where id_måling = " + index;
+            string selectString = "Select * from SP_NyeEkger where id_måling = " + måleId;
             using (SqlCommand cmd = new SqlCommand(selectString, conn))
             {
                 rdr = cmd.ExecuteReader();
                 if (rdr.Read())
                     bytesArr = (byte[])rdr["raa_data"];
-
-
                 tal = new double[bytesArr.Length / 8];
 
                 for (int i = 0, j = 0; i < bytesArr.Length; i += 8, j++)
@@ -50,7 +48,12 @@ namespace d_layer
 
             return tal;
         }
-        public int hentAntalletAfMålinger()
+
+        /// <summary>
+        /// Ansvar: At tælle hvor mange målinger der er i den lokale database
+        /// </summary>
+        /// <returns> Antallet af elementer i databasen </returns>
+        public int HentAntalletAfMålinger()
         {
             SqlConnection conn;
             const String db = "F20ST2ITS2201908775";
@@ -72,7 +75,11 @@ namespace d_layer
             conn.Close();
             return tal;
         }
-        public int[] hentID_MålingerAfMålinger()
+        /// <summary>
+        /// Ansvar: At hente alle de måleId'er der er i databasen
+        /// </summary>
+        /// <returns>Et array der indeholder alle måleID'er</returns>
+        public int[] HentAlleMåleIDer()
         {
             SqlConnection conn;
             const String db = "F20ST2ITS2201908775";
@@ -82,7 +89,7 @@ namespace d_layer
             SqlDataReader rdr;
 
             List<int> tal = new List<int>();
-            
+
             string selectString = "Select id_måling From SP_NyeEkger";
             using (SqlCommand cmd = new SqlCommand(selectString, conn))
             {
@@ -98,12 +105,15 @@ namespace d_layer
             return tal.ToArray();
         }
 
-        //Select id_måling From SP_NyeEkger
-
-        public DTO_EkgMåling hentMåling(int id_måling)
+        /// <summary>
+        /// Ansvar: At hente en specifik måling fra den lokale database, ud fra Måle_id
+        /// </summary>
+        /// <param name="måle_Id">Måle_ID fra den målling man ønsker</param>
+        /// <returns>Et DTO_objekt med alle de informationer der fremgår i database for den enkle måling</returns>
+        public DTO_EkgMåling HentEnMåling(int måle_Id)
         {
 
-            målingFraDB = new DTO_EkgMåling(id_måling, hentEkgData(id_måling));
+            målingFraDB = new DTO_EkgMåling(måle_Id, HentEkgDataRaaData(måle_Id));
             SqlConnection conn;
             const String db = "F20ST2ITS2201908775";
 
@@ -111,7 +121,7 @@ namespace d_layer
             conn.Open();
             SqlDataReader rdr;
 
-            string selectString = "Select * from SP_NyeEkger where id_måling = " + id_måling;
+            string selectString = "Select * from SP_NyeEkger where id_måling = " + måle_Id;
             using (SqlCommand cmd = new SqlCommand(selectString, conn))
             {
                 rdr = cmd.ExecuteReader();
@@ -132,16 +142,13 @@ namespace d_layer
                     }
                     if (rdr["antal_maalepunkter"] != DBNull.Value)
                         målingFraDB.antal_maalepunkter = (int)rdr["antal_maalepunkter"];
+
                     if (rdr["samplerate_hz"] != DBNull.Value)
-                        målingFraDB.samplerate_hz = Convert.ToDouble( rdr["samplerate_hz"]);
+                        målingFraDB.samplerate_hz = Convert.ToDouble(rdr["samplerate_hz"]);
+
                     if (rdr["kommentar"] != DBNull.Value)
                         målingFraDB.kommentar = (string)(rdr["kommentar"]);
-
-
-
                 }
-
-
             }
             conn.Close();
 
