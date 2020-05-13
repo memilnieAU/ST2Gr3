@@ -8,16 +8,24 @@ using DTOs;
 
 namespace d_layer
 {
+    /// <summary>
+    /// Ansvar: At hente EKG-datasæt fra en lokal CSV fil på computeren
+    /// </summary>
     public class DownloadFraLocalFile
     {
         List<double> midlertidigePunkter;
         double tidstart;
         double tidslut;
 
-
-
-
-        public DTO_EkgMåling HentFraCsvFil(String FilNavn)  //Henter data fra en måling og tilføjer punkter til en liste
+        /// <summary>
+        /// Ansvar: At henter data fra en måling og tilføjer punkter til en liste. 
+        /// Hvad: Den udfylder: antal målepunkter, samelrate, starttid og x-antal punkter i mV
+        /// </summary>
+        /// <param name="FilNavn"> Dette er navnet på selve filen</param>
+        /// <returns>
+        /// Den retunere en "ny" DTO_EkgMåling med begrænset indehold       
+        /// </returns>
+        public DTO_EkgMåling HentFraCsvFil(String FilNavn)  
         {
             midlertidigePunkter = new List<double>();
 

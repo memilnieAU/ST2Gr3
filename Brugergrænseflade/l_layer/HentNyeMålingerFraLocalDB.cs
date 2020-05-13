@@ -11,12 +11,6 @@ namespace l_layer
     public class HentNyeMålingerFraLocalDB
     {
 
-        public int id_måling { get; set; }
-        public string id_medarbejder { get; set; }
-        public string borger_cprnr { get; set; }
-        public DateTime start_tidspunkt { get; set; }
-        public double[] raa_maalepunkter { get; set; }
-        public double samplerate_hz { get; set; }
         /// <summary>
         /// Denne klasse skal kunne hente Målinger fra den lokale database tabel "SP_NyeEkger"
         /// </summary>
@@ -38,13 +32,13 @@ namespace l_layer
         {
 
            
-            int[] id_målinger = downloadEkg.hentID_MålingerAfMålinger();
+            int[] id_målinger = downloadEkg.HentAlleMåleIDer();
 
             int AntalNyeMålinger = 0;
 
             foreach (int item in id_målinger)
             {
-                DTO_EkgMåling dTO_EkgMåling = (downloadEkg.hentMåling(item));
+                DTO_EkgMåling dTO_EkgMåling = (downloadEkg.HentEnMåling(item));
                 nyeMålinger.Add(dTO_EkgMåling);
                 if (string.IsNullOrEmpty(dTO_EkgMåling.kommentar))
                 {
@@ -61,7 +55,7 @@ namespace l_layer
         public void HentEnMålingFraLocalDB(int ID)
         {
          
-            nyeMålinger.Add(downloadEkg.hentMåling(ID));
+            nyeMålinger.Add(downloadEkg.HentEnMåling(ID));
         }
 
         /// <summary>

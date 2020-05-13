@@ -88,10 +88,10 @@ namespace p_layer
             hentNyeMålinger = new HentNyeMålingerFraLocalDB();
             antalNyeMåinger = hentNyeMålinger.HentAlleMålingerFraLocalDB();
             NyeMålingerTBL.Text = "Der er " + antalNyeMåinger + " nye målinger";
-            
+
         }
         public Func<double, string> Formatter { get; set; }
-        
+
 
         #region DummyOpstartAnalyse
 

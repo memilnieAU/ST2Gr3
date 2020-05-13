@@ -8,8 +8,16 @@ using System.Threading.Tasks;
 using DTOs;
 namespace d_layer
 {
+    /// <summary>
+    /// Ansvar: At uploade til en måling til den lokale database
+    /// </summary>
     public class Local_UploadEkg
     {
+        /// <summary>
+        /// Ansvar: At uploade en specifik måling til den lokale database, efter den er blevet hentet fra en csv fil.
+        /// </summary>
+        /// <param name="nyMåling">En specefik måling</param>
+        /// <returns></returns>
         public int UploadNewEKGFromFile(DTO_EkgMåling nyMåling)
         {
             SqlConnection conn;
@@ -34,14 +42,18 @@ namespace d_layer
 
             return retur;
         }
-
+        /// <summary>
+        /// Ansvar: At opdatere en specefik måling med en ny kommentar
+        /// </summary>
+        /// <param name="måling">Den specfikke måling der ønskes at der opdateres</param>
         public void OpdaterEKG(DTO_EkgMåling måling)
         {
+            string opdateText = "Kommentar ændret: " + DateTime.Now + "\n";
             SqlConnection conn;
             const String db = "F20ST2ITS2201908775";
             conn = new SqlConnection("Data Source = st-i4dab.uni.au.dk;Initial Catalog = " + db + ";Persist Security Info = True;User ID = " + db + ";Password = " + db + "");
             conn.Open();
-            string insertStringParam = $"UPDATE SP_NyeEkger set kommentar = '{måling.kommentar}' where id_måling = {måling.id_måling}";
+            string insertStringParam = $"UPDATE SP_NyeEkger set kommentar = '{opdateText+ måling.kommentar}' where id_måling = {måling.id_måling}";
             using (SqlCommand cmd = new SqlCommand(insertStringParam, conn))
             {
                 cmd.ExecuteNonQuery();
