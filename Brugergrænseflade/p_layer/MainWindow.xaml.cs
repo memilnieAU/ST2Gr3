@@ -137,6 +137,8 @@ namespace p_layer
         DTO_EkgMåling ekgMåling;
         private void CprB_Click(object sender, RoutedEventArgs e)
         {
+                if (CprLB.SelectedIndex != -1)
+                {
             if (FindNyPatientTrykket == true)
             {
                 string cpr = (CprLB.SelectedItem.ToString().Substring(5));
@@ -153,18 +155,20 @@ namespace p_layer
             }
             else
             {
-                ekgMåling = hentNyeMålinger.Hent1Måling(Convert.ToInt32(CprLB.SelectedItem.ToString().Substring(CprLB.SelectedItem.ToString().Length - 2)));
-                EKG_Analyser analyserEnMåling = new EKG_Analyser();
 
-                IndiSygdomTB.Text = analyserEnMåling.AnalyserEnMåling(ekgMåling);
-                DummyTilføjPunkterTilGraf(ekgMåling);
+                    ekgMåling = hentNyeMålinger.Hent1Måling(Convert.ToInt32(CprLB.SelectedItem.ToString().Substring(CprLB.SelectedItem.ToString().Length - 2)));
+                    EKG_Analyser analyserEnMåling = new EKG_Analyser();
 
-                SPKommentar.Text = ekgMåling.kommentar;
-                cprTB.Text = ekgMåling.borger_cprnr;
-                patientInfoTB.Text = "Måling taget af: " + ekgMåling.id_medarbejder;
-                patientInfoTB.Text += "\n" + "Tidspunkt for måling: " + ekgMåling.start_tidspunkt;
-                patientInfoTB.Text += "\n";
-                //patientInfoTB.Text += "\n";
+                    IndiSygdomTB.Text = analyserEnMåling.AnalyserEnMåling(ekgMåling);
+                    DummyTilføjPunkterTilGraf(ekgMåling);
+
+                    SPKommentar.Text = ekgMåling.kommentar;
+                    cprTB.Text = ekgMåling.borger_cprnr;
+                    patientInfoTB.Text = "Måling taget af: " + ekgMåling.id_medarbejder;
+                    patientInfoTB.Text += "\n" + "Tidspunkt for måling: " + ekgMåling.start_tidspunkt;
+                    patientInfoTB.Text += "\n";
+                    //patientInfoTB.Text += "\n";
+                }
             }
 
 
