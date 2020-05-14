@@ -5,23 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:p_layer"
         mc:Ignorable="d"
-        Title="Lam-on Window" Height="300" Width="300">
+        Title="Login Window" Height="300" Width="300">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Image Source="Lars.jpg" Stretch="Fill">
+        <Image Source="århuslogo.png" >
+            <Image.Effect >
+                <BlurEffect Radius="10"/>
+            </Image.Effect>
 
         </Image>
 
 
         <StackPanel Grid.ColumnSpan="2" Margin="0,0,0,0.4">
-            <Label x:Name="LoginL" Content="Lam-on" Foreground="White" FontSize="25" HorizontalAlignment="Center" Margin="20"/>
-            <Label x:Name="MedarbejderIDL" Content="MedarbejderID" Margin="80 -3" Foreground="White" HorizontalAlignment="Center"/>
-            <TextBox Name="MedarbejderIDTB" Margin="80 0" FontSize="18" Background="Transparent" TextAlignment="Center" Foreground="White" />
-            <Label x:Name="passwordL" Content="Password" Margin= "80 5" Foreground="White" HorizontalAlignment="Center"/>
-            <PasswordBox Name="PasswordPW" Margin="80,-4,79.6,-4" FontSize="18" Background="Transparent" HorizontalContentAlignment="Center" Foreground="White"  Width="134"/>
+            <Label x:Name="LoginL" Content="Login" Foreground="Black" FontSize="25" HorizontalAlignment="Center" Margin="20"/>
+            <Label x:Name="MedarbejderIDL" Content="MedarbejderID" Margin="80 -3" Foreground="Black" HorizontalAlignment="Center"/>
+            <TextBox Name="MedarbejderIDTB" Margin="80 0" FontSize="18" Background="Transparent" TextAlignment="Center" Foreground="Black" />
+            <Label x:Name="passwordL" Content="Password" Margin= "80 5" Foreground="Black" HorizontalAlignment="Center"/>
+            <PasswordBox Name="PasswordPW" Margin="80,-4,79.6,-4" FontSize="18" Background="Transparent" HorizontalContentAlignment="Center" Foreground="Black"  Width="134"/>
             <TextBlock x:Name="space" Text=""/>
             <TextBlock x:Name="space1" Text=""/>
             <StackPanel Orientation="Horizontal">
