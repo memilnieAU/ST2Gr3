@@ -176,7 +176,7 @@ namespace p_layer
 
         private void CprLB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //ekgMåling = null;
+            ekgMåling = null;
             testLine.Values.Clear();
             SPKommentar.Text = "";
             IndiSygdomTB.Text = "";
