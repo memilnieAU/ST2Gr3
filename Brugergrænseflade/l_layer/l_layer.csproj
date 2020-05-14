@@ -54,6 +54,7 @@
     <Compile Include="OpdaterLocalDB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UploadNewDataFraLocalFile.cs" />
+    <Compile Include="UploadToOffDb.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DTOs\DTOs.csproj">

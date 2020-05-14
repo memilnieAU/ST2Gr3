@@ -63,7 +63,7 @@
                 <TextBox x:Name="SPKommentar" HorizontalAlignment="Left" TextWrapping="Wrap" Grid.Column="2" Margin="0,10,20,0" Grid.ColumnSpan="1" VerticalAlignment="Top" Height="49" Width="160"/>
                 <StackPanel Orientation="Horizontal">
                     <Button x:Name="TilføjKommentarB" Content="Tilføj kommentar" HorizontalAlignment="Left" Margin="0,10,20,0" VerticalAlignment="Top" Width="110" Height="24" Click="TilføjKommentarB_Click"/>
-                    <Button x:Name="UploadMålingB" Content="Upload måling" HorizontalAlignment="Left" Margin="40,8.333,0,0" Grid.Row="6" VerticalAlignment="Top" Width="110" Height="24" Grid.Column="3"/>
+                    <Button x:Name="UploadMålingB" Content="Upload måling" HorizontalAlignment="Left" Margin="40,8.333,0,0" Grid.Row="6" VerticalAlignment="Top" Width="110" Height="24" Grid.Column="3" Click="UploadMålingB_Click"/>
 
                 </StackPanel>
             </StackPanel>

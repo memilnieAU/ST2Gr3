@@ -319,7 +319,10 @@ namespace p_layer
                 patientInfoTB.Text = hentPinfo.hentPinfo(cprTB.Text);
             }
         }
-
-
+        UploadToOffDb UploadToOffDb = new UploadToOffDb();
+        private void UploadMålingB_Click(object sender, RoutedEventArgs e)
+        {
+            UploadToOffDb.uploadToOff(ekgMåling);
+        }
     }
 }
