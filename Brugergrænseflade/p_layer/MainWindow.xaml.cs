@@ -89,9 +89,10 @@ namespace p_layer
             //uploadNewDataFraLocalFile.HentDataFraFil(17);
             //uploadNewDataFraLocalFile.HentDataFraFil(18);
             hentNyeMålinger = new HentNyeMålingerFraLocalDB();
-            
+
             antalNyeMåinger = hentNyeMålinger.HentAlleMålingerFraLocalDB();
             NyeMålingerTBL.Text = "Der er " + antalNyeMåinger + " nye målinger";
+            hentPinfo = new hentPatientinformationer();
 
         }
         public Func<double, string> Formatter { get; set; }
@@ -141,12 +142,12 @@ namespace p_layer
                 string cpr = (CprLB.SelectedItem.ToString().Substring(5));
 
                 CprLB.Items.Clear();
-               
+
                 foreach (int item in hentNyeMålinger.HentMåleIdUdfracpr(cpr))
                 {
                     CprLB.Items.Add("Cpr: " + cpr + " MåleId: " + item);
                 }
-              
+
 
                 FindNyPatientTrykket = false;
             }
@@ -166,17 +167,29 @@ namespace p_layer
                 //patientInfoTB.Text += "\n";
             }
 
-            hentPinfo = new hentPatientinformationer();
-            patientInfoTB.Text = hentPinfo.hentPinfo(cprTB.Text);
+
         }
 
         private void CprLB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            ekgMåling = null;
             testLine.Values.Clear();
             SPKommentar.Text = "";
             IndiSygdomTB.Text = "";
             TilføjKommentarL.Content = "Tilføj evt kommentar";
             SPKommentar.IsReadOnly = false;
+
+            if (CprLB.SelectedIndex != -1)
+            {
+                cprTB.Text = CprLB.SelectedItem.ToString().Substring(5, 11);
+                patientInfoTB.Text = hentPinfo.hentPinfo(cprTB.Text);
+
+            }
+
+
+
+
+
         }
 
 
@@ -192,18 +205,18 @@ namespace p_layer
             FindNyPatientTrykket = true;
             CprLB.Items.Clear();
             //Henter data fra Den lokaleDB 
-            
-            
+
+
             foreach (string cprNR in hentNyeMålinger.HentAlleCprNr())
             {
                 CprLB.Items.Add("Cpr: " + cprNR);
-            } 
-          
+            }
+
         }
 
         private void TilføjKommentarB_Click(object sender, RoutedEventArgs e)
         {
-            
+
             //if (string.IsNullOrEmpty(SPKommentar.Text) == false)
             {
                 ekgMåling.kommentar = SPKommentar.Text;
@@ -232,11 +245,11 @@ namespace p_layer
         {
             FindNyPatientTrykket = false;
             CprLB.Items.Clear();
-            
+
             foreach (var måling in hentNyeMålinger.HentMåleIdPåNyeMålingerUKommentar())
             {
                 CprLB.Items.Add(måling);
-                
+
             }
         }
 
@@ -266,7 +279,7 @@ namespace p_layer
 
 
 
-       
+
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -276,32 +289,33 @@ namespace p_layer
 
         private void OpdaterCprB_Click(object sender, RoutedEventArgs e)
         {
-            if (cprTB.Text != ekgMåling.borger_cprnr)
+            if (ekgMåling != null)
             {
-                MessageBoxResult result = (MessageBox.Show("Bekræft ændring af cprnummer", "Bekræft", MessageBoxButton.OKCancel));
-                switch (result)
+
+                if (cprTB.Text != ekgMåling.borger_cprnr)
                 {
-                    case MessageBoxResult.OK:
-                        {
-                            ekgMåling.borger_cprnr = cprTB.Text;
-                            opdaterLocalDB.OpdaterCpr(ekgMåling);
+                    MessageBoxResult result = (MessageBox.Show("Bekræft ændring af cprnummer", "Bekræft", MessageBoxButton.OKCancel));
+                    switch (result)
+                    {
+                        case MessageBoxResult.OK:
+                            {
+                                ekgMåling.borger_cprnr = cprTB.Text;
+                                opdaterLocalDB.OpdaterCpr(ekgMåling);
+                                CprLB.SelectedItem = "test";
+                                break;
+                            }
+                        case MessageBoxResult.Cancel:
+                            cprTB.Focus();
                             break;
-                        }
-                    case MessageBoxResult.Cancel:
-                        cprTB.Focus();
-                        break;
+                    }
+
+
                 }
 
-
+                patientInfoTB.Text = hentPinfo.hentPinfo(cprTB.Text);
             }
-
-            hentPinfo = new hentPatientinformationer();
-            patientInfoTB.Text = hentPinfo.hentPinfo(cprTB.Text);
         }
 
-        private void cprTB_TextChanged(object sender, TextChangedEventArgs e)
-        {
-           
-        }
+
     }
 }
