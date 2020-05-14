@@ -164,9 +164,9 @@ namespace p_layer
 
                     SPKommentar.Text = ekgMåling.kommentar;
                     cprTB.Text = ekgMåling.borger_cprnr;
-                    patientInfoTB.Text = "Måling taget af: " + ekgMåling.id_medarbejder;
-                    patientInfoTB.Text += "\n" + "Tidspunkt for måling: " + ekgMåling.start_tidspunkt;
-                    patientInfoTB.Text += "\n";
+                    MInfoTB.Text = "Måling taget af: " + ekgMåling.id_medarbejder;
+                    MInfoTB.Text += "\n" + "Tidspunkt for måling: " + ekgMåling.start_tidspunkt;
+                    MInfoTB.Text += "\n";
                     //patientInfoTB.Text += "\n";
                 }
             }
