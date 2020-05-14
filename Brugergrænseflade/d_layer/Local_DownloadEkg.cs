@@ -104,6 +104,95 @@ namespace d_layer
             conn.Close();
             return tal.ToArray();
         }
+        public string[] HentAlleMåleIDerUKommentar()
+        {
+            SqlConnection conn;
+            const String db = "F20ST2ITS2201908775";
+
+            conn = new SqlConnection("Data Source = st-i4dab.uni.au.dk;Initial Catalog = " + db + ";Persist Security Info = True;User ID = " + db + ";Password = " + db + "");
+            conn.Open();
+            SqlDataReader rdr;
+
+            List<string> info = new List<string>();
+            string selectString = "Select id_måling, borger_cprnr From SP_NyeEkger where kommentar IS NULL";
+            using (SqlCommand cmd = new SqlCommand(selectString, conn))
+            {
+                rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    string cpr = (string)rdr["borger_cprnr"];
+                    string måleid = Convert.ToString(rdr["id_måling"]);
+                    info.Add("Cpr: " + cpr + " MåleId: " + måleid) ;
+                    
+
+                }
+                //tal = (int)rdr["AntalMålinger"];
+            }
+            conn.Close();
+            return info.ToArray();
+        }
+        /// <summary>
+        /// Ansvar: At hente alle forskellige cpr nummer der findes i lokal db
+        /// </summary>
+        /// <returns>Et array der indeholder alle måleID'er</returns>
+        public string[] HentAlleCPRNr()
+        {
+            SqlConnection conn;
+            const String db = "F20ST2ITS2201908775";
+
+            conn = new SqlConnection("Data Source = st-i4dab.uni.au.dk;Initial Catalog = " + db + ";Persist Security Info = True;User ID = " + db + ";Password = " + db + "");
+            conn.Open();
+            SqlDataReader rdr;
+
+            List<string> tal = new List<string>();
+
+            string selectString = "Select borger_cprnr From SP_NyeEkger";
+            using (SqlCommand cmd = new SqlCommand(selectString, conn))
+            {
+                rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    string cpr = ((string)rdr["borger_cprnr"]);
+                    if (tal.Contains(cpr) == false)
+                    {
+                        tal.Add(cpr);
+
+                    }
+                }
+                
+            }
+            conn.Close();
+            return tal.ToArray();
+        }
+        /// <summary>
+        /// Ansvar: At hente måle id udfra cprNummer
+        /// </summary>
+        /// <returns>Et array der indeholder alle måleID'er</returns>
+        public int[] HentMåleIDCPR(string cpr)
+        {
+            SqlConnection conn;
+            const String db = "F20ST2ITS2201908775";
+
+            conn = new SqlConnection("Data Source = st-i4dab.uni.au.dk;Initial Catalog = " + db + ";Persist Security Info = True;User ID = " + db + ";Password = " + db + "");
+            conn.Open();
+            SqlDataReader rdr;
+
+            List<int> tal = new List<int>();
+
+            string selectString = $"Select id_måling From SP_NyeEkger where borger_cprnr = '{cpr}'";
+            using (SqlCommand cmd = new SqlCommand(selectString, conn))
+            {
+                rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    tal.Add((int)rdr["id_måling"]);
+
+                }
+                //tal = (int)rdr["AntalMålinger"];
+            }
+            conn.Close();
+            return tal.ToArray();
+        }
 
         /// <summary>
         /// Ansvar: At hente en specifik måling fra den lokale database, ud fra Måle_id
@@ -159,7 +248,7 @@ namespace d_layer
         /// </summary>
         /// <param name="socSecNb">der ønskes data fra cpr</param>
         /// <returns>returnere navn, alder og adresse</returns>
-        public string HentPatientinformation(string socSecNb) 
+        public string HentPatientinformation(string socSecNb)
         {
 
             SqlConnection conn;
@@ -167,20 +256,20 @@ namespace d_layer
             string patientinformationer = "";
             string cpr = "";
             string navn = "";
-            string alder= "";
+            string alder = "";
             string adresse = "";
 
             conn = new SqlConnection("Data Source = st-i4dab.uni.au.dk;Initial Catalog = " + db + ";Persist Security Info = True;User ID = " + db + ";Password = " + db + "");
             conn.Open();
-            SqlDataReader rdr; 
-            string selectString = "Select * from SP_patientinformationer where cpr = " + "'" +socSecNb+ "'";
+            SqlDataReader rdr;
+            string selectString = "Select * from SP_patientinformationer where cpr = " + "'" + socSecNb + "'";
             using (SqlCommand cmd = new SqlCommand(selectString, conn))
             {
-                    
+
                 rdr = cmd.ExecuteReader();
                 if (rdr.Read())
                 {
-                        if (rdr["navn"] != DBNull.Value)
+                    if (rdr["navn"] != DBNull.Value)
                         navn = (string)rdr["navn"];
                     if (rdr["alder"] != DBNull.Value)
                         alder = Convert.ToString(rdr["alder"]);
@@ -191,7 +280,7 @@ namespace d_layer
                 }
             }
             conn.Close();
-            patientinformationer = "navn: " + navn +"\r\nalder: "+ alder + "\r\nadresse: " + adresse;
+            patientinformationer = "navn: " + navn + "\r\nalder: " + alder + "\r\nadresse: " + adresse;
             return patientinformationer;
         }
 
