@@ -17,9 +17,9 @@ namespace l_layer
         {
             up_Download_Offentlig = new Up_download_Offentlig();
         }
-        public void uploadToOff(DTO_EkgMåling ekgmåling)
+        public bool uploadToOff(DTO_EkgMåling ekgmåling)
         {
-            up_Download_Offentlig.upload(ekgmåling);
+            return up_Download_Offentlig.upload(ekgmåling);
         }
     }
 }

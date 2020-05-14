@@ -18,27 +18,35 @@ namespace d_layer
         {
 
         }
-        public void upload(DTO_EkgMåling nyMåling)
+        public bool upload(DTO_EkgMåling nyMåling)
         {
-            int id = uploadEKGMaeling(nyMåling);
+            //int id = uploadEKGMaeling(nyMåling);
+            return uploadEKGMaeling(nyMåling);
         }
-        private int uploadEKGMaeling(DTO_EkgMåling nyMåling)
+        private bool uploadEKGMaeling(DTO_EkgMåling nyMåling)
         {
-            //connection = new SqlConnection("Data Source=st-i4dab.uni.au.dk; Initial Catalog=" + DBlogin + "; User ID= " + DBlogin + "; Password=" + DBlogin + "; Connect Timeout=30; Encrypt=False; TrustServerCertificate=False; ApplicationIntent=ReadWrite; MultiSubnetFailover=False");
-            connection = new SqlConnection("Data Source = st-i4dab.uni.au.dk;Initial Catalog = " + DBlogin + ";Persist Security Info = True;User ID = " + DBlogin + ";Password = " + DBlogin + "");
-            connection.Open();
-            string format = "yyyy-MM-dd HH:mm:ss";
-            int retur;
-            string insertStringParam = $"INSERT INTO dbo.EKGMAELING ([dato],[antalmaalinger],[sfp_ansvrmedarbjnr],[sfp_ans_org]) OUTPUT INSERTED.ekgmaaleid VALUES(CAST('{nyMåling.start_tidspunkt.ToString(format)}' AS Datetime),{nyMåling.antal_maalepunkter},'{nyMåling.id_medarbejder}','Gruppe 3')";
-
-                
-            using (SqlCommand cmd = new SqlCommand(insertStringParam, connection))
+            try
             {
-                
-                retur = (int)cmd.ExecuteScalar();
+                //connection = new SqlConnection("Data Source=st-i4dab.uni.au.dk; Initial Catalog=" + DBlogin + "; User ID= " + DBlogin + "; Password=" + DBlogin + "; Connect Timeout=30; Encrypt=False; TrustServerCertificate=False; ApplicationIntent=ReadWrite; MultiSubnetFailover=False");
+                connection = new SqlConnection("Data Source = st-i4dab.uni.au.dk;Initial Catalog = " + DBlogin + ";Persist Security Info = True;User ID = " + DBlogin + ";Password = " + DBlogin + "");
+                connection.Open();
+                //string format = "yyyy-MM-dd HH:mm:ss";
+                //string insertStringParam = $"INSERT INTO dbo.EKGMAELING ([dato],[antalmaalinger],[sfp_ansvrmedarbjnr],[sfp_ans_org])" + $" OUTPUT INSERTED.ekgmaaleid VALUES(CAST('{nyMåling.start_tidspunkt.ToString()}' AS Datetime),{nyMåling.antal_maalepunkter},'{nyMåling.id_medarbejder}','Gruppe 3')";
+                string insertStringParam = $"INSERT INTO dbo.EKGMAELING ([dato],[antalmaalinger],[sfp_ansvrmedarbjnr],[sfp_ans_org])" + $" OUTPUT INSERTED.ekgmaaleid VALUES(@dato,{nyMåling.antal_maalepunkter},'{nyMåling.id_medarbejder}','Gruppe 3')";
+
+                using (SqlCommand cmd = new SqlCommand(insertStringParam, connection))
+                {
+                    cmd.Parameters.AddWithValue("@dato", nyMåling.start_tidspunkt);
+                    cmd.ExecuteScalar();
+                }
+                connection.Close();
+                return true;
             }
-            connection.Close();
-            return retur;
+            catch (SqlException)
+            {
+                return false;
+            }
+            
         }
     }
 }

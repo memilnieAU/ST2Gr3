@@ -176,7 +176,7 @@ namespace p_layer
 
         private void CprLB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ekgMåling = null;
+            //ekgMåling = null;
             testLine.Values.Clear();
             SPKommentar.Text = "";
             IndiSygdomTB.Text = "";
@@ -322,7 +322,11 @@ namespace p_layer
         UploadToOffDb UploadToOffDb = new UploadToOffDb();
         private void UploadMålingB_Click(object sender, RoutedEventArgs e)
         {
-            UploadToOffDb.uploadToOff(ekgMåling);
+            bool uploaded = UploadToOffDb.uploadToOff(ekgMåling);
+            if (uploaded == true)
+            { MessageBox.Show("Den valgte måling er blevet uploadet til databasen"); }
+            else
+            { MessageBox.Show("Der gik noget galt da den valgte måling skulle uploades til databasen. Prøv igen eller tjek din database-forbindelse"); }
         }
     }
 }
