@@ -35,6 +35,7 @@ namespace p_layer
         private loginView loginref;
         private hentPatientinformationer hentPinfo;
         public string medarbejderID;
+        OpdaterLocalDB opdaterLocalDB;
 
         HentNyeMålingerFraLocalDB hentNyeMålinger;
         EKG_Analyser ekg_Analyse;
@@ -43,6 +44,7 @@ namespace p_layer
         public MainWindow(loginView LoginRef, LoginRequest logicRef)
         {
             InitializeComponent();
+            opdaterLocalDB = new OpdaterLocalDB();
             //TODO få tilføjet medarbejderID'et her og evt et navn, hvis dette skal med og tilføjes i databasen
             testLine = new LineSeries
             {
@@ -167,6 +169,9 @@ namespace p_layer
                 patientInfoTB.Text += "\n";
                 //patientInfoTB.Text += "\n";
             }
+
+            hentPinfo = new hentPatientinformationer();
+            patientInfoTB.Text = hentPinfo.hentPinfo(cprTB.Text);
         }
 
         private void CprLB_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -208,10 +213,9 @@ namespace p_layer
             }
         }
 
-        OpdaterLocalDB opdaterLocalDB;
         private void TilføjKommentarB_Click(object sender, RoutedEventArgs e)
         {
-            opdaterLocalDB = new OpdaterLocalDB();
+            
             //if (string.IsNullOrEmpty(SPKommentar.Text) == false)
             {
                 ekgMåling.kommentar = SPKommentar.Text;
@@ -287,10 +291,34 @@ namespace p_layer
 
         }
 
-        private void HentInformationB_Click(object sender, RoutedEventArgs e)
+        private void OpdaterCprB_Click(object sender, RoutedEventArgs e)
         {
+            if (cprTB.Text != ekgMåling.borger_cprnr)
+            {
+                MessageBoxResult result = (MessageBox.Show("Bekræft ændring af cprnummer", "Bekræft", MessageBoxButton.OKCancel));
+                switch (result)
+                {
+                    case MessageBoxResult.OK:
+                        {
+                            ekgMåling.borger_cprnr = cprTB.Text;
+                            opdaterLocalDB.OpdaterCpr(ekgMåling);
+                            break;
+                        }
+                    case MessageBoxResult.Cancel:
+                        cprTB.Focus();
+                        break;
+                }
+
+
+            }
+
             hentPinfo = new hentPatientinformationer();
             patientInfoTB.Text = hentPinfo.hentPinfo(cprTB.Text);
+        }
+
+        private void cprTB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+           
         }
     }
 }

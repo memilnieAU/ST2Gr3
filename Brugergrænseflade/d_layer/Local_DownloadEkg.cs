@@ -154,5 +154,46 @@ namespace d_layer
 
             return målingFraDB;
         }
+        /// <summary>
+        /// ansvar: henter patientinformationer fra den lokaledatabase.
+        /// </summary>
+        /// <param name="socSecNb">der ønskes data fra cpr</param>
+        /// <returns>returnere navn, alder og adresse</returns>
+        public string HentPatientinformation(string socSecNb) 
+        {
+
+            SqlConnection conn;
+            const String db = "F20ST2ITS2201908775";
+            string patientinformationer = "";
+            string cpr = "";
+            string navn = "";
+            string alder= "";
+            string adresse = "";
+
+            conn = new SqlConnection("Data Source = st-i4dab.uni.au.dk;Initial Catalog = " + db + ";Persist Security Info = True;User ID = " + db + ";Password = " + db + "");
+            conn.Open();
+            SqlDataReader rdr; 
+            string selectString = "Select * from SP_patientinformationer where cpr = " + "'" +socSecNb+ "'";
+            using (SqlCommand cmd = new SqlCommand(selectString, conn))
+            {
+                    
+                rdr = cmd.ExecuteReader();
+                if (rdr.Read())
+                {
+                        if (rdr["navn"] != DBNull.Value)
+                        navn = (string)rdr["navn"];
+                    if (rdr["alder"] != DBNull.Value)
+                        alder = Convert.ToString(rdr["alder"]);
+                    if (rdr["adresse"] != DBNull.Value)
+                        adresse = (string)rdr["adresse"];
+
+
+                }
+            }
+            conn.Close();
+            patientinformationer = "navn: " + navn +"\r\nalder: "+ alder + "\r\nadresse: " + adresse;
+            return patientinformationer;
+        }
+
     }
 }

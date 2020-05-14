@@ -19,7 +19,11 @@ namespace l_layer
 
         public void OpdaterKommentar(DTO_EkgMåling måling)
         {
-            Local_Upload.OpdaterEKG(måling);
+            Local_Upload.OpdaterKommentar(måling);
+        }
+        public void OpdaterCpr(DTO_EkgMåling måling)
+        {
+            Local_Upload.Opdatercpr(måling);
         }
     }
 }
