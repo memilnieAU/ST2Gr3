@@ -89,6 +89,7 @@ namespace p_layer
             //uploadNewDataFraLocalFile.HentDataFraFil(17);
             //uploadNewDataFraLocalFile.HentDataFraFil(18);
             hentNyeMålinger = new HentNyeMålingerFraLocalDB();
+            
             antalNyeMåinger = hentNyeMålinger.HentAlleMålingerFraLocalDB();
             NyeMålingerTBL.Text = "Der er " + antalNyeMåinger + " nye målinger";
 
@@ -140,17 +141,12 @@ namespace p_layer
                 string cpr = (CprLB.SelectedItem.ToString().Substring(5));
 
                 CprLB.Items.Clear();
-                //Henter data fra Den lokaleDB 
-                hentNyeMålinger = new HentNyeMålingerFraLocalDB();
-                hentNyeMålinger.HentAlleMålingerFraLocalDB();
-
-                foreach (var måling in hentNyeMålinger.nyeMålinger)
+               
+                foreach (int item in hentNyeMålinger.HentMåleIdUdfracpr(cpr))
                 {
-                    if (måling.borger_cprnr == cpr && måling.kommentar.Length > 0)
-                    {
-                        CprLB.Items.Add("Cpr: " + måling.borger_cprnr + " MåleId: " + måling.id_måling);
-                    }
+                    CprLB.Items.Add("Cpr: " + cpr + " MåleId: " + item);
                 }
+              
 
                 FindNyPatientTrykket = false;
             }
@@ -196,21 +192,13 @@ namespace p_layer
             FindNyPatientTrykket = true;
             CprLB.Items.Clear();
             //Henter data fra Den lokaleDB 
-            hentNyeMålinger = new HentNyeMålingerFraLocalDB();
-            hentNyeMålinger.HentAlleMålingerFraLocalDB();
-
-            foreach (var måling in hentNyeMålinger.nyeMålinger)
+            
+            
+            foreach (string cprNR in hentNyeMålinger.HentAlleCprNr())
             {
-                //TODO Test linje som kan tilføje en kommentar til målingens kommentar
-                //måling.kommentar = "Huske at slette denne linje kode";
-                if (string.IsNullOrEmpty(måling.kommentar) || string.IsNullOrWhiteSpace(måling.kommentar))
-                {
-                    if (CprLB.Items.Contains("Cpr: " + måling.borger_cprnr) == false)
-                    {
-                        CprLB.Items.Add("Cpr: " + måling.borger_cprnr);
-                    }
-                }
-            }
+                CprLB.Items.Add("Cpr: " + cprNR);
+            } 
+          
         }
 
         private void TilføjKommentarB_Click(object sender, RoutedEventArgs e)
@@ -244,16 +232,11 @@ namespace p_layer
         {
             FindNyPatientTrykket = false;
             CprLB.Items.Clear();
-            //Henter data fra Den lokaleDB 
-            hentNyeMålinger = new HentNyeMålingerFraLocalDB();
-            hentNyeMålinger.HentAlleMålingerFraLocalDB();
-
-            foreach (var måling in hentNyeMålinger.nyeMålinger)
+            
+            foreach (var måling in hentNyeMålinger.HentMåleIdPåNyeMålingerUKommentar())
             {
-                if (string.IsNullOrEmpty(måling.kommentar) || string.IsNullOrWhiteSpace(måling.kommentar))
-                {
-                    CprLB.Items.Add("Cpr: " + måling.borger_cprnr + " MåleId: " + måling.id_måling);
-                }
+                CprLB.Items.Add(måling);
+                
             }
         }
 
@@ -266,7 +249,7 @@ namespace p_layer
             {
                 sw.Stop();
                 sw.Reset();
-                antalNyeMåinger = hentNyeMålinger.HentAlleMålingerFraLocalDB();
+                antalNyeMåinger = hentNyeMålinger.HentantalAfNyeMålingerUKommentar();
                 NyeMålingerTBL.Text = "Der er " + antalNyeMåinger + " nye målinger";
             }
             if (antalNyeMåinger > 0)

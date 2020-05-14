@@ -47,6 +47,39 @@ namespace l_layer
             }
             return AntalNyeMålinger;
         }
+        public string[] HentAlleCprNr()
+        {
+
+
+            string[] alleCprNr  = downloadEkg.HentAlleCPRNr();
+
+            
+            return alleCprNr;
+        }
+        public int[] HentMåleIdUdfracpr(string cpr)
+        {
+            int[] måleid = downloadEkg.HentMåleIDCPR(cpr);
+
+            return måleid;
+        }
+        public int HentantalAfNyeMålingerUKommentar()
+        {
+
+
+            string[] id_målinger = downloadEkg.HentAlleMåleIDerUKommentar();
+
+            
+            return id_målinger.Length;
+        }
+        public string[] HentMåleIdPåNyeMålingerUKommentar()
+        {
+
+
+            string[] id_målinger = downloadEkg.HentAlleMåleIDerUKommentar();
+
+
+            return id_målinger;
+        }
 
         /// <summary>
         /// Denne metode vil kun hente en specifik måling i databasen
