@@ -33,6 +33,7 @@ namespace p_layer
         private LineSeries Line1;
         List<cprEksempel> cpreks;
         private loginView loginref;
+        private hentPatientinformationer hentPinfo;
         public string medarbejderID;
 
         HentNyeMålingerFraLocalDB hentNyeMålinger;
@@ -278,15 +279,18 @@ namespace p_layer
 
 
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+       
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             loginInfoTB.Text = "MedarbejderID: " + medarbejderID;
 
+        }
+
+        private void HentInformationB_Click(object sender, RoutedEventArgs e)
+        {
+            hentPinfo = new hentPatientinformationer();
+            patientInfoTB.Text = hentPinfo.hentPinfo(cprTB.Text);
         }
     }
 }

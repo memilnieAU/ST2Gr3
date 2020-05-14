@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="EKG_Analyser.cs" />
     <Compile Include="HentNyeMålingerFraLocalDB.cs" />
+    <Compile Include="HentPatientinformationer.cs" />
     <Compile Include="LoginRequest.cs" />
     <Compile Include="OpdaterLocalDB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

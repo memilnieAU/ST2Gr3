@@ -40,10 +40,10 @@
             <Label x:Name="VælgCprL" Content="Vælg CPR" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top" Height="30" Width="225" Grid.Row="1"/>
             <ListBox x:Name="CprLB" Grid.Column="0" HorizontalAlignment="Left" Height="150" VerticalAlignment="Top" Width="198" Margin="20,10,0,0" Grid.RowSpan="3" SelectionChanged="CprLB_SelectionChanged" Grid.Row="1" Background="#FFDDE1E7"/>
             <Button x:Name="cprB"  Grid.Row="3" Content="Vælg" Click="CprB_Click" Margin="20,5,0,0"  Width="170" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-            <Button Content="Hent patientinformationer" HorizontalAlignment="Left" Margin="20,20,0,0" Grid.Row="4" VerticalAlignment="Top" Width="170" Height="25" Click="Button_Click"/>
+            <Button x:Name="HentInformationB" Content="Hent patientinformationer" HorizontalAlignment="Left" Margin="20,20,0,0" Grid.Row="4" VerticalAlignment="Top" Width="170" Height="25" Click="HentInformationB_Click" />
             <Canvas>
                 <TextBox x:Name="cprTB" HorizontalAlignment="Left" Canvas.Top="0" Height="25" Margin="20,10,0,0" TextWrapping="Wrap" Text="000000-0000" VerticalAlignment="Top" Width="198" Grid.Row="5" Background="#FFDDE1E7" BorderBrush="{x:Null}"/>
-                <TextBox x:Name="patientInfoTB" HorizontalAlignment="Left" Canvas.Top="28" IsReadOnly="True" Height="100" Margin="20,0,0,0" TextWrapping="Wrap" Text="Navn/alder/mm" VerticalAlignment="Top" Width="198" Grid.Row="5" Background="#FFDDE1E7" BorderBrush="{x:Null}"/>
+                <TextBox x:Name="patientInfoTB" HorizontalAlignment="Left" Canvas.Top="28" IsReadOnly="True" Height="100" Margin="20,0,0,0" TextWrapping="Wrap" Text="Navn/alder/mm" VerticalAlignment="Top" Width="198" Grid.Row="5" Background="#FFDDE1E7" BorderBrush="{x:Null}" />
             </Canvas>
         </StackPanel>
         <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0.667,163.667,-0.333">
