@@ -146,7 +146,7 @@ namespace d_layer
 
             List<string> tal = new List<string>();
 
-            string selectString = "Select borger_cprnr From SP_NyeEkger";
+            string selectString = "Select borger_cprnr From SP_NyeEkger Order by borger_cprnr";
             using (SqlCommand cmd = new SqlCommand(selectString, conn))
             {
                 rdr = cmd.ExecuteReader();
