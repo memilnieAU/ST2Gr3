@@ -8,6 +8,11 @@ using System.Security.Cryptography;
 
 namespace l_layer
 {
+
+    /// <summary>
+    /// Ansvar står for kommunikationen mellem d_layer og p_layer. Derudover kryptere den også passwordet så det der bliver indtastet kan sammenlignes med det der står i databasen
+    /// hashing metoden er meget inspireret af https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.hashalgorithm.computehash?view=netcore-3.1, dog har vi ændret i hashing metoden
+    /// </summary>
     public class LoginRequest
     {
         private Local_User dataObject;
@@ -15,6 +20,12 @@ namespace l_layer
         public LoginRequest ()
         { dataObject = new Local_User();   }
 
+        /// <summary>
+        /// Ansvar: sender informationer videre til d_layer
+        /// </summary>
+        /// <param name="BrugerNavn"> det indtastede medarbejderID</param>
+        /// <param name="pw">det indtastede password</param>
+        /// <returns></returns>
         public bool checkLogin(String BrugerNavn, String pw)
         {
            using (SHA512 sha512Hash = SHA512.Create())
@@ -27,6 +38,11 @@ namespace l_layer
             // return true;
         }
 
+        /// <summary>
+        /// opretter nye brugere og hasher deres password
+        /// </summary>
+        /// <param name="Brugernavn">MedarbejderID</param>
+        /// <param name="pw">password</param>
         public void registerNewUser(string Brugernavn, string pw)
         {
 
@@ -37,6 +53,12 @@ namespace l_layer
             }
         }
 
+        /// <summary>
+        /// Ansvar: kryptere password
+        /// </summary>
+        /// <param name="hashAlgorithm"></param>
+        /// <param name="input"></param>
+        /// <returns></returns>
         private static string GetHash(HashAlgorithm hashAlgorithm, string input)
         {
 
