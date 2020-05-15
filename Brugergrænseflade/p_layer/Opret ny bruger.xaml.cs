@@ -33,15 +33,24 @@ namespace p_layer
             if (MedarbejderIDTB.Text.Length != 4)
             {
                 MessageBox.Show("MedarbejderID skal være fire karaktere");
+                PasswordPW.Clear();
+                gentagPasswordPW.Clear();
+                MedarbejderIDTB.Focus();
             }
             else if (PasswordPW.Password.Length != 4)
             {
                 MessageBox.Show("Password skal være fire karaktere");
+                PasswordPW.Focus();
+                PasswordPW.Clear();
+                gentagPasswordPW.Clear();
             }
             else if (PasswordPW.Password != gentagPasswordPW.Password)
                 {
                     MessageBox.Show("De to password skal være ens");
-                }
+                PasswordPW.Focus();
+                PasswordPW.Clear();
+                gentagPasswordPW.Clear();
+            }
             
             else if (MedarbejderIDTB.Text.Length == 4 && PasswordPW.Password.Length ==4 && PasswordPW.Password==gentagPasswordPW.Password)
             {

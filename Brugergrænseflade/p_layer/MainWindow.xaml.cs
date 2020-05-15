@@ -93,7 +93,7 @@ namespace p_layer
             antalNyeMåinger = hentNyeMålinger.HentAlleMålingerFraLocalDB();
             NyeMålingerTBL.Text = "Der er " + antalNyeMåinger + " nye målinger";
             hentPinfo = new hentPatientinformationer();
-
+            
         }
         public Func<double, string> Formatter { get; set; }
 

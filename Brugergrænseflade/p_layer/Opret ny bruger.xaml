@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:p_layer"
         mc:Ignorable="d"
-        Title="Opret ny bruger" Height="450" Width="300">
+        Title="Opret ny bruger" Height="450" Width="300" FontSize="18">
     <Grid>
 
         <Grid.ColumnDefinitions>
@@ -14,30 +14,26 @@
 
         <Image Source="århuslogo.png" >
             <Image.Effect >
-                <BlurEffect Radius="8"/>
+                <BlurEffect Radius="10"/>
             </Image.Effect>
         </Image>
 
         <StackPanel>
-            <!--<StackPanel.Background>
-                <ImageBrush ImageSource="århuslogo.png"/>
-            </StackPanel.Background>-->
             <Label x:Name="OpretNyBrugerL" Content="Opret ny bruger:" Foreground="Black" FontSize="25" HorizontalAlignment="Center" Margin="20"/>
-            <Label x:Name="medarbejderIDL" Content="MedarbejderID" Margin="80 0" Foreground="Black" HorizontalAlignment="Center"/>
-            <TextBox Name="MedarbejderIDTB" Margin="80 0" FontSize="18" Background="Transparent" Foreground="Black" TextAlignment="Center"/>
-            <Label x:Name="passwordL" Content="Password" Margin= "80 5" Foreground="Black" HorizontalAlignment="Center"/>
-            <PasswordBox Name="PasswordPW" Margin="80,5,79.6,5" FontSize="18" HorizontalContentAlignment="Center" Background="Transparent" Foreground="Black" Width="134"/>
-            <Label x:Name="gentagPasword" Content="Gentag password" Margin= "80 5" HorizontalAlignment="Center" Foreground="Black"/>
-            <PasswordBox Name="gentagPasswordPW"  FontSize="18" HorizontalContentAlignment="Center" Background="Transparent" Foreground="Black" Margin="80,0,79.6,0" Width="134"/>
-            <TextBlock x:Name="space" Text=""/>
-            <Button x:Name="OpretNyBrugerB" Content="Opret bruger" Margin="50,10,49.6,10" FontSize="18" Background="White" Foreground="Black" Height="31" Click="OpretNyBrugerB_Click">
+            <Label x:Name="medarbejderIDL" Content="MedarbejderID" Foreground="Black" Width="180" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
+            <TextBox Name="MedarbejderIDTB" Margin="80 0" Background="Transparent" Foreground="Black" TextAlignment="Center"/>
+            <Label x:Name="passwordL" Content="Password" Foreground="Black" Width="180" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
+            <PasswordBox Name="PasswordPW" Margin="80,5,79.6,5" HorizontalContentAlignment="Center" Background="Transparent" Foreground="Black" Width="134"/>
+            <Label x:Name="gentagPaswordL" Content="Gentag password" Foreground="Black" Width="180" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
+            <PasswordBox Name="gentagPasswordPW" HorizontalContentAlignment="Center" Background="Transparent" Foreground="Black" Margin="80,0,79.6,0" Width="134"/>
+            <Button x:Name="OpretNyBrugerB" Content="Opret bruger" Margin="50,30,50,10 " FontSize="18" Background="White" Foreground="Black" Height="31" Click="OpretNyBrugerB_Click">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="10"/>
                     </Style>
                 </Button.Resources>
-                </Button>
-            <Button Name="AlleredeOprettetB" Content="Allerede bruger?" Margin="50,10,49.6,10" FontSize="18" Background="White" Foreground="black" Click="AlleredeOprettetB_Click">
+            </Button>
+            <Button Name="AlleredeOprettetB" Content="Allerede bruger?" Margin="50,10" FontSize="18" Background="White" Foreground="black" Click="AlleredeOprettetB_Click">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="10"/>

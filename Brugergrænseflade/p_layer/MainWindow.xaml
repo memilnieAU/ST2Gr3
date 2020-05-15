@@ -74,7 +74,7 @@
             <Button x:Name="SletEKGB" Content="Slet EKG-måling"  Height="30" Width="120" HorizontalAlignment="Right" Margin="0,30,0,0"/>
         </StackPanel>
 
-        <lvc:CartesianChart x:Name="test"  DisableAnimations="True" Series="{Binding MyCollectionEkg}" Grid.ColumnSpan="2" Grid.RowSpan="4" ToolTip="false" Margin="13.333,40,19.667,57.333" Grid.Column="1" >
+        <lvc:CartesianChart x:Name="test"  DisableAnimations="True" Series="{Binding MyCollectionEkg}" Grid.ColumnSpan="2" Grid.RowSpan="4" ToolTip="false" Margin="13.333,40,19.667,57.333" Grid.Column="1" Hoverable="False">
 
             <lvc:CartesianChart.AxisY>
                 <lvc:AxesCollection>
