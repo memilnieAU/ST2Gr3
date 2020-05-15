@@ -137,24 +137,24 @@ namespace p_layer
         DTO_EkgMåling ekgMåling;
         private void CprB_Click(object sender, RoutedEventArgs e)
         {
-                if (CprLB.SelectedIndex != -1)
-                {
-            if (FindNyPatientTrykket == true)
+            if (CprLB.SelectedIndex != -1)
             {
-                string cpr = (CprLB.SelectedItem.ToString().Substring(5));
-
-                CprLB.Items.Clear();
-
-                foreach (int item in hentNyeMålinger.HentMåleIdUdfracpr(cpr))
+                if (FindNyPatientTrykket == true)
                 {
-                    CprLB.Items.Add("Cpr: " + cpr + " MåleId: " + item);
+                    string cpr = (CprLB.SelectedItem.ToString().Substring(5));
+
+                    CprLB.Items.Clear();
+
+                    foreach (int item in hentNyeMålinger.HentMåleIdUdfracpr(cpr))
+                    {
+                        CprLB.Items.Add("Cpr: " + cpr + " MåleId: " + item);
+                    }
+
+
+                    FindNyPatientTrykket = false;
                 }
-
-
-                FindNyPatientTrykket = false;
-            }
-            else
-            {
+                else
+                {
 
                     ekgMåling = hentNyeMålinger.Hent1Måling(Convert.ToInt32(CprLB.SelectedItem.ToString().Substring(CprLB.SelectedItem.ToString().Length - 2)));
                     EKG_Analyser analyserEnMåling = new EKG_Analyser();
@@ -168,6 +168,8 @@ namespace p_layer
                     MInfoTB.Text += "\n" + "Tidspunkt for måling: " + ekgMåling.start_tidspunkt;
                     MInfoTB.Text += "\n";
                     //patientInfoTB.Text += "\n";
+                    OpdaterCprB.IsEnabled = true;
+                    cprTB.IsReadOnly = false;
                 }
             }
 
@@ -177,6 +179,8 @@ namespace p_layer
         private void CprLB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ekgMåling = null;
+            OpdaterCprB.IsEnabled = false;
+            cprTB.IsReadOnly = true;
             testLine.Values.Clear();
             SPKommentar.Text = "";
             IndiSygdomTB.Text = "";
