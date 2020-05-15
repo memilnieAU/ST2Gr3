@@ -26,7 +26,7 @@ namespace l_layer
         /// <summary>
         /// Denne metode vil hente fra en given fil
         /// filnavnet skal skrives som parameter i HentFraCsvFil("****")
-        /// Den filerne skal være placeret i p_layer\bin\debug mappen
+        /// Den filerne skal være placeret i p_layer\bin\debug mappen 
         /// </summary>
         public void HentDataFraFil(int nummer)
         {
