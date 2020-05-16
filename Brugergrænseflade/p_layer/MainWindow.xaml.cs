@@ -29,7 +29,6 @@ namespace p_layer
         //i stedet for at hide mainwindow har vi i App.xaml sat StartupUri="loginView.xaml", dette gør at programmet starter i loginView og derefter opretter mainWindow
         public SeriesCollection MyCollectionEkg { get; set; }
         private LineSeries ekgLine;
-        private LineSeries testLine;
         private LineSeries Line1;
         List<cprEksempel> cpreks;
         private loginView loginref;
@@ -46,7 +45,7 @@ namespace p_layer
             InitializeComponent();
             opdaterLocalDB = new OpdaterLocalDB();
             //TODO få tilføjet medarbejderID'et her og evt et navn, hvis dette skal med og tilføjes i databasen
-            testLine = new LineSeries
+            ekgLine = new LineSeries
             {
                 Values = new ChartValues<double> { },
                 PointGeometry = null,
@@ -61,18 +60,10 @@ namespace p_layer
                 StrokeThickness = 1
 
             };
-            /* bsLine = new LineSeries
-             {
-                 Values = new ChartValues<double> { },
-                 PointGeometry = null,
-                 StrokeThickness = 0.2
-             };
-             */
+            
             MyCollectionEkg = new SeriesCollection();
-
-
-            //MyCollectionBS.Add(bsLine);
-            MyCollectionEkg.Add(testLine);
+            
+            MyCollectionEkg.Add(ekgLine);
 
             Formatter = value => "";
             DataContext = this;
@@ -107,13 +98,13 @@ namespace p_layer
         /// </summary>
         private void DummyTilføjPunkterTilGraf(DTO_EkgMåling ekgMåling)
         {
-            testLine.Values.Clear();
+            ekgLine.Values.Clear();
             int i = 0;
 
 
             foreach (double item in ekgMåling.raa_data)
             {
-                testLine.Values.Add(item);
+                ekgLine.Values.Add(item);
                 i++;
                 if (i > 2500)
                 {
@@ -184,7 +175,7 @@ namespace p_layer
             ekgMåling = null;
             OpdaterCprB.IsEnabled = false;
             cprTB.IsReadOnly = true;
-            testLine.Values.Clear();
+            ekgLine.Values.Clear();
             SPKommentar.Text = "";
             IndiSygdomTB.Text = "";
             TilføjKommentarL.Content = "Tilføj evt kommentar";
