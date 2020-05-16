@@ -27,6 +27,7 @@ namespace p_layer
         public loginView()
         {
             InitializeComponent();
+            MedarbejderIDTB.Focus();
             
         }
 

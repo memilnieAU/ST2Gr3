@@ -25,6 +25,7 @@ namespace p_layer
         public Opret_ny_bruger()
         {
             InitializeComponent();
+            MedarbejderIDTB.Focus();
         }
 
         private void OpretNyBrugerB_Click(object sender, RoutedEventArgs e)
