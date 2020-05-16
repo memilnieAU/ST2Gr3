@@ -39,13 +39,13 @@
             <Button x:Name="OffRegisterB" Content="Hent i offentlig database" Margin="20,10,0,0" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Width="170" Height="25"/>
             <Label x:Name="VælgCprL" Content="Vælg CPR" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top" Height="30" Width="225" Grid.Row="1"/>
             <ListBox x:Name="CprLB" Grid.Column="0" HorizontalAlignment="Left" Height="150" VerticalAlignment="Top" Width="220" Margin="20,10,0,0" Grid.RowSpan="3" SelectionChanged="CprLB_SelectionChanged" Grid.Row="1" Background="#FFDDE1E7"/>
-            <Button x:Name="cprB"  Grid.Row="3" Content="Vælg" Click="CprB_Click" Margin="20,5,0,0"  Width="170" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Button x:Name="cprB"  Grid.Row="3" Content="Vælg" Click="CprB_Click" Margin="20,5,0,0"  Width="170" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
             <Label x:Name="patientInfoL" Content="Patientinformationer:" HorizontalAlignment="Left" Margin="20,15,0,0" VerticalAlignment="Top" Height="30" Width="225" Grid.Row="1"/>
             <Canvas>
                 <TextBox x:Name="cprTB" HorizontalAlignment="Left" Canvas.Top="0" Height="25" Margin="20,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Grid.Row="5" Background="#FFDDE1E7" BorderBrush="{x:Null}"/>
                 <TextBox x:Name="patientInfoTB" HorizontalAlignment="Left" Canvas.Top="28" IsReadOnly="True" Height="100" Margin="20,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Grid.Row="5" Background="#FFDDE1E7" BorderBrush="{x:Null}" />
             </Canvas>
-            <Button x:Name="OpdaterCprB" Content="Opdater cpr" HorizontalAlignment="Left" Margin="20,135,0,0" Grid.Row="4" VerticalAlignment="Top" Width="170" Height="25" Click="OpdaterCprB_Click" />
+            <Button x:Name="OpdaterCprB" Content="Opdater cpr" HorizontalAlignment="Left" Margin="20,135,0,0" Grid.Row="4" VerticalAlignment="Top" Width="170" Height="25" Click="OpdaterCprB_Click" IsEnabled="False"/>
         </StackPanel>
         <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0.667,163.667,-0.333">
             <Label x:Name="loginInfoL" Content="Login-information" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" Height="30" Width="215" Grid.Column="3"/>
@@ -62,16 +62,16 @@
             <StackPanel Grid.Row="4" Grid.RowSpan="3" Grid.Column="2" Margin="0,0">
                 <Label x:Name="TilføjKommentarL" Content="Tilføj evt kommentar" Grid.Column="2" Margin="0,0,20,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="234" Grid.Row="4" Grid.ColumnSpan="2"/>
                 <TextBox x:Name="SPKommentar" HorizontalAlignment="Left" TextWrapping="Wrap" Grid.Column="2" Margin="0,10,20,0" Grid.ColumnSpan="1" VerticalAlignment="Top" Height="75" Width="250"/>
-                <Button x:Name="TilføjKommentarB" Content="Tilføj kommentar" HorizontalAlignment="Left" Margin="0,10,20,0" VerticalAlignment="Top" Width="120" Height="24" Click="TilføjKommentarB_Click"/>
+                <Button x:Name="TilføjKommentarB" Content="Tilføj kommentar" HorizontalAlignment="Left" Margin="0,10,20,0" VerticalAlignment="Top" Width="120" Height="24" Click="TilføjKommentarB_Click" IsEnabled="False"/>
 
             </StackPanel>
-            <Button x:Name="UploadMålingB" Content="Upload EKG-måling" HorizontalAlignment="Left" Margin="0,54,0,0" Height="49" Grid.Row="6" VerticalAlignment="Top" Width="130" Grid.Column="3" Click="UploadMålingB_Click"/>
+            <Button x:Name="UploadMålingB" Content="Upload EKG-måling" HorizontalAlignment="Left" Margin="0,54,0,0" Height="49" Grid.Row="6" VerticalAlignment="Top" Width="130" Grid.Column="3" Click="UploadMålingB_Click" IsEnabled="False"/>
         </StackPanel>
 
         <StackPanel Grid.Row="4" Grid.Column="2" Grid.RowSpan="3" Grid.ColumnSpan="1" Margin="300,0,35,20">
             <Label x:Name="MInfoL" Content="Måleinfo"/>
             <TextBox x:Name="MInfoTB" Margin="0,10,0,0" Height="75"/>
-            <Button x:Name="SletEKGB" Content="Slet EKG-måling"  Height="30" Width="120" HorizontalAlignment="Right" Margin="0,30,0,0"/>
+            <Button x:Name="SletEKGB" Content="Slet EKG-måling"  Height="30" Width="120" HorizontalAlignment="Right" Margin="0,30,0,0" Click="SletEKGB_Click" IsEnabled="False"/>
         </StackPanel>
 
         <lvc:CartesianChart x:Name="test"  DisableAnimations="True" Series="{Binding MyCollectionEkg}" Grid.ColumnSpan="2" Grid.RowSpan="4" ToolTip="false" Margin="13.333,40,19.667,57.333" Grid.Column="1" Hoverable="False">

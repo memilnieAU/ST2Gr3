@@ -170,6 +170,9 @@ namespace p_layer
                     //patientInfoTB.Text += "\n";
                     OpdaterCprB.IsEnabled = true;
                     cprTB.IsReadOnly = false;
+                    SletEKGB.IsEnabled = true;
+                    TilføjKommentarB.IsEnabled = true;
+                    UploadMålingB.IsEnabled = true;
                 }
             }
 
@@ -186,18 +189,20 @@ namespace p_layer
             IndiSygdomTB.Text = "";
             TilføjKommentarL.Content = "Tilføj evt kommentar";
             SPKommentar.IsReadOnly = false;
+            TilføjKommentarB.IsEnabled = false;
+            UploadMålingB.IsEnabled = false;
+            
+            
 
             if (CprLB.SelectedIndex != -1)
             {
                 cprTB.Text = CprLB.SelectedItem.ToString().Substring(5, 11);
                 patientInfoTB.Text = hentPinfo.hentPinfo(cprTB.Text);
+                cprB.IsEnabled = true;
 
             }
-
-
-
-
-
+            else
+            { cprB.IsEnabled = false; }
         }
 
 
@@ -331,6 +336,26 @@ namespace p_layer
             { MessageBox.Show("Den valgte måling er blevet uploadet til databasen"); }
             else
             { MessageBox.Show("Der gik noget galt da den valgte måling skulle uploades til databasen. Prøv igen eller tjek din database-forbindelse"); }
+        }
+
+        private void SletEKGB_Click(object sender, RoutedEventArgs e)
+        {
+            if (ekgMåling != null)
+            {
+                MessageBoxResult result = (MessageBox.Show("Bekræft sletning af ekgmåling", "Bekræft", MessageBoxButton.OKCancel));
+                switch (result)
+                {
+                    case MessageBoxResult.OK:
+                        {
+                            opdaterLocalDB.deleteEKG(ekgMåling);
+                            SletEKGB.IsEnabled = false;
+                            break;
+                        }
+                    case MessageBoxResult.Cancel:
+                        break;
+
+                }
+            }
         }
     }
 }

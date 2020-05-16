@@ -73,5 +73,20 @@ namespace d_layer
             }
             conn.Close();
         }
+        public void deleteEkg(DTO_EkgMåling måling)
+        {
+            SqlConnection conn;
+            const String db = "F20ST2ITS2201908775";
+            conn = new SqlConnection("Data Source = st-i4dab.uni.au.dk;Initial Catalog = " + db + ";Persist Security Info = True;User ID = " + db + ";Password = " + db + "");
+            conn.Open();
+            string insertStringParam = $"delete from SP_NyeEkger where id_måling = '{måling.id_måling}'";
+            using (SqlCommand cmd = new SqlCommand(insertStringParam, conn))
+            {
+                cmd.ExecuteNonQuery();
+            }
+            conn.Close();
+        }
+
+
     }
 }

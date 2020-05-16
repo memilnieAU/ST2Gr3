@@ -15,7 +15,8 @@ namespace d_layer
     public class Up_download_Offentlig
     {
         private SqlConnection connection;
-     
+        private int ekgMaaleID = 0;
+
         private const string DBlogin = "ST2PRJ2OffEKGDatabase";
         public Up_download_Offentlig()
         {
@@ -30,7 +31,14 @@ namespace d_layer
         public bool upload(DTO_EkgMåling nyMåling)
         {
             //int id = uploadEKGMaeling(nyMåling);
-            return uploadEKGMaeling(nyMåling);
+            if (uploadEKGMaeling(nyMåling))
+            {
+                uploadEKGData(nyMåling);
+                return true;
+            }
+            else
+            { return false; }
+                      
         }
         private bool uploadEKGMaeling(DTO_EkgMåling nyMåling)
         {
@@ -44,7 +52,7 @@ namespace d_layer
                 using (SqlCommand cmd = new SqlCommand(insertStringParam, connection))
                 {
                     cmd.Parameters.AddWithValue("@dato", nyMåling.start_tidspunkt);
-                    cmd.ExecuteScalar();
+                    ekgMaaleID = Convert.ToInt32(cmd.ExecuteScalar());
                 }
                 connection.Close();
                 return true;
@@ -53,8 +61,37 @@ namespace d_layer
             {
                 return false;
             }
-            
         }
+        private void uploadEKGData(DTO_EkgMåling nyMåling)
+        {
+            try
+            {
+                connection = new SqlConnection("Data Source = st-i4dab.uni.au.dk;Initial Catalog = " + DBlogin + ";Persist Security Info = True;User ID = " + DBlogin + ";Password = " + DBlogin + "");
+                connection.Open();
+                //TODO skal den ikke også sætte information ind i dbo.EKGDATA
+                string insertStringParam = $"INSERT INTO dbo.EKGDATA ([raa_data],[samplerate_hz],[interval_sec],[data_format],[bin_eller_tekst],[maaleformat_type],[start_tid],[kommentar],[ekgmaaleid])" + $" OUTPUT INSERTED.ekgmaaleid VALUES(@data, {Convert.ToInt32(nyMåling.samplerate_hz)},'18','andet','b','{nyMåling.raa_data[0].GetType()}',@dato,'{nyMåling.kommentar}', {ekgMaaleID})";
+
+                using (SqlCommand cmd = new SqlCommand(insertStringParam, connection))
+                {
+                    cmd.Parameters.AddWithValue("@data",
+                    nyMåling.raa_data.SelectMany(value =>
+                    BitConverter.GetBytes(value)).ToArray());
+                    cmd.Parameters.AddWithValue("@dato", nyMåling.start_tidspunkt);
+                    //cmd.Parameters.AddWithValue("@maaleid", ekgMaaleID);
+                    cmd.ExecuteScalar();
+                }
+                connection.Close();
+                
+                
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+
+        }
+
     }
 }
+
 

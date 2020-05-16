@@ -25,5 +25,9 @@ namespace l_layer
         {
             Local_Upload.Opdatercpr(måling);
         }
+        public void deleteEKG(DTO_EkgMåling måling)
+        {
+            Local_Upload.deleteEkg(måling);
+        }
     }
 }
