@@ -115,7 +115,7 @@ namespace p_layer
             {
                 testLine.Values.Add(item);
                 i++;
-                if (i > 1000)
+                if (i > 2500)
                 {
                     break;
                 }

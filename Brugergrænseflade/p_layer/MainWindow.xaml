@@ -74,7 +74,7 @@
             <Button x:Name="SletEKGB" Content="Slet EKG-måling"  Height="30" Width="120" HorizontalAlignment="Right" Margin="0,30,0,0" Click="SletEKGB_Click" IsEnabled="False"/>
         </StackPanel>
 
-        <lvc:CartesianChart x:Name="test"  DisableAnimations="True" Series="{Binding MyCollectionEkg}" Grid.ColumnSpan="2" Grid.RowSpan="4" ToolTip="false" Margin="13.333,40,19.667,57.333" Grid.Column="1" Hoverable="False">
+        <lvc:CartesianChart x:Name="test"  DisableAnimations="True" Series="{Binding MyCollectionEkg}" Grid.ColumnSpan="2" Grid.RowSpan="2" ToolTip="false" Margin="13.6,0.2,19.2,10.4" Grid.Column="1" Hoverable="False" Grid.Row="1">
 
             <lvc:CartesianChart.AxisY>
                 <lvc:AxesCollection>
@@ -84,33 +84,33 @@
 
                         </lvc:Axis.Separator>
                         <lvc:Axis.Sections>
-                            <lvc:AxisSection Value="-1.0" StrokeThickness="1" Stroke="Black">
+                            <lvc:AxisSection Value="-1.0" StrokeThickness="0.5" Stroke="Black">
                                 <lvc:AxisSection.Fill>
                                     <SolidColorBrush Color="Black" Opacity="1"></SolidColorBrush>
                                 </lvc:AxisSection.Fill>
                             </lvc:AxisSection>
-                            <lvc:AxisSection Value="-0.5" StrokeThickness="1" Stroke="Black">
+                            <lvc:AxisSection Value="-0.5" StrokeThickness="0.5" Stroke="Black">
                                 <lvc:AxisSection.Fill>
                                     <SolidColorBrush Color="Black" Opacity="1"></SolidColorBrush>
                                 </lvc:AxisSection.Fill>
                             </lvc:AxisSection>
-                            <lvc:AxisSection Value="0.0" StrokeThickness="1" Stroke="Black">
+                            <lvc:AxisSection Value="0.0" StrokeThickness="0.5" Stroke="Black">
                                 <lvc:AxisSection.Fill>
                                     <SolidColorBrush Color="Black" Opacity=".4"></SolidColorBrush>
                                 </lvc:AxisSection.Fill>
                             </lvc:AxisSection>
 
-                            <lvc:AxisSection Value="0.5" StrokeThickness="1" Stroke="Black">
+                            <lvc:AxisSection Value="0.5" StrokeThickness="0.5" Stroke="Black">
                                 <lvc:AxisSection.Fill>
                                     <SolidColorBrush Color="Black" Opacity="1"></SolidColorBrush>
                                 </lvc:AxisSection.Fill>
                             </lvc:AxisSection>
-                            <lvc:AxisSection Value="1.0" StrokeThickness="1" Stroke="Black">
+                            <lvc:AxisSection Value="1.0" StrokeThickness="0.5" Stroke="Black">
                                 <lvc:AxisSection.Fill>
                                     <SolidColorBrush Color="Black" Opacity="1"></SolidColorBrush>
                                 </lvc:AxisSection.Fill>
                             </lvc:AxisSection>
-                            <lvc:AxisSection Value="1.5" StrokeThickness="1" Stroke="Black">
+                            <lvc:AxisSection Value="1.5" StrokeThickness="0.5" Stroke="Black">
                                 <lvc:AxisSection.Fill>
                                     <SolidColorBrush Color="Black" Opacity="1"></SolidColorBrush>
                                 </lvc:AxisSection.Fill>
@@ -124,67 +124,144 @@
             <lvc:CartesianChart.AxisX>
 
                 <lvc:AxesCollection>
-                    <lvc:Axis MinValue="0" MaxValue="1000" LabelFormatter="{Binding Formatter}">
+                    <lvc:Axis MinValue="0" MaxValue="2500" LabelFormatter="{Binding Formatter}">
                         <lvc:Axis.Separator >
                             <lvc:Separator Step="20" />
 
                         </lvc:Axis.Separator>
                         <lvc:Axis.Sections>
-                            <lvc:AxisSection Value="00" StrokeThickness="1" Stroke="Black">
+                            <lvc:AxisSection Value="00" StrokeThickness="0.5" Stroke="Black">
                                 <lvc:AxisSection.Fill>
                                     <SolidColorBrush Color="Black" Opacity="1"></SolidColorBrush>
                                 </lvc:AxisSection.Fill>
                             </lvc:AxisSection>
-                            <lvc:AxisSection Value="100" StrokeThickness="1" Stroke="Black">
+                            <lvc:AxisSection Value="100" StrokeThickness="0.5" Stroke="Black">
                                 <lvc:AxisSection.Fill>
                                     <SolidColorBrush Color="Black" Opacity="1"></SolidColorBrush>
                                 </lvc:AxisSection.Fill>
                             </lvc:AxisSection>
-                            <lvc:AxisSection Value="200" StrokeThickness="1" Stroke="Black">
+                            <lvc:AxisSection Value="200" StrokeThickness="0.5" Stroke="Black">
                                 <lvc:AxisSection.Fill>
                                     <SolidColorBrush Color="Black" Opacity="1"></SolidColorBrush>
                                 </lvc:AxisSection.Fill>
                             </lvc:AxisSection>
-                            <lvc:AxisSection Value="300" StrokeThickness="1" Stroke="Black">
+                            <lvc:AxisSection Value="300" StrokeThickness="0.5" Stroke="Black">
                                 <lvc:AxisSection.Fill>
                                     <SolidColorBrush Color="Black" Opacity="1"></SolidColorBrush>
                                 </lvc:AxisSection.Fill>
                             </lvc:AxisSection>
-                            <lvc:AxisSection Value="400" StrokeThickness="1" Stroke="Black">
+                            <lvc:AxisSection Value="400" StrokeThickness="0.5" Stroke="Black">
                                 <lvc:AxisSection.Fill>
                                     <SolidColorBrush Color="Black" Opacity="1"></SolidColorBrush>
                                 </lvc:AxisSection.Fill>
                             </lvc:AxisSection>
-                            <lvc:AxisSection Value="500" StrokeThickness="1" Stroke="Black">
+                            <lvc:AxisSection Value="500" StrokeThickness="0.5" Stroke="Black">
                                 <lvc:AxisSection.Fill>
                                     <SolidColorBrush Color="Black" Opacity="1"></SolidColorBrush>
                                 </lvc:AxisSection.Fill>
                             </lvc:AxisSection>
-                            <lvc:AxisSection Value="600" StrokeThickness="1" Stroke="Black">
+                            <lvc:AxisSection Value="600" StrokeThickness="0.5" Stroke="Black">
                                 <lvc:AxisSection.Fill>
                                     <SolidColorBrush Color="Black" Opacity="1"></SolidColorBrush>
                                 </lvc:AxisSection.Fill>
                             </lvc:AxisSection>
-                            <lvc:AxisSection Value="700" StrokeThickness="1" Stroke="Black">
+                            <lvc:AxisSection Value="700" StrokeThickness="0.5" Stroke="Black">
                                 <lvc:AxisSection.Fill>
                                     <SolidColorBrush Color="Black" Opacity="1"></SolidColorBrush>
                                 </lvc:AxisSection.Fill>
                             </lvc:AxisSection>
-                            <lvc:AxisSection Value="800" StrokeThickness="1" Stroke="Black">
+                            <lvc:AxisSection Value="800" StrokeThickness="0.5" Stroke="Black">
                                 <lvc:AxisSection.Fill>
                                     <SolidColorBrush Color="Black" Opacity="1"></SolidColorBrush>
                                 </lvc:AxisSection.Fill>
                             </lvc:AxisSection>
-                            <lvc:AxisSection Value="900" StrokeThickness="1" Stroke="Black">
+                            <lvc:AxisSection Value="900" StrokeThickness="0.5" Stroke="Black">
                                 <lvc:AxisSection.Fill>
                                     <SolidColorBrush Color="Black" Opacity="1"></SolidColorBrush>
                                 </lvc:AxisSection.Fill>
                             </lvc:AxisSection>
-                            <lvc:AxisSection Value="1000" StrokeThickness="1" Stroke="Black">
+                            <lvc:AxisSection Value="1000" StrokeThickness="0.5" Stroke="Black">
                                 <lvc:AxisSection.Fill>
                                     <SolidColorBrush Color="Black" Opacity="1"></SolidColorBrush>
                                 </lvc:AxisSection.Fill>
                             </lvc:AxisSection>
+                            <lvc:AxisSection Value="1100" StrokeThickness="0.5" Stroke="Black">
+                                <lvc:AxisSection.Fill>
+                                    <SolidColorBrush Color="Black" Opacity="1"></SolidColorBrush>
+                                </lvc:AxisSection.Fill>
+                            </lvc:AxisSection>
+                            <lvc:AxisSection Value="1200" StrokeThickness="0.5" Stroke="Black">
+                                <lvc:AxisSection.Fill>
+                                    <SolidColorBrush Color="Black" Opacity="1"></SolidColorBrush>
+                                </lvc:AxisSection.Fill>
+                            </lvc:AxisSection>
+                            <lvc:AxisSection Value="1300" StrokeThickness="0.5" Stroke="Black">
+                                <lvc:AxisSection.Fill>
+                                    <SolidColorBrush Color="Black" Opacity="1"></SolidColorBrush>
+                                </lvc:AxisSection.Fill>
+                            </lvc:AxisSection>
+                            <lvc:AxisSection Value="1400" StrokeThickness="0.5" Stroke="Black">
+                                <lvc:AxisSection.Fill>
+                                    <SolidColorBrush Color="Black" Opacity="1"></SolidColorBrush>
+                                </lvc:AxisSection.Fill>
+                            </lvc:AxisSection>
+                            <lvc:AxisSection Value="1500" StrokeThickness="0.5" Stroke="Black">
+                                <lvc:AxisSection.Fill>
+                                    <SolidColorBrush Color="Black" Opacity="1"></SolidColorBrush>
+                                </lvc:AxisSection.Fill>
+                            </lvc:AxisSection>
+                            <lvc:AxisSection Value="1600" StrokeThickness="0.5" Stroke="Black">
+                                <lvc:AxisSection.Fill>
+                                    <SolidColorBrush Color="Black" Opacity="1"></SolidColorBrush>
+                                </lvc:AxisSection.Fill>
+                            </lvc:AxisSection>
+                            <lvc:AxisSection Value="1700" StrokeThickness="0.5" Stroke="Black">
+                                <lvc:AxisSection.Fill>
+                                    <SolidColorBrush Color="Black" Opacity="1"></SolidColorBrush>
+                                </lvc:AxisSection.Fill>
+                            </lvc:AxisSection>
+                            <lvc:AxisSection Value="1800" StrokeThickness="0.5" Stroke="Black">
+                                <lvc:AxisSection.Fill>
+                                    <SolidColorBrush Color="Black" Opacity="1"></SolidColorBrush>
+                                </lvc:AxisSection.Fill>
+                            </lvc:AxisSection>
+                            <lvc:AxisSection Value="1900" StrokeThickness="0.5" Stroke="Black">
+                                <lvc:AxisSection.Fill>
+                                    <SolidColorBrush Color="Black" Opacity="1"></SolidColorBrush>
+                                </lvc:AxisSection.Fill>
+                            </lvc:AxisSection>
+                            <lvc:AxisSection Value="2000" StrokeThickness="0.5" Stroke="Black">
+                                <lvc:AxisSection.Fill>
+                                    <SolidColorBrush Color="Black" Opacity="1"></SolidColorBrush>
+                                </lvc:AxisSection.Fill>
+                            </lvc:AxisSection>
+                            <lvc:AxisSection Value="2100" StrokeThickness="0.5" Stroke="Black">
+                                <lvc:AxisSection.Fill>
+                                    <SolidColorBrush Color="Black" Opacity="1"></SolidColorBrush>
+                                </lvc:AxisSection.Fill>
+                            </lvc:AxisSection>
+                            <lvc:AxisSection Value="2200" StrokeThickness="0.5" Stroke="Black">
+                                <lvc:AxisSection.Fill>
+                                    <SolidColorBrush Color="Black" Opacity="1"></SolidColorBrush>
+                                </lvc:AxisSection.Fill>
+                            </lvc:AxisSection>
+                            <lvc:AxisSection Value="2300" StrokeThickness="0.5" Stroke="Black">
+                                <lvc:AxisSection.Fill>
+                                    <SolidColorBrush Color="Black" Opacity="1"></SolidColorBrush>
+                                </lvc:AxisSection.Fill>
+                            </lvc:AxisSection>
+                            <lvc:AxisSection Value="2400" StrokeThickness="0.5" Stroke="Black">
+                                <lvc:AxisSection.Fill>
+                                    <SolidColorBrush Color="Black" Opacity="1"></SolidColorBrush>
+                                </lvc:AxisSection.Fill>
+                            </lvc:AxisSection>
+                            <lvc:AxisSection Value="2500" StrokeThickness="0.5" Stroke="Black">
+                                <lvc:AxisSection.Fill>
+                                    <SolidColorBrush Color="Black" Opacity="1"></SolidColorBrush>
+                                </lvc:AxisSection.Fill>
+                            </lvc:AxisSection>
+                            
+
                         </lvc:Axis.Sections>
                     </lvc:Axis>
                 </lvc:AxesCollection>
