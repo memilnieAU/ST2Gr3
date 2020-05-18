@@ -51,6 +51,16 @@ namespace l_layer
                 string krypteret = GetHash(sha512Hash, pw);
                 dataObject.registerNewUser(Brugernavn, krypteret);
             }
+            
+        }
+        /// <summary>
+        /// sender brugernavn videre til d_layer
+        /// </summary>
+        /// <param name="Brugernavn">MedarbejderID</param>
+        /// <returns></returns>
+        public bool BrugerAlleredeOprettet(string Brugernavn)
+        {
+               return dataObject.alleredeOprettet(Brugernavn);
         }
 
         /// <summary>

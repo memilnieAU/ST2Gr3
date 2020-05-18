@@ -52,6 +52,14 @@ namespace p_layer
                 PasswordPW.Clear();
                 gentagPasswordPW.Clear();
             }
+            else if (logicObj.BrugerAlleredeOprettet(MedarbejderIDTB.Text)==true)
+            {
+                MessageBox.Show("Det indtastede MedarbejderID findes allerede i databasen");
+                MedarbejderIDTB.Focus();
+                PasswordPW.Clear();
+                gentagPasswordPW.Clear();
+
+            }
             
             else if (MedarbejderIDTB.Text.Length == 4 && PasswordPW.Password.Length ==4 && PasswordPW.Password==gentagPasswordPW.Password)
             {

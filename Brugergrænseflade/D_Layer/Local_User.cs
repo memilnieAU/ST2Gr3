@@ -17,6 +17,7 @@ namespace d_layer
         private SqlDataReader reader;
         private SqlCommand command;
         private const string DBlogin = "F20ST2ITS2201908775";
+        private bool resultat;
 
         /// <summary>
         /// ansvar: sammenligner data i databasen med de indtastede data (medarbejderID og password)
@@ -43,7 +44,7 @@ namespace d_layer
                 }
             }
             catch (SqlException e)
-            { throw e; }
+            { return false; }
 
             connection.Close();
             return result;
@@ -56,20 +57,59 @@ namespace d_layer
         /// <param name="pw"></param>
         public void registerNewUser(string Brugernavn, string pw)
         {
+
             connection = new SqlConnection("Data Source=st-i4dab.uni.au.dk; Initial Catalog=" + DBlogin + "; User ID= " + DBlogin + "; Password=" + DBlogin + "; Connect Timeout=30; Encrypt=False; TrustServerCertificate=False; ApplicationIntent=ReadWrite; MultiSubnetFailover=False");
 
             command = new SqlCommand("insert into db_owner.SP_MedarbejderID Values ( '" + Brugernavn + "', '" + pw + "')", connection);
 
             connection.Open();
+
             try
             {
+
                 command.ExecuteNonQuery();
+                connection.Close();
             }
             catch (SqlException e)
             { throw e; }
 
-            connection.Close();
-            
         }
+
+        /// <summary>
+        /// Ansvar: sammenligner det indtastede MedarbejderID med de allerede registerede bruger, så der ikke kan blive oprettet to brugere med samme login
+        /// </summary>
+        /// <param name="Brugernavn">medarbejderID</param>
+        /// <returns></returns>
+        public bool alleredeOprettet(string Brugernavn)
+        {
+            resultat = false;
+
+
+            connection = new SqlConnection("Data Source=st-i4dab.uni.au.dk; Initial Catalog=" + DBlogin + "; User ID= " + DBlogin + "; Password=" + DBlogin + "; Connect Timeout=30; Encrypt=False; TrustServerCertificate=False; ApplicationIntent=ReadWrite; MultiSubnetFailover=False");
+            command = new SqlCommand("select * from db_owner.SP_MedarbejderID where MedarbejderID = '" + Brugernavn + "'", connection);
+
+            connection.Open();
+
+
+            try
+            {
+                reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    if (reader["MedarbejderID"].ToString() == Brugernavn)
+                        resultat = true;
+                }
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+
+            return resultat;
+        }
+
+
     }
+
 }
