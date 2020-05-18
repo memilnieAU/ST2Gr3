@@ -75,11 +75,11 @@ namespace p_layer
             UploadNewDataFraLocalFile uploadNewDataFraLocalFile = new UploadNewDataFraLocalFile();
 
             // De er udkommenteret for at vi ikke overfylder vores database med samme måling 20 gange
-            //uploadNewDataFraLocalFile.HentDataFraFil(1);
-            //uploadNewDataFraLocalFile.HentDataFraFil(2);
-            //uploadNewDataFraLocalFile.HentDataFraFil(16);
-            //uploadNewDataFraLocalFile.HentDataFraFil(17);
-            //uploadNewDataFraLocalFile.HentDataFraFil(18);
+           uploadNewDataFraLocalFile.HentDataFraFil(1);
+           uploadNewDataFraLocalFile.HentDataFraFil(2);
+           uploadNewDataFraLocalFile.HentDataFraFil(16);
+           uploadNewDataFraLocalFile.HentDataFraFil(17);
+           uploadNewDataFraLocalFile.HentDataFraFil(18);
             hentNyeMålinger = new HentNyeMålingerFraLocalDB();
 
             antalNyeMåinger = hentNyeMålinger.HentAlleMålingerFraLocalDB();
@@ -164,8 +164,8 @@ namespace p_layer
                     OpdaterCprB.IsEnabled = true;
                     cprTB.IsReadOnly = false;
                     SletEKGB.IsEnabled = true;
-                    TilføjKommentarB.IsEnabled = true;
-                    UploadMålingB.IsEnabled = true;
+
+
                 }
             }
 
@@ -229,9 +229,10 @@ namespace p_layer
                 opdaterLocalDB.OpdaterKommentar(ekgMåling);
                 TilføjKommentarB.IsEnabled = false;
                 TilføjKommentarB.Content = "Kommentar tilføjet";
-                SPKommentar.IsReadOnly = true;
+
 
             }
+            UploadMålingB.IsEnabled = true;
 
             antalNyeMåinger = hentNyeMålinger.HentAlleMålingerFraLocalDB();
             NyeMålingerTBL.Text = "Der er " + antalNyeMåinger + " nye målinger";
@@ -354,9 +355,24 @@ namespace p_layer
             }
         }
 
-        private void CheckLocalDbB_Click(object sender, RoutedEventArgs e)
+        private void SPKommentar_TextChanged(object sender, TextChangedEventArgs e)
         {
+            if (ekgMåling != null)
+            {
 
+                if (String.IsNullOrEmpty(SPKommentar.Text))
+                {
+                    TilføjKommentarB.IsEnabled = false;
+
+                }
+                else TilføjKommentarB.IsEnabled = true;
+
+                if (string.IsNullOrEmpty(ekgMåling.kommentar))
+                {
+                    UploadMålingB.IsEnabled = false;
+                }
+                else UploadMålingB.IsEnabled = true;
+            }
         }
     }
 }
