@@ -280,7 +280,7 @@ namespace d_layer
                 }
             }
             conn.Close();
-            patientinformationer = "navn: " + navn + "\r\nalder: " + alder + "\r\nadresse: " + adresse;
+            patientinformationer = "Navn: " + navn + "\r\nAlder: " + alder + "\r\nAdresse: " + adresse;
             return patientinformationer;
         }
 

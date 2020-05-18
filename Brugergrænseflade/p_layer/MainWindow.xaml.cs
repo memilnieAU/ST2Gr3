@@ -35,6 +35,7 @@ namespace p_layer
         private hentPatientinformationer hentPinfo;
         public string medarbejderID;
         OpdaterLocalDB opdaterLocalDB;
+        private string gammelCpr;
 
         HentNyeMålingerFraLocalDB hentNyeMålinger;
         EKG_Analyser ekg_Analyse;
@@ -60,9 +61,9 @@ namespace p_layer
                 StrokeThickness = 1
 
             };
-            
+
             MyCollectionEkg = new SeriesCollection();
-            
+
             MyCollectionEkg.Add(ekgLine);
 
             Formatter = value => "";
@@ -84,7 +85,7 @@ namespace p_layer
             antalNyeMåinger = hentNyeMålinger.HentAlleMålingerFraLocalDB();
             NyeMålingerTBL.Text = "Der er " + antalNyeMåinger + " nye målinger";
             hentPinfo = new hentPatientinformationer();
-            
+
         }
         public Func<double, string> Formatter { get; set; }
 
@@ -128,6 +129,7 @@ namespace p_layer
         DTO_EkgMåling ekgMåling;
         private void CprB_Click(object sender, RoutedEventArgs e)
         {
+            gammelCpr = cprTB.Text;
             if (CprLB.SelectedIndex != -1)
             {
                 if (FindNyPatientTrykket == true)
@@ -182,8 +184,8 @@ namespace p_layer
             SPKommentar.IsReadOnly = false;
             TilføjKommentarB.IsEnabled = false;
             UploadMålingB.IsEnabled = false;
-            
-            
+
+
 
             if (CprLB.SelectedIndex != -1)
             {
@@ -225,8 +227,8 @@ namespace p_layer
             {
                 ekgMåling.kommentar = SPKommentar.Text;
                 opdaterLocalDB.OpdaterKommentar(ekgMåling);
-
-                TilføjKommentarL.Content = "Kommentar tilføjet";
+                TilføjKommentarB.IsEnabled = false;
+                TilføjKommentarB.Content = "Kommentar tilføjet";
                 SPKommentar.IsReadOnly = true;
 
             }
@@ -309,6 +311,7 @@ namespace p_layer
                                 break;
                             }
                         case MessageBoxResult.Cancel:
+                            cprTB.Text = gammelCpr;
                             cprTB.Focus();
                             break;
                     }
@@ -340,13 +343,20 @@ namespace p_layer
                         {
                             opdaterLocalDB.deleteEKG(ekgMåling);
                             SletEKGB.IsEnabled = false;
+                            ekgLine.Values.Clear();
                             break;
+
                         }
                     case MessageBoxResult.Cancel:
                         break;
 
                 }
             }
+        }
+
+        private void CheckLocalDbB_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

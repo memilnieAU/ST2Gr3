@@ -33,11 +33,11 @@
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="6" Grid.ColumnSpan="2" Margin="0,0,0,0">
             <Label x:Name="menuL" HorizontalAlignment="Left" Margin="20,5,0,0" Content="Menu" VerticalAlignment="Top" Height="30" Width="205" FontSize="18" FontWeight="Bold"/>
             <TextBlock x:Name="NyeMålingerTBL" HorizontalAlignment="Left" Margin="20,5,0,0" TextWrapping="Wrap" Text="Der er nye målinger i EKG-måleren" VerticalAlignment="Top" Height="21" Width="237"/>
-            <Button x:Name="CheckLocalDbB"  Command="{Binding HentNyeMålingerCommand, Mode=OneWay}" Content="Hent nye målinger" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" Width="170"  Height="25"/>
+            <Button x:Name="CheckLocalDbB"  Command="{Binding HentNyeMålingerCommand, Mode=OneWay}" Content="Hent nye målinger" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" Width="170"  Height="25" Click="CheckLocalDbB_Click"/>
 
             <Button x:Name="PatientRegisterB" Content="Hent gemte målinger" Margin="20,10,0,0" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="170" RenderTransformOrigin="0.502,2.419" Height="25" Click="PatientRegisterB_Click"/>
             <Button x:Name="OffRegisterB" Content="Hent i offentlig database" Margin="20,10,0,0" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Width="170" Height="25"/>
-            <Label x:Name="VælgCprL" Content="Vælg CPR" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top" Height="30" Width="225" Grid.Row="1"/>
+            <Label x:Name="VælgCprL" Content="Vælg CPR:" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top" Height="30" Width="225" Grid.Row="1"/>
             <ListBox x:Name="CprLB" Grid.Column="0" HorizontalAlignment="Left" Height="150" VerticalAlignment="Top" Width="220" Margin="20,10,0,0" Grid.RowSpan="3" SelectionChanged="CprLB_SelectionChanged" Grid.Row="1" Background="#FFDDE1E7"/>
             <Button x:Name="cprB"  Grid.Row="3" Content="Vælg" Click="CprB_Click" Margin="20,5,0,0"  Width="170" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
             <Label x:Name="patientInfoL" Content="Patientinformationer:" HorizontalAlignment="Left" Margin="20,15,0,0" VerticalAlignment="Top" Height="30" Width="225" Grid.Row="1"/>
@@ -48,7 +48,7 @@
             <Button x:Name="OpdaterCprB" Content="Opdater cpr" HorizontalAlignment="Left" Margin="20,135,0,0" Grid.Row="4" VerticalAlignment="Top" Width="170" Height="25" Click="OpdaterCprB_Click" IsEnabled="False"/>
         </StackPanel>
         <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0.667,163.667,-0.333">
-            <Label x:Name="loginInfoL" Content="Login-information" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" Height="30" Width="215" Grid.Column="3"/>
+            <Label x:Name="loginInfoL" Content="Login-information:" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" Height="30" Width="215" Grid.Column="3"/>
             <TextBox x:Name="loginInfoTB" HorizontalAlignment="Left" Height="45" Margin="20,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Grid.Column="3" Background="#FFDDE1E7" IsReadOnly="True"/>
             <Button x:Name="LogAfB" Content="Log af" Grid.Column="3" Width="153" HorizontalAlignment="Left" Margin="20,20,0,0" Grid.Row="6" VerticalAlignment="Top" Height="25" Click="LogAfB_Click"/>
 
@@ -60,7 +60,7 @@
                 <TextBox x:Name="IndiSygdomTB" IsReadOnly="True" Margin="10,10,20,0" Grid.Column="1" Grid.Row="5" Width="250" Height="75" />
             </StackPanel>
             <StackPanel Grid.Row="4" Grid.RowSpan="3" Grid.Column="2" Margin="0,0">
-                <Label x:Name="TilføjKommentarL" Content="Tilføj evt kommentar" Grid.Column="2" Margin="0,0,20,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="234" Grid.Row="4" Grid.ColumnSpan="2"/>
+                <Label x:Name="TilføjKommentarL" Content="Tilføj evt. kommentar" Grid.Column="2" Margin="0,0,20,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" Width="234" Grid.Row="4" Grid.ColumnSpan="2"/>
                 <TextBox x:Name="SPKommentar" HorizontalAlignment="Left" TextWrapping="Wrap" Grid.Column="2" Margin="0,10,20,0" Grid.ColumnSpan="1" VerticalAlignment="Top" Height="75" Width="250"/>
                 <Button x:Name="TilføjKommentarB" Content="Tilføj kommentar" HorizontalAlignment="Left" Margin="0,10,20,0" VerticalAlignment="Top" Width="120" Height="24" Click="TilføjKommentarB_Click" IsEnabled="False"/>
 
