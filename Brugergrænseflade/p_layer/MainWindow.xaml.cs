@@ -75,11 +75,11 @@ namespace p_layer
             UploadNewDataFraLocalFile uploadNewDataFraLocalFile = new UploadNewDataFraLocalFile();
 
             // De er udkommenteret for at vi ikke overfylder vores database med samme måling 20 gange
-           uploadNewDataFraLocalFile.HentDataFraFil(1);
-           uploadNewDataFraLocalFile.HentDataFraFil(2);
-           uploadNewDataFraLocalFile.HentDataFraFil(16);
-           uploadNewDataFraLocalFile.HentDataFraFil(17);
-           uploadNewDataFraLocalFile.HentDataFraFil(18);
+            //uploadNewDataFraLocalFile.HentDataFraFil(1);
+            //uploadNewDataFraLocalFile.HentDataFraFil(2);
+            //uploadNewDataFraLocalFile.HentDataFraFil(16);
+            //uploadNewDataFraLocalFile.HentDataFraFil(17);
+            //uploadNewDataFraLocalFile.HentDataFraFil(18);
             hentNyeMålinger = new HentNyeMålingerFraLocalDB();
 
             antalNyeMåinger = hentNyeMålinger.HentAlleMålingerFraLocalDB();
@@ -223,16 +223,25 @@ namespace p_layer
         private void TilføjKommentarB_Click(object sender, RoutedEventArgs e)
         {
 
-            //if (string.IsNullOrEmpty(SPKommentar.Text) == false)
-            {
-                ekgMåling.kommentar = SPKommentar.Text;
-                opdaterLocalDB.OpdaterKommentar(ekgMåling);
-                TilføjKommentarB.IsEnabled = false;
-                TilføjKommentarB.Content = "Kommentar tilføjet";
-
-
-            }
+            //bool kommentarVarTom = false;
+            //if (string.IsNullOrEmpty(ekgMåling.kommentar))
+            //{
+            //    kommentarVarTom = true;
+            //}
+            string opdateText = "Kommentar ændret: " + DateTime.Now.ToShortDateString() +" "  + DateTime.Now.ToShortTimeString()   ;
+            ekgMåling.kommentar = SPKommentar.Text + "\n" + opdateText + "\n\n"; ;
+            opdaterLocalDB.OpdaterKommentar(ekgMåling);
+            SPKommentar.Text = ekgMåling.kommentar;
+            TilføjKommentarB.IsEnabled = false;
+            TilføjKommentarB.Content = "Kommentar tilføjet";
             UploadMålingB.IsEnabled = true;
+
+            //if (kommentarVarTom)
+            //{
+            //    HentNyeMålingerHandler();
+
+            //}
+
 
             antalNyeMåinger = hentNyeMålinger.HentAlleMålingerFraLocalDB();
             NyeMålingerTBL.Text = "Der er " + antalNyeMåinger + " nye målinger";
@@ -283,10 +292,6 @@ namespace p_layer
         {
             App.Current.Shutdown();
         }
-
-
-
-
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
