@@ -33,14 +33,14 @@ namespace p_layer
             logicObj = new LoginRequest();
             if (MedarbejderIDTB.Text.Length != 4)
             {
-                MessageBox.Show("MedarbejderID skal være fire karaktere");
+                MessageBox.Show("MedarbejderID skal være fire karakterer");
                 PasswordPW.Clear();
                 gentagPasswordPW.Clear();
                 MedarbejderIDTB.Focus();
             }
             else if (PasswordPW.Password.Length != 4)
             {
-                MessageBox.Show("Password skal være fire karaktere");
+                MessageBox.Show("Password skal være fire karakterer");
                 PasswordPW.Focus();
                 PasswordPW.Clear();
                 gentagPasswordPW.Clear();
