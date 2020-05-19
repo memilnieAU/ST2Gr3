@@ -335,7 +335,8 @@ namespace p_layer
                             {
                                 ekgMåling.borger_cprnr = cprTB.Text;
                                 opdaterLocalDB.OpdaterCpr(ekgMåling);
-                               // CprLB.SelectedItem = "test";
+                                // CprLB.SelectedItem = "test";
+                                CprLB.Items.Clear();
                                 break;
                             }
                         case MessageBoxResult.Cancel:
@@ -355,7 +356,9 @@ namespace p_layer
         {
             bool uploaded = UploadToOffDb.uploadToOff(ekgMåling);
             if (uploaded == true)
-            { MessageBox.Show("Den valgte måling er blevet uploadet til databasen"); }
+            { MessageBox.Show("Den valgte måling er blevet uploadet til databasen");
+                CprLB.Items.Clear();
+            }
             else
             { MessageBox.Show("Der gik noget galt da den valgte måling skulle uploades til databasen. Prøv igen eller tjek din database-forbindelse"); }
         }
@@ -372,6 +375,7 @@ namespace p_layer
                             opdaterLocalDB.deleteEKG(ekgMåling);
                             SletEKGB.IsEnabled = false;
                             ekgLine.Values.Clear();
+                            CprLB.Items.Clear();
                             break;
 
                         }

@@ -27,7 +27,7 @@ namespace d_layer
 
             SqlConnection conn;
             const String db = "F20ST2ITS2201908775";
-
+       
             conn = new SqlConnection("Data Source = st-i4dab.uni.au.dk;Initial Catalog = " + db + ";Persist Security Info = True;User ID = " + db + ";Password = " + db + "");
             conn.Open();
             SqlDataReader rdr;
