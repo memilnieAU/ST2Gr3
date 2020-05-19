@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "d_layer", "d_layer\d_layer.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hashing", "..\..\..\..\Semesterprojekt EKG\hashing\hashing\hashing.csproj", "{71B31310-DC55-43BD-96BF-49A675C809D2}"
 EndProject
-Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Documentation1", "Documentation1\Documentation1.shfbproj", "{9009E512-74E3-4E9B-A545-DA5A9CD5A6A7}"
+Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Documentation", "Documentation1\Documentation.shfbproj", "{9009E512-74E3-4E9B-A545-DA5A9CD5A6A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

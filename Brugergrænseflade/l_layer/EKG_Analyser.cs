@@ -50,6 +50,9 @@ namespace l_layer
             string sygdom = AnalyserSygdom();
             return sygdom;
         }
+        /// <summary>
+        /// Denne metode beregner pulsen
+        /// </summary>
         private void FindPuls()
         {
             double threshold = 0.6;
