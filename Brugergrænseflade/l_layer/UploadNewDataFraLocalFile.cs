@@ -35,6 +35,11 @@ namespace l_layer
             
             switch (filnummer)
             {
+                case 0:
+                    {
+                        filNavn = "0. TestSignal.csv";
+                        break;
+                    }
                 default:
                 case 1:
                     {

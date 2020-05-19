@@ -75,6 +75,7 @@ namespace p_layer
             UploadNewDataFraLocalFile uploadNewDataFraLocalFile = new UploadNewDataFraLocalFile();
 
             // De er udkommenteret for at vi ikke overfylder vores database med samme måling 20 gange
+            uploadNewDataFraLocalFile.HentDataFraFil(0);
             //uploadNewDataFraLocalFile.HentDataFraFil(1);
             //uploadNewDataFraLocalFile.HentDataFraFil(2);
             //uploadNewDataFraLocalFile.HentDataFraFil(16);
@@ -101,17 +102,37 @@ namespace p_layer
         {
             ekgLine.Values.Clear();
             int i = 0;
+            double højesteVærdi = ekgMåling.raa_data[0];
+            double lavesteVærdi = ekgMåling.raa_data[0];
 
 
             foreach (double item in ekgMåling.raa_data)
             {
                 ekgLine.Values.Add(item);
                 i++;
-                if (i > 2500)
+                    if (item > højesteVærdi)
+                    {
+                        højesteVærdi = item;
+                    }
+                    if (item < lavesteVærdi)
+                    {
+                        lavesteVærdi = item;
+                    }
+                if (i> 2500)
                 {
                     break;
                 }
             }
+            højesteVærdi += 0.1;
+            lavesteVærdi -= 0.1;
+            // ekgLine.MaxHeight = højesteVærdi;
+            yakse.MinValue = lavesteVærdi;
+            if (højesteVærdi < lavesteVærdi+2.5)
+            {
+                yakse.MaxValue = lavesteVærdi + 2.5;
+            }
+            else
+            yakse.MaxValue = højesteVærdi;
 
         }
 
@@ -160,6 +181,7 @@ namespace p_layer
                     MInfoTB.Text = "Måling taget af: " + ekgMåling.id_medarbejder;
                     MInfoTB.Text += "\n" + "Tidspunkt for måling: " + ekgMåling.start_tidspunkt;
                     MInfoTB.Text += "\n" + "Samplerate: " + ekgMåling.samplerate_hz + " Hz";
+                    MInfoTB.Text += "\n" + "Baseline: " + analyserEnMåling.baseline.Key + " V";
                     //patientInfoTB.Text += "\n";
                     OpdaterCprB.IsEnabled = true;
                     cprTB.IsReadOnly = false;

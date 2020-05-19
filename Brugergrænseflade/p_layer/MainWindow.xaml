@@ -76,9 +76,9 @@
 
         <lvc:CartesianChart x:Name="test"  DisableAnimations="True" Series="{Binding MyCollectionEkg}" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="13.6,0.2,19.2,10.4" Grid.Column="1" Hoverable="False" Grid.Row="1">
 
-            <lvc:CartesianChart.AxisY>
+            <lvc:CartesianChart.AxisY >
                 <lvc:AxesCollection>
-                    <lvc:Axis MinValue="-1" MaxValue="3.5" LabelFormatter="{Binding Formatter}">
+                    <lvc:Axis x:Name="yakse" MinValue="-1" MaxValue="1.5" LabelFormatter="{Binding Formatter}">
                         <lvc:Axis.Separator >
                             <lvc:Separator Step="0.1" />
 

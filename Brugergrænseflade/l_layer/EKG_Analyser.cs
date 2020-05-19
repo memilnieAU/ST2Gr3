@@ -17,7 +17,7 @@ namespace l_layer
         Dictionary<string, double> verticalHistogram;
         double[] råMåling;
         private DTOs.DTO_EkgMåling måling;
-        KeyValuePair<double, int> baseline;
+        public KeyValuePair<double, int> baseline;
         double pulsPrMin;
 
         public DTOs.DTO_EkgMåling Måling
