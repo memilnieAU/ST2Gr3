@@ -196,18 +196,18 @@ namespace p_layer
 
         private void CprLB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ekgMåling = null;
-            OpdaterCprB.IsEnabled = false;
-            cprTB.IsReadOnly = true;
-            ekgLine.Values.Clear();
-            SPKommentar.Text = "";
-            IndiSygdomTB.Text = "";
-            TilføjKommentarL.Content = "Tilføj evt kommentar";
-            SPKommentar.IsReadOnly = false;
-            TilføjKommentarB.IsEnabled = false;
-            UploadMålingB.IsEnabled = false;
+            //ekgMåling = null;
+            //OpdaterCprB.IsEnabled = false;
+            //cprTB.IsReadOnly = true;
+            //ekgLine.Values.Clear();
+            //SPKommentar.Text = "";
+            //IndiSygdomTB.Text = "";
+            //TilføjKommentarL.Content = "Tilføj evt kommentar";
+            //SPKommentar.IsReadOnly = false;
+            //TilføjKommentarB.IsEnabled = false;
+            //UploadMålingB.IsEnabled = false;
 
-
+            NulstilGUI();
 
             if (CprLB.SelectedIndex != -1)
             {
@@ -337,6 +337,7 @@ namespace p_layer
                                 opdaterLocalDB.OpdaterCpr(ekgMåling);
                                 // CprLB.SelectedItem = "test";
                                 CprLB.Items.Clear();
+                                NulstilGUI();
                                 break;
                             }
                         case MessageBoxResult.Cancel:
@@ -348,8 +349,25 @@ namespace p_layer
 
                 }
 
-                patientInfoTB.Text = hentPinfo.hentPinfo(cprTB.Text);
+                //patientInfoTB.Text = hentPinfo.hentPinfo(cprTB.Text);
             }
+        }
+        private void NulstilGUI()
+        {
+            ekgMåling = null;
+            OpdaterCprB.IsEnabled = false;
+            cprTB.IsReadOnly = true;
+            ekgLine.Values.Clear();
+            SPKommentar.Text = "";
+            IndiSygdomTB.Text = "";
+            TilføjKommentarL.Content = "Tilføj evt kommentar";
+            SPKommentar.IsReadOnly = false;
+            TilføjKommentarB.IsEnabled = false;
+            UploadMålingB.IsEnabled = false;
+            MInfoTB.Text = "";
+            cprTB.Text = "";
+            patientInfoTB.Text = "";
+            
         }
         UploadToOffDb UploadToOffDb = new UploadToOffDb();
         private void UploadMålingB_Click(object sender, RoutedEventArgs e)
@@ -358,6 +376,7 @@ namespace p_layer
             if (uploaded == true)
             { MessageBox.Show("Den valgte måling er blevet uploadet til databasen");
                 CprLB.Items.Clear();
+                NulstilGUI();
             }
             else
             { MessageBox.Show("Der gik noget galt da den valgte måling skulle uploades til databasen. Prøv igen eller tjek din database-forbindelse"); }

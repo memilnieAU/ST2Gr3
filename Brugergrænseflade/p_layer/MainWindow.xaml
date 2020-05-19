@@ -37,7 +37,7 @@
 
             <Button x:Name="PatientRegisterB" Content="Hent gemte målinger" Margin="20,10,0,0" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="170" RenderTransformOrigin="0.502,2.419" Height="25" Click="PatientRegisterB_Click"/>
             <Button x:Name="OffRegisterB" Content="Hent i offentlig database" Margin="20,10,0,0" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Width="170" Height="25"/>
-            <Label x:Name="VælgCprL" Content="Vælg CPR:" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top" Height="30" Width="225" Grid.Row="1"/>
+            <Label x:Name="VælgCprL" Content="CPR / Målinger:" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top" Height="30" Width="225" Grid.Row="1"/>
             <ListBox x:Name="CprLB" Grid.Column="0" HorizontalAlignment="Left" Height="150" VerticalAlignment="Top" Width="220" Margin="20,10,0,0" Grid.RowSpan="3" SelectionChanged="CprLB_SelectionChanged" Grid.Row="1" Background="#FFDDE1E7"/>
             <Button x:Name="cprB"  Grid.Row="3" Content="Vælg" Click="CprB_Click" Margin="20,5,0,0"  Width="170" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
             <Label x:Name="patientInfoL" Content="Patientinformationer:" HorizontalAlignment="Left" Margin="20,15,0,0" VerticalAlignment="Top" Height="30" Width="225" Grid.Row="1"/>
