@@ -115,6 +115,21 @@
                                     <SolidColorBrush Color="Black" Opacity="1"></SolidColorBrush>
                                 </lvc:AxisSection.Fill>
                             </lvc:AxisSection>
+                            <lvc:AxisSection Value="2.0" StrokeThickness="0.5" Stroke="Black">
+                                <lvc:AxisSection.Fill>
+                                    <SolidColorBrush Color="Black" Opacity="1"></SolidColorBrush>
+                                </lvc:AxisSection.Fill>
+                            </lvc:AxisSection>
+                            <lvc:AxisSection Value="2.5" StrokeThickness="0.5" Stroke="Black">
+                                <lvc:AxisSection.Fill>
+                                    <SolidColorBrush Color="Black" Opacity="1"></SolidColorBrush>
+                                </lvc:AxisSection.Fill>
+                            </lvc:AxisSection>
+                            <lvc:AxisSection Value="3.0" StrokeThickness="0.5" Stroke="Black">
+                                <lvc:AxisSection.Fill>
+                                    <SolidColorBrush Color="Black" Opacity="1"></SolidColorBrush>
+                                </lvc:AxisSection.Fill>
+                            </lvc:AxisSection>
 
                         </lvc:Axis.Sections>
                     </lvc:Axis>
