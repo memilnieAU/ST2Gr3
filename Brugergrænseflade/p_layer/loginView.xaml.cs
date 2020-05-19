@@ -43,7 +43,7 @@ namespace p_layer
             }
             else
             {
-                MessageBox.Show("Enten Brugernavn eller password er forkert. Prøv igen\n (BrugerNavn == \"1234\" && pw == \"1234\")");
+                MessageBox.Show("Enten Brugernavn eller password er forkert. Prøv igen\n EX: (BrugerNavn == \"1234\" && pw == \"1234\")");
                 PasswordPW.Clear();
                 MedarbejderIDTB.Focus();
             }

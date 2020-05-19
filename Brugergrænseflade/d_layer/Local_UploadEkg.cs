@@ -33,6 +33,7 @@ namespace d_layer
                 nyMåling.raa_data.SelectMany(value =>
                 BitConverter.GetBytes(value)).ToArray());
 
+               
                 cmd.Parameters.AddWithValue("@hz", (float)nyMåling.samplerate_hz);
 
 

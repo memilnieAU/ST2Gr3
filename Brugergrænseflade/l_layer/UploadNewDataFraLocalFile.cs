@@ -32,7 +32,7 @@ namespace l_layer
         {
             string filNavn = "";
             int filnummer = nummer;
-            
+
             switch (filnummer)
             {
                 case 0:
@@ -65,6 +65,12 @@ namespace l_layer
                 case 18:
                     {
                         filNavn = "18. Fine atrial fibrillation.csv";
+                        break;
+                    }
+
+                case 25:
+                    {
+                        filNavn = "25. ST elevation of 0.6 mV.csv";
                         break;
                     }
             }

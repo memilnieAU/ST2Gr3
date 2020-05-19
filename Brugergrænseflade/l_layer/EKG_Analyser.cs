@@ -37,6 +37,10 @@ namespace l_layer
         /// <returns></returns>
         public string AnalyserEnMåling(DTOs.DTO_EkgMåling målingTilAnalyse)
         {
+            if (målingTilAnalyse.raa_data.Length == 0)
+            {
+                return "Kunne ikke analyseres";
+            }
             måling = målingTilAnalyse;
             hoizontalHistogram = new Dictionary<double, int>();
             hoizontalHistogram.Add(0, 0);

@@ -75,12 +75,14 @@ namespace p_layer
             UploadNewDataFraLocalFile uploadNewDataFraLocalFile = new UploadNewDataFraLocalFile();
 
             // De er udkommenteret for at vi ikke overfylder vores database med samme måling 20 gange
-            // uploadNewDataFraLocalFile.HentDataFraFil(0);
+            //uploadNewDataFraLocalFile.HentDataFraFil(0);
             //uploadNewDataFraLocalFile.HentDataFraFil(1);
             //uploadNewDataFraLocalFile.HentDataFraFil(2);
             //uploadNewDataFraLocalFile.HentDataFraFil(16);
             //uploadNewDataFraLocalFile.HentDataFraFil(17);
             //uploadNewDataFraLocalFile.HentDataFraFil(18);
+            //uploadNewDataFraLocalFile.HentDataFraFil(25);
+
             hentNyeMålinger = new HentNyeMålingerFraLocalDB();
 
             antalNyeMåinger = hentNyeMålinger.HentantalAfNyeMålingerUKommentar();
@@ -101,15 +103,18 @@ namespace p_layer
         private void DummyTilføjPunkterTilGraf(DTO_EkgMåling ekgMåling)
         {
             ekgLine.Values.Clear();
-            int i = 0;
-            double højesteVærdi = ekgMåling.raa_data[0];
-            double lavesteVærdi = ekgMåling.raa_data[0];
-
-
-            foreach (double item in ekgMåling.raa_data)
+            if (ekgMåling.raa_data.Length != 0)
             {
-                ekgLine.Values.Add(item);
-                i++;
+
+                int i = 0;
+                double højesteVærdi = ekgMåling.raa_data[0];
+                double lavesteVærdi = ekgMåling.raa_data[0];
+
+
+                foreach (double item in ekgMåling.raa_data)
+                {
+                    ekgLine.Values.Add(item);
+                    i++;
                     if (item > højesteVærdi)
                     {
                         højesteVærdi = item;
@@ -118,22 +123,23 @@ namespace p_layer
                     {
                         lavesteVærdi = item;
                     }
-                if (i> 2500)
-                {
-                    break;
+                    if (i > 2500)
+                    {
+                        break;
+                    }
                 }
-            }
-            højesteVærdi += 0.1;
-            lavesteVærdi -= 0.1;
-            // ekgLine.MaxHeight = højesteVærdi;
-            yakse.MinValue = lavesteVærdi;
-            if (højesteVærdi < lavesteVærdi+2.5)
-            {
-                yakse.MaxValue = lavesteVærdi + 2.5;
-            }
-            else
-            yakse.MaxValue = højesteVærdi;
+                højesteVærdi += 0.1;
+                lavesteVærdi -= 0.1;
+                // ekgLine.MaxHeight = højesteVærdi;
+                yakse.MinValue = lavesteVærdi;
+                if (højesteVærdi < lavesteVærdi + 2.5)
+                {
+                    yakse.MaxValue = lavesteVærdi + 2.5;
+                }
+                else
+                    yakse.MaxValue = højesteVærdi;
 
+            }
         }
 
 
@@ -250,7 +256,7 @@ namespace p_layer
             //{
             //    kommentarVarTom = true;
             //}
-            string opdateText = "Kommentar ændret: " + DateTime.Now.ToShortDateString() +" "  + DateTime.Now.ToShortTimeString()   ;
+            string opdateText = "Kommentar ændret: " + DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString();
             ekgMåling.kommentar = SPKommentar.Text + "\n" + opdateText + "\n\n"; ;
             opdaterLocalDB.OpdaterKommentar(ekgMåling);
             SPKommentar.Text = ekgMåling.kommentar;
@@ -367,14 +373,15 @@ namespace p_layer
             MInfoTB.Text = "";
             cprTB.Text = "";
             patientInfoTB.Text = "";
-            
+
         }
         UploadToOffDb UploadToOffDb = new UploadToOffDb();
         private void UploadMålingB_Click(object sender, RoutedEventArgs e)
         {
             bool uploaded = UploadToOffDb.uploadToOff(ekgMåling);
             if (uploaded == true)
-            { MessageBox.Show("Den valgte måling er blevet uploadet til databasen");
+            {
+                MessageBox.Show("Den valgte måling er blevet uploadet til databasen");
                 CprLB.Items.Clear();
                 NulstilGUI();
             }
