@@ -47,6 +47,7 @@ namespace l_layer
             }
             return AntalNyeMålinger;
         }
+       
         public string[] HentAlleCprNr()
         {
 

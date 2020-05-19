@@ -82,7 +82,7 @@ namespace p_layer
             //uploadNewDataFraLocalFile.HentDataFraFil(18);
             hentNyeMålinger = new HentNyeMålingerFraLocalDB();
 
-            antalNyeMåinger = hentNyeMålinger.HentAlleMålingerFraLocalDB();
+            antalNyeMåinger = hentNyeMålinger.HentantalAfNyeMålingerUKommentar();
             NyeMålingerTBL.Text = "Der er " + antalNyeMåinger + " nye målinger";
             hentPinfo = new hentPatientinformationer();
 
@@ -148,7 +148,7 @@ namespace p_layer
                 }
                 else
                 {
-
+                    hentNyeMålinger.HentEnMålingFraLocalDB(Convert.ToInt32(CprLB.SelectedItem.ToString().Substring(CprLB.SelectedItem.ToString().Length - 2)));
                     ekgMåling = hentNyeMålinger.Hent1Måling(Convert.ToInt32(CprLB.SelectedItem.ToString().Substring(CprLB.SelectedItem.ToString().Length - 2)));
                     EKG_Analyser analyserEnMåling = new EKG_Analyser();
 
@@ -159,7 +159,7 @@ namespace p_layer
                     cprTB.Text = ekgMåling.borger_cprnr;
                     MInfoTB.Text = "Måling taget af: " + ekgMåling.id_medarbejder;
                     MInfoTB.Text += "\n" + "Tidspunkt for måling: " + ekgMåling.start_tidspunkt;
-                    MInfoTB.Text += "\n";
+                    MInfoTB.Text += "\n" + "Samplerate: " + ekgMåling.samplerate_hz + " Hz";
                     //patientInfoTB.Text += "\n";
                     OpdaterCprB.IsEnabled = true;
                     cprTB.IsReadOnly = false;
@@ -313,7 +313,7 @@ namespace p_layer
                             {
                                 ekgMåling.borger_cprnr = cprTB.Text;
                                 opdaterLocalDB.OpdaterCpr(ekgMåling);
-                                CprLB.SelectedItem = "test";
+                               // CprLB.SelectedItem = "test";
                                 break;
                             }
                         case MessageBoxResult.Cancel:

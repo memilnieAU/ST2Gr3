@@ -78,7 +78,7 @@
 
             <lvc:CartesianChart.AxisY>
                 <lvc:AxesCollection>
-                    <lvc:Axis MinValue="-1" MaxValue="1.5" LabelFormatter="{Binding Formatter}">
+                    <lvc:Axis MinValue="-1" MaxValue="3.5" LabelFormatter="{Binding Formatter}">
                         <lvc:Axis.Separator >
                             <lvc:Separator Step="0.1" />
 
