@@ -69,7 +69,7 @@ namespace d_layer
                 connection = new SqlConnection("Data Source = st-i4dab.uni.au.dk;Initial Catalog = " + DBlogin + ";Persist Security Info = True;User ID = " + DBlogin + ";Password = " + DBlogin + "");
                 connection.Open();
                 //TODO skal den ikke også sætte information ind i dbo.EKGDATA
-                string insertStringParam = $"INSERT INTO dbo.EKGDATA ([raa_data],[samplerate_hz],[interval_sec],[data_format],[bin_eller_tekst],[maaleformat_type],[start_tid],[kommentar],[ekgmaaleid])" + $" OUTPUT INSERTED.ekgmaaleid VALUES(@data, {Convert.ToInt32(nyMåling.samplerate_hz)},'18','andet','b','{nyMåling.raa_data[0].GetType()}',@dato,'{nyMåling.kommentar}', {ekgMaaleID})";
+                string insertStringParam = $"INSERT INTO dbo.EKGDATA ([raa_data],[samplerate_hz],[interval_sec],[data_format],[bin_eller_tekst],[maaleformat_type],[start_tid],[kommentar],[ekgmaaleid])" + $" OUTPUT INSERTED.ekgmaaleid VALUES(@data, {Convert.ToInt32(nyMåling.samplerate_hz)},'{Convert.ToInt32(nyMåling.antal_maalepunkter*(1/nyMåling.samplerate_hz))}','andet','b','{nyMåling.raa_data[0].GetType()}',@dato,'{nyMåling.kommentar}', {ekgMaaleID})";
 
                 using (SqlCommand cmd = new SqlCommand(insertStringParam, connection))
                 {
