@@ -75,7 +75,7 @@ namespace p_layer
             UploadNewDataFraLocalFile uploadNewDataFraLocalFile = new UploadNewDataFraLocalFile();
 
             // De er udkommenteret for at vi ikke overfylder vores database med samme måling 20 gange
-            uploadNewDataFraLocalFile.HentDataFraFil(0);
+            // uploadNewDataFraLocalFile.HentDataFraFil(0);
             //uploadNewDataFraLocalFile.HentDataFraFil(1);
             //uploadNewDataFraLocalFile.HentDataFraFil(2);
             //uploadNewDataFraLocalFile.HentDataFraFil(16);
@@ -400,6 +400,16 @@ namespace p_layer
                 }
                 else UploadMålingB.IsEnabled = true;
             }
+        }
+
+        private void cprTB_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (cprTB.Text.Length == 11)
+            {
+                OpdaterCprB.IsEnabled = true;
+
+            }
+            else OpdaterCprB.IsEnabled = false;
         }
     }
 }

@@ -42,7 +42,7 @@
             <Button x:Name="cprB"  Grid.Row="3" Content="Vælg" Click="CprB_Click" Margin="20,5,0,0"  Width="170" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False"/>
             <Label x:Name="patientInfoL" Content="Patientinformationer:" HorizontalAlignment="Left" Margin="20,15,0,0" VerticalAlignment="Top" Height="30" Width="225" Grid.Row="1"/>
             <Canvas>
-                <TextBox x:Name="cprTB" HorizontalAlignment="Left" Canvas.Top="0" Height="25" Margin="20,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Grid.Row="5" Background="#FFDDE1E7" BorderBrush="{x:Null}"/>
+                <TextBox x:Name="cprTB" HorizontalAlignment="Left" Canvas.Top="0" Height="25" Margin="20,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Grid.Row="5" Background="#FFDDE1E7" BorderBrush="{x:Null}" TextChanged="cprTB_TextChanged"/>
                 <TextBox x:Name="patientInfoTB" HorizontalAlignment="Left" Canvas.Top="28" IsReadOnly="True" Height="100" Margin="20,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Grid.Row="5" Background="#FFDDE1E7" BorderBrush="{x:Null}" />
             </Canvas>
             <Button x:Name="OpdaterCprB" Content="Opdater cpr" HorizontalAlignment="Left" Margin="20,135,0,0" Grid.Row="4" VerticalAlignment="Top" Width="170" Height="25" Click="OpdaterCprB_Click" IsEnabled="False"/>
