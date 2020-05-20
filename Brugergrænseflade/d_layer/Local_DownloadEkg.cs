@@ -10,10 +10,12 @@ namespace d_layer
 {
     /// <summary>
     /// Ansvar: At hente EKG-målinger fra en lokal database
-    /// </summary>
+    /// </summary> 
     public class Local_DownloadEkg
     {
-
+        /// <summary>
+        /// Det DTO_objekt der oprettes fra målingen i databasen
+        /// </summary>
         DTO_EkgMåling målingFraDB;
 
 
@@ -22,7 +24,7 @@ namespace d_layer
         /// </summary>
         /// <param name="måleId">MåleID på den målling man ønsker at hente</param>
         /// <returns> Rådata fra en secifik måling </returns>
-        public double[] HentEkgDataRaaData(int måleId)
+        public double[] HentEkg_RaaData(int måleId)
         {
 
             SqlConnection conn;
@@ -53,7 +55,7 @@ namespace d_layer
         /// Ansvar: At tælle hvor mange målinger der er i den lokale database
         /// </summary>
         /// <returns> Antallet af elementer i databasen </returns>
-        public int HentAntalletAfMålinger()
+        public int HentAntalMålinger()
         {
             SqlConnection conn;
             const String db = "F20ST2ITS2201908775";
@@ -104,6 +106,10 @@ namespace d_layer
             conn.Close();
             return tal.ToArray();
         }
+        /// <summary>
+        /// Ansvar: At hente alle de måleId'er der ikke er kommenteret i databasen
+        /// </summary>
+        /// <returns> returnerer alle "Cpr: xxxxxx-xxxx  MåleId: xx " som string array </returns>
         public string[] HentAlleMåleIDerUKommentar()
         {
             SqlConnection conn;
@@ -165,9 +171,9 @@ namespace d_layer
             return tal.ToArray();
         }
         /// <summary>
-        /// Ansvar: At hente måle id udfra cprNummer
+        /// Ansvar: At hente alle måleID'er udfra specefikt cpr_nummer
         /// </summary>
-        /// <returns>Et array der indeholder alle måleID'er</returns>
+        /// <returns>Et array der indeholder alle måleID'er der er tilknyttet det specefikke CPR_nummer </returns>
         public int[] HentMåleIDCPR(string cpr)
         {
             SqlConnection conn;
@@ -202,7 +208,7 @@ namespace d_layer
         public DTO_EkgMåling HentEnMåling(int måle_Id)
         {
 
-            målingFraDB = new DTO_EkgMåling(måle_Id, HentEkgDataRaaData(måle_Id));
+            målingFraDB = new DTO_EkgMåling(måle_Id, HentEkg_RaaData(måle_Id));
             SqlConnection conn;
             const String db = "F20ST2ITS2201908775";
 
@@ -246,9 +252,9 @@ namespace d_layer
         /// <summary>
         /// ansvar: henter patientinformationer fra den lokaledatabase.
         /// </summary>
-        /// <param name="socSecNb">der ønskes data fra cpr</param>
+        /// <param name="socSecNb">Det cprnummer der ønskes data fra</param>
         /// <returns>returnere navn, alder og adresse</returns>
-        public string HentPatientinformation(string socSecNb)
+        public string HentPatientinfo(string socSecNb)
         {
 
             SqlConnection conn;
