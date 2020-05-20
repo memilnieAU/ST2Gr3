@@ -9,15 +9,16 @@ using DTOs;
 namespace d_layer
 {
     /// <summary>
-    /// Ansvar: At uploade til en måling til den lokale database
+    /// Ansvar: At uploade en måling til den lokale database
     /// </summary>
     public class Local_UploadEkg
     {
         /// <summary>
+        /// Dette er en hjælpe metode for at uploade data direkte fra Physionet
         /// Ansvar: At uploade en specifik måling til den lokale database, efter den er blevet hentet fra en csv fil.
         /// </summary>
         /// <param name="nyMåling">En specefik måling</param>
-        /// <returns></returns>
+        /// <returns>Det specefikke MåleId som mållingen fik tilknyttet af databasen</returns>
         public int UploadNewEKGFromFile(DTO_EkgMåling nyMåling)
         {
             SqlConnection conn;
@@ -60,6 +61,10 @@ namespace d_layer
             }
             conn.Close();
         }
+        /// <summary>
+        /// Ansvar: At opdatere en specefik måling med et nyt cprnummer
+        /// </summary>
+        /// <param name="måling">Den måling med det nye cpr-nummer</param>
         public void Opdatercpr(DTO_EkgMåling måling)
         {
             SqlConnection conn;
@@ -73,6 +78,10 @@ namespace d_layer
             }
             conn.Close();
         }
+        /// <summary>
+        /// Ansvar: At slette en specefik målling
+        /// </summary>
+        /// <param name="måling">Den måling der ønskes at slettes</param>
         public void deleteEkg(DTO_EkgMåling måling)
         {
             SqlConnection conn;
@@ -86,7 +95,6 @@ namespace d_layer
             }
             conn.Close();
         }
-
 
     }
 }

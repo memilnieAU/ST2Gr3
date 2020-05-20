@@ -31,7 +31,7 @@ namespace l_layer
            using (SHA512 sha512Hash = SHA512.Create())
             {
                 string krypteret = GetHash(sha512Hash, pw);
-                return dataObject.isUserRegistered(BrugerNavn, krypteret);
+                return dataObject.IsUserRegistered(BrugerNavn, krypteret);
             }
 
            
@@ -49,7 +49,7 @@ namespace l_layer
             using (SHA512 sha512Hash = SHA512.Create())
             {
                 string krypteret = GetHash(sha512Hash, pw);
-                dataObject.registerNewUser(Brugernavn, krypteret);
+                dataObject.RegisterNewUser(Brugernavn, krypteret);
             }
             
         }
@@ -60,7 +60,7 @@ namespace l_layer
         /// <returns></returns>
         public bool BrugerAlleredeOprettet(string Brugernavn)
         {
-               return dataObject.alleredeOprettet(Brugernavn);
+               return dataObject.AlleredeOprettet(Brugernavn);
         }
 
         /// <summary>

@@ -21,7 +21,7 @@ namespace l_layer
         /// <returns>returnere navn, alder og adresse på det valgte cpr</returns>
         public string hentPinfo(string socSecNb)
         {
-            return hentInformation.HentPatientinformation(socSecNb);
+            return hentInformation.HentPatientinfo(socSecNb);
         }
 
     }

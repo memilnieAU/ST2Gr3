@@ -13,17 +13,26 @@ namespace d_layer
     /// </summary>
     public class DownloadFraLocalFile
     {
+        /// <summary>
+        /// Midllertigtig punkter inden de indsættes i et DTO_Objekt
+        /// </summary>
         List<double> midlertidigePunkter;
+        /// <summary>
+        /// Målingens starttidspunkt
+        /// </summary>
         double tidstart;
+        /// <summary>
+        /// Målingens sluttidspunkt
+        /// </summary>
         double tidslut;
 
         /// <summary>
         /// Ansvar: At henter data fra en måling og tilføjer punkter til en liste. 
         /// Hvad: Den udfylder: antal målepunkter, samelrate, starttid og x-antal punkter i mV
         /// </summary>
-        /// <param name="FilNavn"> Dette er navnet på selve filen</param>
+        /// <param name="FilNavn"> Dette er navnet på selve filen, der skal hentes fra</param>
         /// <returns>
-        /// Den retunere en "ny" DTO_EkgMåling med begrænset indehold       
+        /// Den retunerer en "ny" DTO_EkgMåling med begrænset indhold       
         /// </returns>
         public DTO_EkgMåling HentFraCsvFil(String FilNavn)  
         {
@@ -37,7 +46,7 @@ namespace d_layer
             // opret de nødvendige stream-objekter
             // FileStream input = new FileStream("Test_Atrieflimmer_1.csv", FileMode.OpenOrCreate, FileAccess.Read);
             FileStream input = new FileStream(FilNavn, FileMode.OpenOrCreate, FileAccess.Read);
-
+            
             StreamReader fileReader = new StreamReader(input);
 
 

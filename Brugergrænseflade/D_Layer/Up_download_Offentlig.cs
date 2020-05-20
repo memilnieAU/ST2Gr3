@@ -18,29 +18,31 @@ namespace d_layer
         private int ekgMaaleID = 0;
 
         private const string DBlogin = "ST2PRJ2OffEKGDatabase";
-        public Up_download_Offentlig()
-        {
-
-        }
+       
 
         /// <summary>
-        /// Ansvar: uploader måling til databasen
+        /// Ansvar: uploader til den offenlige database, den kalder to hjælpe metoder
         /// </summary>
         /// <param name="nyMåling"></param>
-        /// <returns></returns>
-        public bool upload(DTO_EkgMåling nyMåling)
+        /// <returns>Retunerer true hvis det lykkes at uploade data til databasen</returns>
+        public bool Upload(DTO_EkgMåling nyMåling)
         {
             //int id = uploadEKGMaeling(nyMåling);
-            if (uploadEKGMaeling(nyMåling))
+            if (UploadEKGMaeling(nyMåling))
             {
-                uploadEKGData(nyMåling);
+                UploadEKGData(nyMåling);
                 return true;
             }
             else
             { return false; }
                       
         }
-        private bool uploadEKGMaeling(DTO_EkgMåling nyMåling)
+        /// <summary>
+        /// Ansvar: At uploade data til Den offentlige DB_EKGMåling
+        /// </summary>
+        /// <param name="nyMåling"></param>
+        /// <returns>Retuenrer true hvis det lykkedes at uploade data</returns>
+        private bool UploadEKGMaeling(DTO_EkgMåling nyMåling)
         {
             try
             {
@@ -62,7 +64,11 @@ namespace d_layer
                 return false;
             }
         }
-        private void uploadEKGData(DTO_EkgMåling nyMåling)
+        /// <summary>
+        /// uploader selve måle dataen til den off DB_EKGDATA
+        /// </summary>
+        /// <param name="nyMåling">Den måling der ønskes at uploade data fra </param>
+        private void UploadEKGData(DTO_EkgMåling nyMåling)
         {
             try
             {

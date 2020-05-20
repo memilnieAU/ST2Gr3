@@ -22,10 +22,10 @@ namespace d_layer
         /// <summary>
         /// ansvar: sammenligner data i databasen med de indtastede data (medarbejderID og password)
         /// </summary>
-        /// <param name="Brugernavn"></param>
-        /// <param name="pw"></param>
-        /// <returns></returns>
-        public bool isUserRegistered(string Brugernavn, string pw)
+        /// <param name="Brugernavn">Det brugernavn der sammenlignes med</param>
+        /// <param name="pw">Det Password der sammenlignes med</param>
+        /// <returns>Retunerer true hvis login oplysninger er gyldige</returns>
+        public bool IsUserRegistered(string Brugernavn, string pw)
         {
             connection = new SqlConnection("Data Source=st-i4dab.uni.au.dk; Initial Catalog=" + DBlogin + "; User ID= " + DBlogin + "; Password=" + DBlogin + "; Connect Timeout=30; Encrypt=False; TrustServerCertificate=False; ApplicationIntent=ReadWrite; MultiSubnetFailover=False");
 
@@ -53,9 +53,9 @@ namespace d_layer
         /// <summary>
         /// opretter nye bruger i databassen med de indtastede data
         /// </summary>
-        /// <param name="Brugernavn"></param>
-        /// <param name="pw"></param>
-        public void registerNewUser(string Brugernavn, string pw)
+        /// <param name="Brugernavn">Det nye brugernavn</param>
+        /// <param name="pw">Det nye password</param>
+        public void RegisterNewUser(string Brugernavn, string pw)
         {
 
             connection = new SqlConnection("Data Source=st-i4dab.uni.au.dk; Initial Catalog=" + DBlogin + "; User ID= " + DBlogin + "; Password=" + DBlogin + "; Connect Timeout=30; Encrypt=False; TrustServerCertificate=False; ApplicationIntent=ReadWrite; MultiSubnetFailover=False");
@@ -76,11 +76,12 @@ namespace d_layer
         }
 
         /// <summary>
-        /// Ansvar: sammenligner det indtastede MedarbejderID med de allerede registerede bruger, så der ikke kan blive oprettet to brugere med samme login
+        /// Ansvar: sammenligner det indtastede MedarbejderID med de allerede registerede bruger,
+        /// så der ikke kan blive oprettet to brugere med samme login
         /// </summary>
         /// <param name="Brugernavn">medarbejderID</param>
-        /// <returns></returns>
-        public bool alleredeOprettet(string Brugernavn)
+        /// <returns>Retunerer true hvis medarbejder nummer findes i forvejen</returns>
+        public bool AlleredeOprettet(string Brugernavn)
         {
             resultat = false;
 

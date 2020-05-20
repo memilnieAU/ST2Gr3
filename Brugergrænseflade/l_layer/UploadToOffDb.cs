@@ -19,7 +19,7 @@ namespace l_layer
         }
         public bool uploadToOff(DTO_EkgMåling ekgmåling)
         {
-            return up_Download_Offentlig.upload(ekgmåling);
+            return up_Download_Offentlig.Upload(ekgmåling);
         }
     }
 }
