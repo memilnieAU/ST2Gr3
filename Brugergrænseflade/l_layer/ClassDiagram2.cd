@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="l_layer.EKG_Analyser" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAAQAAAAAAAhAACAAEAQgAAAABAACAA=</HashCode>
+      <FileName>EKG_Analyser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="l_layer.HentFraLocalDB" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAIAAAAAAAAAAAAAAAAAAIgQIAKBAAAAAAAAA=</HashCode>
+      <FileName>HentNyeMålingerFraLocalDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="l_layer.HentPatientInfo" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAACAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>HentPatientinformationer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="l_layer.LoginRequest" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAEAgAAAAAAAAAAAAAAAAAAAACAAIAAAAAAAA=</HashCode>
+      <FileName>LoginRequest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="l_layer.OpdaterLocalDB" Collapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAIAAAAAAAAAAAAAAAAAAgAAAAAAAI=</HashCode>
+      <FileName>OpdaterLocalDB.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="l_layer.UploadNewDataFraLocalFile" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAgAAAAAAAAAAAAAAAAAABAACAAQAAAAAg=</HashCode>
+      <FileName>UploadNewDataFraLocalFile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="l_layer.UploadToOffDb" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>UploadToOffDb.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
