@@ -76,14 +76,12 @@ namespace l_layer
             }
 
             nyMåling = downloadFraLocalFile.HentFraCsvFil(filNavn);
-            UploadDateTilLocalDB();
+            UploadDataTilLocalDB();
         }
         /// <summary>
         /// Denne metode uploader den hentede csv fil den lokale database som også EKG-måleren uploader data til
-        /// 
-        /// Denne Metode er ikke færdig endnu, da den skal kunne udfylde dummydata i de tomme felter
         /// </summary>
-        public void UploadDateTilLocalDB()
+        public void UploadDataTilLocalDB()
         {
 
             sidsteMålingUpladede = local_Upload.UploadNewEKGFromFile(nyMåling);

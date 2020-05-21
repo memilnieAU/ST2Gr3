@@ -82,7 +82,7 @@ namespace d_layer
         /// Ansvar: At slette en specefik målling
         /// </summary>
         /// <param name="måling">Den måling der ønskes at slettes</param>
-        public void deleteEkg(DTO_EkgMåling måling)
+        public void DeleteEkg(DTO_EkgMåling måling)
         {
             SqlConnection conn;
             const String db = "F20ST2ITS2201908775";

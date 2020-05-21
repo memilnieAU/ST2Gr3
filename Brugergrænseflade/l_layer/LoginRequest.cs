@@ -57,7 +57,7 @@ namespace l_layer
         /// sender brugernavn videre til d_layer
         /// </summary>
         /// <param name="Brugernavn">MedarbejderID</param>
-        /// <returns></returns>
+        /// <returns>Retunerer true hvis medarbejder nummer findes i forvejen, </returns>
         public bool BrugerAlleredeOprettet(string Brugernavn)
         {
                return dataObject.AlleredeOprettet(Brugernavn);
@@ -66,8 +66,8 @@ namespace l_layer
         /// <summary>
         /// Ansvar: kryptere password
         /// </summary>
-        /// <param name="hashAlgorithm"></param>
-        /// <param name="input"></param>
+        /// <param name="hashAlgorithm">Den algorithme som bruges til at krypterer</param>
+        /// <param name="input">Password/Det indhold der skal krypteres</param>
         /// <returns></returns>
         private static string GetHash(HashAlgorithm hashAlgorithm, string input)
         {

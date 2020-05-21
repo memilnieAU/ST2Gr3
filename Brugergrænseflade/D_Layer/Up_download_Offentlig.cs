@@ -18,8 +18,6 @@ namespace d_layer
         private int ekgMaaleID = 0;
 
         private const string DBlogin = "ST2PRJ2OffEKGDatabase";
-       
-
         /// <summary>
         /// Ansvar: uploader til den offenlige database, den kalder to hjælpe metoder
         /// </summary>

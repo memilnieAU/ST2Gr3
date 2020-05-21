@@ -30,14 +30,15 @@ namespace p_layer
         public SeriesCollection MyCollectionEkg { get; set; }
         private LineSeries ekgLine;
         private LineSeries Line1;
-        List<cprEksempel> cpreks;
+        public Func<double, string> Formatter { get; set; }
+
         private loginView loginref;
-        private hentPatientinformationer hentPinfo;
+        private HentPatientInfo hentPinfo;
         public string medarbejderID;
         OpdaterLocalDB opdaterLocalDB;
         private string gammelCpr;
 
-        HentNyeMålingerFraLocalDB hentNyeMålinger;
+        HentFraLocalDB hentNyeMålinger;
         EKG_Analyser ekg_Analyse;
 
 
@@ -69,38 +70,39 @@ namespace p_layer
             Formatter = value => "";
             DataContext = this;
 
+            //HentDataFraCSVfil();
 
+            hentNyeMålinger = new HentFraLocalDB();
 
+            antalNyeMåinger = hentNyeMålinger.HentantalAfNyeMålingerUKommentar();
+            NyeMålingerTBL.Text = "Der er " + antalNyeMåinger + " nye målinger";
+            hentPinfo = new HentPatientInfo();
+
+        }
+       
+        /// <summary>
+        /// Henter data fra en csv fil, lokal på computeren
+        /// </summary>
+        void HentDataFraCSVfil()
+        {
             //Denne henter data fra en lokal fil og sætter det ind i databasen
             UploadNewDataFraLocalFile uploadNewDataFraLocalFile = new UploadNewDataFraLocalFile();
 
             // De er udkommenteret for at vi ikke overfylder vores database med samme måling 20 gange
-            //uploadNewDataFraLocalFile.HentDataFraFil(0);
-            //uploadNewDataFraLocalFile.HentDataFraFil(1);
-            //uploadNewDataFraLocalFile.HentDataFraFil(2);
-            //uploadNewDataFraLocalFile.HentDataFraFil(16);
-            //uploadNewDataFraLocalFile.HentDataFraFil(17);
-            //uploadNewDataFraLocalFile.HentDataFraFil(18);
-            //uploadNewDataFraLocalFile.HentDataFraFil(25);
-
-            hentNyeMålinger = new HentNyeMålingerFraLocalDB();
-
-            antalNyeMåinger = hentNyeMålinger.HentantalAfNyeMålingerUKommentar();
-            NyeMålingerTBL.Text = "Der er " + antalNyeMåinger + " nye målinger";
-            hentPinfo = new hentPatientinformationer();
-
+            uploadNewDataFraLocalFile.HentDataFraFil(0);
+            uploadNewDataFraLocalFile.HentDataFraFil(1);
+            uploadNewDataFraLocalFile.HentDataFraFil(2);
+            uploadNewDataFraLocalFile.HentDataFraFil(16);
+            uploadNewDataFraLocalFile.HentDataFraFil(17);
+            uploadNewDataFraLocalFile.HentDataFraFil(18);
+            uploadNewDataFraLocalFile.HentDataFraFil(25);
         }
-        public Func<double, string> Formatter { get; set; }
 
-
-        #region DummyOpstartAnalyse
-
-
+        
         /// <summary>
         /// Denne metode tilføjer alle punkter til grafen
-        /// Denne metode er midlertidig
         /// </summary>
-        private void DummyTilføjPunkterTilGraf(DTO_EkgMåling ekgMåling)
+        private void TilføjPunkterTilGraf(DTO_EkgMåling ekgMåling)
         {
             ekgLine.Values.Clear();
             if (ekgMåling.raa_data.Length != 0)
@@ -142,9 +144,6 @@ namespace p_layer
             }
         }
 
-
-        #endregion
-
         private void LogAfB_Click(object sender, RoutedEventArgs e)
         {
             //denne kode genstarter programmet, jeg leder lige efter en smartere måde, men det her gør sådanset hvad der skal ske
@@ -180,7 +179,7 @@ namespace p_layer
                     EKG_Analyser analyserEnMåling = new EKG_Analyser();
 
                     IndiSygdomTB.Text = analyserEnMåling.AnalyserEnMåling(ekgMåling);
-                    DummyTilføjPunkterTilGraf(ekgMåling);
+                    TilføjPunkterTilGraf(ekgMåling);
 
                     SPKommentar.Text = ekgMåling.kommentar;
                     cprTB.Text = ekgMåling.borger_cprnr;
@@ -202,23 +201,12 @@ namespace p_layer
 
         private void CprLB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //ekgMåling = null;
-            //OpdaterCprB.IsEnabled = false;
-            //cprTB.IsReadOnly = true;
-            //ekgLine.Values.Clear();
-            //SPKommentar.Text = "";
-            //IndiSygdomTB.Text = "";
-            //TilføjKommentarL.Content = "Tilføj evt kommentar";
-            //SPKommentar.IsReadOnly = false;
-            //TilføjKommentarB.IsEnabled = false;
-            //UploadMålingB.IsEnabled = false;
-
             NulstilGUI();
 
             if (CprLB.SelectedIndex != -1)
             {
                 cprTB.Text = CprLB.SelectedItem.ToString().Substring(5, 11);
-                patientInfoTB.Text = hentPinfo.hentPinfo(cprTB.Text);
+                patientInfoTB.Text = hentPinfo.HentPinfo(cprTB.Text);
                 cprB.IsEnabled = true;
 
             }
@@ -378,7 +366,7 @@ namespace p_layer
         UploadToOffDb UploadToOffDb = new UploadToOffDb();
         private void UploadMålingB_Click(object sender, RoutedEventArgs e)
         {
-            bool uploaded = UploadToOffDb.uploadToOff(ekgMåling);
+            bool uploaded = UploadToOffDb.UploadToOff(ekgMåling);
             if (uploaded == true)
             {
                 MessageBox.Show("Den valgte måling er blevet uploadet til databasen");
@@ -398,7 +386,7 @@ namespace p_layer
                 {
                     case MessageBoxResult.OK:
                         {
-                            opdaterLocalDB.deleteEKG(ekgMåling);
+                            opdaterLocalDB.DeleteEKG(ekgMåling);
                             SletEKGB.IsEnabled = false;
                             ekgLine.Values.Clear();
                             CprLB.Items.Clear();

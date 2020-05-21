@@ -29,7 +29,13 @@ namespace p_layer
             InitializeComponent();
             MedarbejderIDTB.Focus();
         }
-
+        /// <summary>
+        /// Denne metode bliver kaldt når der trykkes på knappen "Login"
+        /// Ansvar: At kontrolere om de indtastede data er korrekte
+        /// Hvis de indtastede er korrekte vil mainWindow åbne
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LoginB_Click(object sender, RoutedEventArgs e)
         {
             logicObj = new LoginRequest();
@@ -49,10 +55,22 @@ namespace p_layer
             }
 
         }
+        /// <summary>
+        /// Denne metode bliver kaldt når man trykker på Kryds i toppen til højre
+        /// Denne metode lukker hele applikatioenen
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             App.Current.Shutdown();
         }
+        /// <summary>
+        /// Denne metode bliver kaldt når man trykker på "Opret ny bruger" på skærmen
+        /// Denne metode åbner OpretNyBruger vinduet
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OpretNyBrugerB_Click(object sender, RoutedEventArgs e)
         {
             

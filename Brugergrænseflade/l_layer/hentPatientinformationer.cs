@@ -7,10 +7,13 @@ using d_layer;
 
 namespace l_layer
 {
-    public class hentPatientinformationer
+    /// <summary>
+    /// Ansvar: At hente informationer om en patient
+    /// </summary>
+    public class HentPatientInfo
     {
         Local_DownloadEkg hentInformation;
-        public hentPatientinformationer()
+        public HentPatientInfo()
         {
             hentInformation = new Local_DownloadEkg();
         }
@@ -19,7 +22,7 @@ namespace l_layer
         /// </summary>
         /// <param name="socSecNb"> det cpr, der sendes med</param>
         /// <returns>returnere navn, alder og adresse på det valgte cpr</returns>
-        public string hentPinfo(string socSecNb)
+        public string HentPinfo(string socSecNb)
         {
             return hentInformation.HentPatientinfo(socSecNb);
         }

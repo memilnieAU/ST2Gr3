@@ -8,22 +8,23 @@ using System.Threading.Tasks;
 
 namespace l_layer
 {
-    public class HentNyeMålingerFraLocalDB
+    /// <summary>
+    /// Ansvar: At hente obejkter fra den lokale database
+    /// Denne klasse skal kunne hente Målinger fra den lokale database tabel "SP_NyeEkger"
+    /// </summary>
+    public class HentFraLocalDB
     {
-
         /// <summary>
-        /// Denne klasse skal kunne hente Målinger fra den lokale database tabel "SP_NyeEkger"
+        /// Liste over alle nye målinger
         /// </summary>
         public List<DTO_EkgMåling> nyeMålinger;
-
         Local_DownloadEkg downloadEkg;
-        public HentNyeMålingerFraLocalDB()
+        
+       
+        public HentFraLocalDB()
         {
             nyeMålinger = new List<DTO_EkgMåling>();
             downloadEkg = new Local_DownloadEkg();
-            
-            
-
         }
         /// <summary>
         /// Denne metoede vil hente alle "nye" målinger sendt fra EKG_måleren
@@ -47,56 +48,65 @@ namespace l_layer
             }
             return AntalNyeMålinger;
         }
-       
+       /// <summary>
+       /// Henter alle CPR nummer der forkommer i den lokale database
+       /// </summary>
+       /// <returns>Retunerer et ararry med alle nummerne</returns>
         public string[] HentAlleCprNr()
         {
-
-
             string[] alleCprNr  = downloadEkg.HentAlleCPRNr();
-
-            
             return alleCprNr;
         }
+        /// <summary>
+        /// Ansvar: At hente alle måleID'er udfra specefikt cpr_nummer
+        /// </summary>
+        /// <param name="cpr">Det specefikke cpr nummer der som, ønske måleID'er for</param>
+        /// <returns>Et array der indeholder alle måleID'er der er tilknyttet det specefikke CPR_nummer </returns>
+
         public int[] HentMåleIdUdfracpr(string cpr)
         {
             int[] måleid = downloadEkg.HentMåleIDCPR(cpr);
 
             return måleid;
         }
+        /// <summary>
+        /// Ansvar: At hente alle de måleId'er der ikke er kommenteret i databasen
+        /// </summary>
+        /// <returns> returnerer antallet af nye målinger </returns>
         public int HentantalAfNyeMålingerUKommentar()
         {
-
-
             string[] id_målinger = downloadEkg.HentAlleMåleIDerUKommentar();
-
-            
             return id_målinger.Length;
         }
+
+        /// <summary>
+        /// Ansvar: At hente alle de måleId'er der ikke er kommenteret i databasen
+        /// </summary>
+        /// <returns> returnerer alle "Cpr: xxxxxx-xxxx  MåleId: xx " som string array </returns>
         public string[] HentMåleIdPåNyeMålingerUKommentar()
         {
-
-
+           
             string[] id_målinger = downloadEkg.HentAlleMåleIDerUKommentar();
-
 
             return id_målinger;
         }
 
         /// <summary>
         /// Denne metode vil kun hente en specifik måling i databasen
+        /// Den metode tilføjer den hentede måling så den nu fremgår lokalt på computeren
         /// </summary>
-        /// <param name="ID"></param>
-        public void HentEnMålingFraLocalDB(int ID)
+        /// <param name="Måle_ID">Det måle id man ønsker at hente data fra</param>
+        public void HentEnMålingFraLocalDB(int Måle_ID)
         {
          
-            nyeMålinger.Add(downloadEkg.HentEnMåling(ID));
+            nyeMålinger.Add(downloadEkg.HentEnMåling(Måle_ID));
         }
 
         /// <summary>
         /// Denne metode returnere en specifik måling ud fra dem der er hentet fra databasen tidligere
         /// </summary>
-        /// <param name="MåleID"></param>
-        /// <returns></returns>
+        /// <param name="MåleID">Det måle ID som man ønsker at hente</param>
+        /// <returns>Retunerer en måling med alle relevante dataer</returns>
         public DTO_EkgMåling Hent1Måling(int MåleID)
         {
             foreach (DTO_EkgMåling item in nyeMålinger)
@@ -108,9 +118,6 @@ namespace l_layer
             }
             return nyeMålinger[0];
         }
-        public DTO_EkgMåling Hent1MålingUdFraAll(int placering)
-        {
-            return nyeMålinger[placering];
-        }
+
     }
 }

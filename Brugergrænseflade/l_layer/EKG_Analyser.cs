@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,34 +9,45 @@ namespace l_layer
 {
     /// <summary>
     /// Denne klasse vil kunne analysere et ekg signal
-    /// Jeg finder baseline ved at inddele alle punkter i grupper af 0.1mV
+    /// Vi finder baseline ved at inddele alle punkter i grupper af 0.1mV
     /// Et Dictionary er et 2Dimensionelt liste/array system som er, som er hurtigt at søge igennem
     /// </summary>
     public class EKG_Analyser
     {
-        Dictionary<double, int> hoizontalHistogram; //fordeling af amplityder
+        /// <summary>
+        /// Fordeling af amplityder
+        /// </summary>
+        Dictionary<double, int> hoizontalHistogram;
+        /// <summary>
+        /// Ikke i brug endnu
+        /// </summary>
         Dictionary<string, double> verticalHistogram;
-        double[] råMåling;
-        private DTOs.DTO_EkgMåling måling;
+        /// <summary>
+        /// Baseline, hvor graffen "svinger" omkring
+        /// </summary>
         public KeyValuePair<double, int> baseline;
+        /// <summary>
+        /// Patientens puls
+        /// </summary>
         double pulsPrMin;
+        /// <summary>
+        /// Det måling, som der gennems i undervejs i løbet af analysen
+        /// </summary>
+        private DTO_EkgMåling måling;
 
-        public DTOs.DTO_EkgMåling Måling
+        public DTO_EkgMåling Måling
         {
             get { return måling; }
             private set { måling = value; }
         }
 
 
-        public EKG_Analyser()
-        {
-        }
         /// <summary>
         /// Analysere en graf og retunere dianosen
         /// </summary>
-        /// <param name="målingTilAnalyse"></param>
-        /// <returns></returns>
-        public string AnalyserEnMåling(DTOs.DTO_EkgMåling målingTilAnalyse)
+        /// <param name="målingTilAnalyse">Den måling som skal analyseres</param>
+        /// <returns>Returunerer svaret på analysen</returns>
+        public string AnalyserEnMåling(DTO_EkgMåling målingTilAnalyse)
         {
             if (målingTilAnalyse.raa_data.Length == 0)
             {
@@ -55,6 +67,7 @@ namespace l_layer
         /// </summary>
         private void FindPuls()
         {
+            //TODO Find en dynamisk måde at berenge threshold
             double threshold = 0.6;
             bool underThreshold = true;
 
@@ -62,7 +75,7 @@ namespace l_layer
             int antalpulsslag = 0;
             pulsPrMin = 0;
             double tidligerepunkt = måling.raa_data[0];
-            
+
             for (int i = 0; i < måling.raa_data.Length; i++)
             {
                 double nytpunkt = måling.raa_data[i];
@@ -81,19 +94,19 @@ namespace l_layer
                 {
                     underThreshold = false;
                 }
-                
 
-                
-            
             }
 
             double samepltid = 1 / måling.samplerate_hz;
             double antalfaktiskePunkter = (måling.antal_maalepunkter - pulsslag[0] - (måling.antal_maalepunkter - pulsslag[pulsslag.Count - 1]));
             double målingsLængde = antalfaktiskePunkter * samepltid;
-            pulsPrMin = ((antalpulsslag-1)/målingsLængde)*60;
+            pulsPrMin = ((antalpulsslag - 1) / målingsLængde) * 60;
 
 
         }
+        /// <summary>
+        /// Opretter det hoizontale diagram
+        /// </summary>
         private void HoizontalHistogram()
         {
             foreach (double item in måling.raa_data)
@@ -119,13 +132,17 @@ namespace l_layer
                 }
             }
         }
+        /// <summary>
+        /// Analysere dataen udfra det hoizontale diagraam
+        /// </summary>
+        /// <returns></returns>
         private string AnalyserSygdom()
         {
             KeyValuePair<double, int> baseline1 = baseline;
             KeyValuePair<double, int> baseline2 = baseline;
             foreach (KeyValuePair<double, int> item in hoizontalHistogram)
             {
-                if (item.Key == baseline.Key-0.1)
+                if (item.Key == baseline.Key - 0.1)
                 {
                     baseline1 = item;
                 }
@@ -138,7 +155,7 @@ namespace l_layer
             //  [-0.2-0.1] 131 > [-0.1-0.0]   3300*0.9=3000 ||  [-0.1-0.0] 320 > [0.0-0.1]   3500*0.9=3000
             //  [-0.1-0.0] 1288 > [0.0-0.1]   1580*0.9=1422 ||  [0.1-0.2] 1518 > [0.0-0.1]   1580*0.9=1422
 
-            if (baseline1.Value > baseline.Value*0.6 || baseline2.Value > baseline.Value*0.6)
+            if (baseline1.Value > baseline.Value * 0.6 || baseline2.Value > baseline.Value * 0.6)
             {
                 return $"ADVARSEL: \r\nEKG-målingen indikerer atrieflimmer \nPuls: {pulsPrMin.ToString("f2")}";
             }
