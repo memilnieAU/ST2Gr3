@@ -55,76 +55,98 @@ namespace l_layer
             }
             måling = målingTilAnalyse;
             hoizontalHistogram = new Dictionary<double, int>();
-            hoizontalHistogram.Add(0, 0);
+            //hoizontalHistogram.Add(0, 0);
 
             HoizontalHistogram();
             FindPuls();
             string sygdom = AnalyserSygdom();
             return sygdom;
         }
+        public double threshold;
         /// <summary>
         /// Denne metode beregner pulsen
         /// </summary>
         private void FindPuls()
         {
             //TODO Find en dynamisk måde at berenge threshold
-            double threshold = baseline.Key + 0.6;
+            threshold = baseline.Key + 0.6;
             bool underThreshold = true;
-            double toppunkt = baseline.Key ;
+            double toppunkt = baseline.Key;
             double bundpunkt = baseline.Key;
             double amplitude = 0;
 
-            foreach (double item in hoizontalHistogram.Keys)
+            foreach (KeyValuePair<double,int> item in hoizontalHistogram)
             {
-                if (item > toppunkt)
+                if (item.Key > toppunkt)
                 {
-                    toppunkt = item;
+                    toppunkt = item.Key;
                 }
-                if (item < bundpunkt)
+                if (item.Key < bundpunkt)
                 {
-                    bundpunkt = item;
+                    bundpunkt = item.Key;
                 }
             }
-            amplitude = toppunkt - bundpunkt;
+            amplitude = toppunkt - baseline.Key;
             threshold = baseline.Key + amplitude * 0.5;
 
 
             List<double> pulsslag = new List<double>();
             int antalpulsslag = 0;
+            List<double> pulsslag2 = new List<double>();
+            int antalpulsslag2 = 0;
             pulsPrMin = 0;
             double tidligerepunkt = måling.raa_data[0];
-
-            for (int i = 0; i < måling.raa_data.Length; i++)
+            int gangeoverthres = 0;
+            int overThreshold2 = 0;
+            for (int i = Convert.ToInt32(måling.raa_data.Length*0.1); i < Convert.ToInt32(måling.raa_data.Length); i++)
             {
                 double nytpunkt = måling.raa_data[i];
+
+              
                 if (threshold < nytpunkt && underThreshold)
                 {
                     antalpulsslag++;
                     pulsslag.Add(i);
                     underThreshold = false;
                 }
+                if (threshold < nytpunkt && overThreshold2>15)
+                {
+                    antalpulsslag2++;
+                    pulsslag2.Add(i);
+                    overThreshold2 = 0;
+                }
 
                 if (threshold > nytpunkt)
                 {
                     underThreshold = true;
+                    overThreshold2 ++;
                 }
                 else
                 {
+                    overThreshold2 = 0;
                     underThreshold = false;
                 }
 
+
+            }
+
+
+
+            if (måling.samplerate_hz == 0.0005)
+            {
+                måling.samplerate_hz = 200;
             }
 
             double samepltid = 1 / måling.samplerate_hz;
             double antalfaktiskePunkter = 0;
             if (pulsslag.Count != 0)
             {
-                antalfaktiskePunkter = (måling.antal_maalepunkter - pulsslag[0] - (måling.antal_maalepunkter - pulsslag[pulsslag.Count - 1]));
+                antalfaktiskePunkter = (måling.antal_maalepunkter - pulsslag2[0] - (måling.antal_maalepunkter - pulsslag2[pulsslag2.Count - 2]));
 
             }
-            
+
             double målingsLængde = antalfaktiskePunkter * samepltid;
-            pulsPrMin = ((antalpulsslag - 1) / målingsLængde) * 60;
+            pulsPrMin = ((antalpulsslag2 - 2) / målingsLængde) * 60;
 
 
         }

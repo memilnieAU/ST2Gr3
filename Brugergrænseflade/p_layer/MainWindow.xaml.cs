@@ -39,7 +39,7 @@ namespace p_layer
         private string oprindeligCPR;
 
         HentFraLocalDB hentNyeMålinger;
-        EKG_Analyser ekg_Analyse;
+       
 
 
         public MainWindow(loginView LoginRef, LoginRequest logicRef)
@@ -57,7 +57,7 @@ namespace p_layer
             };
             Line1 = new LineSeries
             {
-                Values = new ChartValues<double> { 1, 1, 1, 1 },
+                Values = new ChartValues<double> { },
                 PointGeometry = null,
                 StrokeThickness = 1
 
@@ -66,7 +66,7 @@ namespace p_layer
             MyCollectionEkg = new SeriesCollection();
 
             MyCollectionEkg.Add(ekgLine);
-
+            MyCollectionEkg.Add(Line1);
             Formatter = value => "";
             DataContext = this;
 
@@ -102,34 +102,37 @@ namespace p_layer
         /// <summary>
         /// Denne metode tilføjer alle punkter til grafen
         /// </summary>
-        private void TilføjPunkterTilGraf(DTO_EkgMåling ekgMåling)
+        private void TilføjPunkterTilGraf(DTO_EkgMåling ekgMåling,double threshold)
         {
             ekgLine.Values.Clear();
             if (ekgMåling.raa_data.Length != 0)
             {
 
-                int i = 0;
+                
                 double højesteVærdi = ekgMåling.raa_data[0];
                 double lavesteVærdi = ekgMåling.raa_data[0];
+                Line1.Values.Clear();
 
-
-                foreach (double item in ekgMåling.raa_data)
+                for (int i = Convert.ToInt32(ekgMåling.raa_data.Length*0.1); i < ekgMåling.raa_data.Length; i++)
                 {
-                    ekgLine.Values.Add(item);
-                    i++;
-                    if (item > højesteVærdi)
+
+                    Line1.Values.Add(threshold);
+                    ekgLine.Values.Add(ekgMåling.raa_data[i]);
+                   
+                    if (ekgMåling.raa_data[i] > højesteVærdi)
                     {
-                        højesteVærdi = item;
+                        højesteVærdi = ekgMåling.raa_data[i];
                     }
-                    if (item < lavesteVærdi)
+                    if (ekgMåling.raa_data[i] < lavesteVærdi)
                     {
-                        lavesteVærdi = item;
+                        lavesteVærdi = ekgMåling.raa_data[i];
                     }
-                    if (i > 2500)
+                    if (i > ekgMåling.raa_data.Length * 0.1 + 2500)
                     {
                         break;
                     }
                 }
+                
                 højesteVærdi += 0.1;
                 lavesteVærdi -= 0.1;
                 // ekgLine.MaxHeight = højesteVærdi;
@@ -179,7 +182,7 @@ namespace p_layer
                     EKG_Analyser analyserEnMåling = new EKG_Analyser();
 
                     IndiSygdomTB.Text = analyserEnMåling.AnalyserEnMåling(ekgMåling);
-                    TilføjPunkterTilGraf(ekgMåling);
+                    TilføjPunkterTilGraf(ekgMåling,analyserEnMåling.threshold);
 
                     SPKommentar.Text = ekgMåling.kommentar;
                     cprTB.Text = ekgMåling.borger_cprnr;
@@ -350,6 +353,7 @@ namespace p_layer
         }
         private void NulstilGUI()
         {
+            Line1.Values.Clear();
             ekgMåling = null;
             OpdaterCprB.IsEnabled = false;
             SletEKGB.IsEnabled = false;
