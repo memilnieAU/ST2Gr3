@@ -68,8 +68,26 @@ namespace l_layer
         private void FindPuls()
         {
             //TODO Find en dynamisk måde at berenge threshold
-            double threshold = 0.6;
+            double threshold = baseline.Key + 0.6;
             bool underThreshold = true;
+            double toppunkt = baseline.Key ;
+            double bundpunkt = baseline.Key;
+            double amplitude = 0;
+
+            foreach (double item in hoizontalHistogram.Keys)
+            {
+                if (item > toppunkt)
+                {
+                    toppunkt = item;
+                }
+                if (item < bundpunkt)
+                {
+                    bundpunkt = item;
+                }
+            }
+            amplitude = toppunkt - bundpunkt;
+            threshold = baseline.Key + amplitude * 0.5;
+
 
             List<double> pulsslag = new List<double>();
             int antalpulsslag = 0;
@@ -98,7 +116,13 @@ namespace l_layer
             }
 
             double samepltid = 1 / måling.samplerate_hz;
-            double antalfaktiskePunkter = (måling.antal_maalepunkter - pulsslag[0] - (måling.antal_maalepunkter - pulsslag[pulsslag.Count - 1]));
+            double antalfaktiskePunkter = 0;
+            if (pulsslag.Count != 0)
+            {
+                antalfaktiskePunkter = (måling.antal_maalepunkter - pulsslag[0] - (måling.antal_maalepunkter - pulsslag[pulsslag.Count - 1]));
+
+            }
+            
             double målingsLængde = antalfaktiskePunkter * samepltid;
             pulsPrMin = ((antalpulsslag - 1) / målingsLængde) * 60;
 

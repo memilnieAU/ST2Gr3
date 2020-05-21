@@ -46,7 +46,6 @@ namespace d_layer
             {
                 connection = new SqlConnection("Data Source = st-i4dab.uni.au.dk;Initial Catalog = " + DBlogin + ";Persist Security Info = True;User ID = " + DBlogin + ";Password = " + DBlogin + "");
                 connection.Open();
-                //TODO skal den ikke også sætte information ind i dbo.EKGDATA
                 string insertStringParam = $"INSERT INTO dbo.EKGMAELING ([dato],[antalmaalinger],[sfp_ansvrmedarbjnr],[sfp_ans_org])" + $" OUTPUT INSERTED.ekgmaaleid VALUES(@dato,{nyMåling.antal_maalepunkter},'{nyMåling.id_medarbejder}','Gruppe 3')";
 
                 using (SqlCommand cmd = new SqlCommand(insertStringParam, connection))
@@ -72,7 +71,6 @@ namespace d_layer
             {
                 connection = new SqlConnection("Data Source = st-i4dab.uni.au.dk;Initial Catalog = " + DBlogin + ";Persist Security Info = True;User ID = " + DBlogin + ";Password = " + DBlogin + "");
                 connection.Open();
-                //TODO skal den ikke også sætte information ind i dbo.EKGDATA
                 string insertStringParam = $"INSERT INTO dbo.EKGDATA ([raa_data],[samplerate_hz],[interval_sec],[data_format],[bin_eller_tekst],[maaleformat_type],[start_tid],[kommentar],[ekgmaaleid])" + $" OUTPUT INSERTED.ekgmaaleid VALUES(@data, {Convert.ToInt32(nyMåling.samplerate_hz)},'{Convert.ToInt32(nyMåling.antal_maalepunkter*(1/nyMåling.samplerate_hz))}','andet','b','{nyMåling.raa_data[0].GetType()}',@dato,'{nyMåling.kommentar}', {ekgMaaleID})";
 
                 using (SqlCommand cmd = new SqlCommand(insertStringParam, connection))
@@ -81,8 +79,9 @@ namespace d_layer
                     nyMåling.raa_data.SelectMany(value =>
                     BitConverter.GetBytes(value)).ToArray());
                     cmd.Parameters.AddWithValue("@dato", nyMåling.start_tidspunkt);
-                    //cmd.Parameters.AddWithValue("@maaleid", ekgMaaleID);
-                    cmd.ExecuteScalar();
+                   
+                    //TODO Skal vi tilføje, borger information
+                    cmd.ExecuteNonQuery();
                 }
                 connection.Close();
                 

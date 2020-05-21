@@ -65,9 +65,9 @@ namespace l_layer
 
         public int[] HentMåleIdUdfracpr(string cpr)
         {
-            int[] måleid = downloadEkg.HentMåleIDCPR(cpr);
-
-            return måleid;
+            int[] måleIder = downloadEkg.HentMåleIDCPR(cpr);
+            
+            return måleIder;
         }
         /// <summary>
         /// Ansvar: At hente alle de måleId'er der ikke er kommenteret i databasen

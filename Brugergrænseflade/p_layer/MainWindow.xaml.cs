@@ -36,7 +36,7 @@ namespace p_layer
         private HentPatientInfo hentPinfo;
         public string medarbejderID;
         OpdaterLocalDB opdaterLocalDB;
-        private string gammelCpr;
+        private string oprindeligCPR;
 
         HentFraLocalDB hentNyeMålinger;
         EKG_Analyser ekg_Analyse;
@@ -46,7 +46,7 @@ namespace p_layer
         {
             InitializeComponent();
             opdaterLocalDB = new OpdaterLocalDB();
-            //TODO få tilføjet medarbejderID'et her og evt et navn, hvis dette skal med og tilføjes i databasen
+           
             ekgLine = new LineSeries
             {
                 Values = new ChartValues<double> { },
@@ -155,7 +155,7 @@ namespace p_layer
         DTO_EkgMåling ekgMåling;
         private void CprB_Click(object sender, RoutedEventArgs e)
         {
-            gammelCpr = cprTB.Text;
+            oprindeligCPR = cprTB.Text;
             if (CprLB.SelectedIndex != -1)
             {
                 if (FindNyPatientTrykket == true)
@@ -278,6 +278,7 @@ namespace p_layer
             FindNyPatientTrykket = false;
             CprLB.Items.Clear();
 
+           
             foreach (var måling in hentNyeMålinger.HentMåleIdPåNyeMålingerUKommentar())
             {
                 CprLB.Items.Add(måling);
@@ -329,13 +330,14 @@ namespace p_layer
                             {
                                 ekgMåling.borger_cprnr = cprTB.Text;
                                 opdaterLocalDB.OpdaterCpr(ekgMåling);
-                                // CprLB.SelectedItem = "test";
+                                
                                 CprLB.Items.Clear();
                                 NulstilGUI();
                                 break;
                             }
                         case MessageBoxResult.Cancel:
-                            cprTB.Text = gammelCpr;
+                            
+                            cprTB.Text = oprindeligCPR;
                             cprTB.Focus();
                             break;
                     }
@@ -350,6 +352,7 @@ namespace p_layer
         {
             ekgMåling = null;
             OpdaterCprB.IsEnabled = false;
+            SletEKGB.IsEnabled = false;
             cprTB.IsReadOnly = true;
             ekgLine.Values.Clear();
             SPKommentar.Text = "";
@@ -387,15 +390,12 @@ namespace p_layer
                     case MessageBoxResult.OK:
                         {
                             opdaterLocalDB.DeleteEKG(ekgMåling);
-                            SletEKGB.IsEnabled = false;
-                            ekgLine.Values.Clear();
                             CprLB.Items.Clear();
+                            NulstilGUI();
                             break;
-
                         }
                     case MessageBoxResult.Cancel:
                         break;
-
                 }
             }
         }
