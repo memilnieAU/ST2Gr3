@@ -149,8 +149,8 @@ namespace d_layer
             conn = new SqlConnection("Data Source = st-i4dab.uni.au.dk;Initial Catalog = " + db + ";Persist Security Info = True;User ID = " + db + ";Password = " + db + "");
             conn.Open();
             SqlDataReader rdr;
-
-            List<string> tal = new List<string>();
+         
+            List<string> alleCprNr = new List<string>();
 
             string selectString = "Select borger_cprnr From SP_NyeEkger Order by borger_cprnr";
             using (SqlCommand cmd = new SqlCommand(selectString, conn))
@@ -159,16 +159,16 @@ namespace d_layer
                 while (rdr.Read())
                 {
                     string cpr = ((string)rdr["borger_cprnr"]);
-                    if (tal.Contains(cpr) == false)
+                    if (alleCprNr.Contains(cpr) == false)
                     {
-                        tal.Add(cpr);
+                        alleCprNr.Add(cpr);
 
                     }
                 }
                 
             }
             conn.Close();
-            return tal.ToArray();
+            return alleCprNr.ToArray();
         }
         /// <summary>
         /// Ansvar: At hente alle måleID'er udfra specefikt cpr_nummer
@@ -182,8 +182,8 @@ namespace d_layer
             conn = new SqlConnection("Data Source = st-i4dab.uni.au.dk;Initial Catalog = " + db + ";Persist Security Info = True;User ID = " + db + ";Password = " + db + "");
             conn.Open();
             SqlDataReader rdr;
-
-            List<int> tal = new List<int>();
+           
+            List<int> MåleIDer = new List<int>();
 
             string selectString = $"Select id_måling From SP_NyeEkger where borger_cprnr = '{cpr}'";
             using (SqlCommand cmd = new SqlCommand(selectString, conn))
@@ -191,13 +191,13 @@ namespace d_layer
                 rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
-                    tal.Add((int)rdr["id_måling"]);
+                    MåleIDer.Add((int)rdr["id_måling"]);
 
                 }
                 //tal = (int)rdr["AntalMålinger"];
             }
             conn.Close();
-            return tal.ToArray();
+            return MåleIDer.ToArray();
         }
 
         /// <summary>
