@@ -131,7 +131,7 @@ namespace l_layer
             }
 
 
-
+            //TODO OBS det er ikke den rigtige samplerate vi får med fra uPc
             if (måling.samplerate_hz == 0.0005)
             {
                 måling.samplerate_hz = 200;
