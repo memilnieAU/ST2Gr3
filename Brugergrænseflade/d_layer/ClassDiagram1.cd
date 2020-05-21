@@ -1,35 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="d_layer.DownloadFraLocalFile" Collapsed="true">
-    <Position X="0.5" Y="0.5" Width="1.5" />
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="d_layer.DownloadFraLocalFile">
+    <Position X="3.75" Y="3.75" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAgAAAAQAAAAAAAAAAAAAFAAAAAAAAAAAAAA=</HashCode>
       <FileName>DownloadFraLocalFile.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="d_layer.Local_DownloadEkg" Collapsed="true">
-    <Position X="2.25" Y="0.5" Width="2.25" />
+    <Position X="5.25" Y="0.5" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AACAEAAAAAAAAQAAAACABAAAACAAAAAKgAAAAAAAAAA=</HashCode>
       <FileName>Local_DownloadEkg.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="d_layer.Local_UploadEkg" Collapsed="true">
-    <Position X="4.75" Y="0.5" Width="1.5" />
+    <Position X="9" Y="0.5" Width="3.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAABAAAAAIAAAAAAAAAAAABAAAAI=</HashCode>
       <FileName>Local_UploadEkg.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="d_layer.Local_User" Collapsed="true">
-    <Position X="0.5" Y="1.5" Width="1.5" />
+    <Position X="7" Y="1.75" Width="3.75" />
     <TypeIdentifier>
       <HashCode>AAAQCAAAAAAAIAAAAQABAAAAAAQAAAAAAAAAAQAQAAA=</HashCode>
       <FileName>Local_User.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="d_layer.Up_download_Offentlig" Collapsed="true">
-    <Position X="2.25" Y="1.5" Width="2.25" />
+    <Position X="8" Y="1" Width="3.75" />
     <TypeIdentifier>
       <HashCode>AAAAAACAgAAAAAAAAQABAAgAAAAAAAAAAAgAAAAAAAA=</HashCode>
       <FileName>Up_download_Offentlig.cs</FileName>

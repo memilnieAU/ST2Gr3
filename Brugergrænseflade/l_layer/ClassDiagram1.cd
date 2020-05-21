@@ -1,27 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
-  <Class Name="d_layer.DownloadFraLocalFile">
-    <Position X="4" Y="1.25" Width="4" />
+  <Class Name="d_layer.DownloadFraLocalFile" Collapsed="true">
+    <Position X="0.5" Y="0.75" Width="4" />
     <TypeIdentifier />
   </Class>
   <Class Name="d_layer.Local_DownloadEkg" Collapsed="true">
-    <Position X="5.75" Y="1.25" Width="1.5" />
+    <Position X="0.5" Y="1.25" Width="3.5" />
     <TypeIdentifier />
   </Class>
   <Class Name="d_layer.Local_UploadEkg" Collapsed="true">
-    <Position X="7.5" Y="1.25" Width="1.5" />
+    <Position X="1.5" Y="2" Width="3.75" />
     <TypeIdentifier />
   </Class>
   <Class Name="d_layer.Local_User" Collapsed="true">
-    <Position X="4" Y="2.25" Width="1.5" />
+    <Position X="1" Y="3.5" Width="3.5" />
     <TypeIdentifier />
   </Class>
   <Class Name="d_layer.Up_download_Offentlig" Collapsed="true">
-    <Position X="5.75" Y="2.25" Width="1.5" />
+    <Position X="6.25" Y="0.75" Width="3" />
     <TypeIdentifier />
   </Class>
-  <Class Name="DTOs.DTO_EkgMåling" Collapsed="true">
-    <Position X="8.5" Y="2.5" Width="1.5" />
+  <Class Name="DTOs.DTO_EkgMåling">
+    <Position X="6.5" Y="2.25" Width="4" />
     <TypeIdentifier />
   </Class>
   <Font Name="Segoe UI" Size="9" />
