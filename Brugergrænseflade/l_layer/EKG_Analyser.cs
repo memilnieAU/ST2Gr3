@@ -11,17 +11,21 @@ namespace l_layer
     /// Denne klasse vil kunne analysere et ekg signal
     /// Vi finder baseline ved at inddele alle punkter i grupper af 0.1mV
     /// Et Dictionary er et 2Dimensionelt liste/array system som er, som er hurtigt at søge igennem
-    /// 
-    /// SUDO Kode:
-    /// 1. Laver et hoizontal histogram med opdeling i bins af 0.1V
+    /// <example>
+    /// <code>
+    /// Pseudo Kode:
+    /// 1. Laver et horisontalt histogram med opdeling i bins af 0.1V
     /// 2. Find baseline ved at tage den bin med flest forekomster
-    /// 3. Find dynamisk threshold så man kan detektere p-taker, threshold er 40% af amplityden
-    /// 4. Ud fra threshold skal der tælles r-takker (Plusslag), der tages højde for støj
-    /// 5. Ud fra sampleraten [hz] kan målingens længde berenges, derefter fra rengnes alt frem til anden p-tak
-    /// 6. Der efter tages antalet af pulsslag og devideres med målingens længde, og ganger efterfølgene med 60 for at få det pulsslag pr. minut
-    /// 7. Analyse af atrieflimmer, sker ved at kigge på de 2 nærmeste bins omkring baseline.
-    ///     Hvis der er mere end 60% af forekomsterne end baseline, indikere det atrieflimmer
-    /// 8. Det retuneres om der er sygdom eller ej
+    /// 3. Find dynamisk threshold så man kan detektere R-takker, threshold er 50% af amplituden
+    /// 4. Ud fra threshold skal der tælles R-takker (Pulsslag), der tages højde for støj
+    /// 5. Ud fra sampleraten [hz] kan målingens længde beregnes, derefter fraregnes alt frem til anden R-tak
+    /// 6. Derefter tages antallet af pulsslag og divideres med målingens længde,
+    ///     og ganges efterfølgende med 60 for at få det i pulsslag pr. minut 
+    /// 7. Analyse af atrieflimren, sker ved at kigge på de 2 nærmeste bins omkring baseline.
+    ///     Hvis der er mere end 60% af forekomsterne end baseline, indikerer det atrieflimren
+    /// 8. Det returneres om der er sygdom eller ej
+    /// </code>
+    /// </example>
     /// </summary>
     public class EKG_Analyser
     {
