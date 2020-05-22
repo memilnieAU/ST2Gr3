@@ -29,19 +29,26 @@ namespace p_layer
         //i stedet for at hide mainwindow har vi i App.xaml sat StartupUri="loginView.xaml", dette gør at programmet starter i loginView og derefter opretter mainWindow
         public SeriesCollection MyCollectionEkg { get; set; }
         private LineSeries ekgLine;
-        private LineSeries Line1;
+        private LineSeries threshold;
         public Func<double, string> Formatter { get; set; }
-
+        private bool FindNyPatientTrykket = false;
+        DTO_EkgMåling ekgMåling;
+        Stopwatch sw = new Stopwatch();
+        int antalNyeMåinger = 0;
         private loginView loginref;
         private HentPatientInfo hentPinfo;
         public string medarbejderID;
         OpdaterLocalDB opdaterLocalDB;
         private string oprindeligCPR;
-
+        UploadToOffDb UploadToOffDb = new UploadToOffDb();
         HentFraLocalDB hentNyeMålinger;
        
 
-
+        /// <summary>
+        /// Constructoren for mainwindow. sørger for at der bliver oprettet en graf
+        /// </summary>
+        /// <param name="LoginRef">referenceobjekt til Loginview</param>
+        /// <param name="logicRef">referenceobjekt til l_layer</param>
         public MainWindow(loginView LoginRef, LoginRequest logicRef)
         {
             InitializeComponent();
@@ -55,7 +62,7 @@ namespace p_layer
                 Fill = Brushes.Transparent
 
             };
-            Line1 = new LineSeries
+            threshold = new LineSeries
             {
                 Values = new ChartValues<double> { },
                 PointGeometry = null,
@@ -66,7 +73,7 @@ namespace p_layer
             MyCollectionEkg = new SeriesCollection();
 
             MyCollectionEkg.Add(ekgLine);
-            MyCollectionEkg.Add(Line1);
+            MyCollectionEkg.Add(threshold);
             Formatter = value => "";
             DataContext = this;
 
@@ -98,10 +105,12 @@ namespace p_layer
             uploadNewDataFraLocalFile.HentDataFraFil(25);
         }
 
-        
+
         /// <summary>
         /// Denne metode tilføjer alle punkter til grafen
         /// </summary>
+        /// <param name="ekgMåling">objekt af DTO_ekgmåling - indeholder alle informationer til EKG-målingen</param>
+        /// <param name="threshold">indikere at hvis det er over, er det en r-tak</param>
         private void TilføjPunkterTilGraf(DTO_EkgMåling ekgMåling,double threshold)
         {
             ekgLine.Values.Clear();
@@ -111,12 +120,12 @@ namespace p_layer
                 
                 double højesteVærdi = ekgMåling.raa_data[0];
                 double lavesteVærdi = ekgMåling.raa_data[0];
-                Line1.Values.Clear();
+                this.threshold.Values.Clear();
 
                 for (int i = Convert.ToInt32(ekgMåling.raa_data.Length*0.1); i < ekgMåling.raa_data.Length; i++)
                 {
 
-                    Line1.Values.Add(threshold);
+                    this.threshold.Values.Add(threshold);
                     ekgLine.Values.Add(ekgMåling.raa_data[i]);
                    
                     if (ekgMåling.raa_data[i] > højesteVærdi)
@@ -147,6 +156,11 @@ namespace p_layer
             }
         }
 
+        /// <summary>
+        /// denne knap, genstarter programmet, som får brugeren tilbage til login-vinduet
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LogAfB_Click(object sender, RoutedEventArgs e)
         {
             //denne kode genstarter programmet, jeg leder lige efter en smartere måde, men det her gør sådanset hvad der skal ske
@@ -154,8 +168,11 @@ namespace p_layer
             Application.Current.Shutdown();
         }
 
-
-        DTO_EkgMåling ekgMåling;
+        /// <summary>
+        /// "vælg" knappen- opdatere henholdsvis listboxen med cpr og målinger, og grafen og patientinformationsboxen
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CprB_Click(object sender, RoutedEventArgs e)
         {
             oprindeligCPR = cprTB.Text;
@@ -202,6 +219,11 @@ namespace p_layer
 
         }
 
+        /// <summary>
+        /// hvis brugeren har valgt i listboxen, opdatere den cpr, patientinformation og enabler vælg knappen. ellers unenabler den vælg knappen 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CprLB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             NulstilGUI();
@@ -219,7 +241,6 @@ namespace p_layer
 
 
 
-        private bool FindNyPatientTrykket = false;
         /// <summary>
         /// Denne metode lister alle cprnummer, som fremgår i den lokale database, som har en kommentar tilknytttet 
         /// </summary>
@@ -239,6 +260,11 @@ namespace p_layer
 
         }
 
+        /// <summary>
+        /// denne metode knytter en indtastet kommentar til den valgte måling. gør det muligt for brugeren at uploade til den offentlige database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TilføjKommentarB_Click(object sender, RoutedEventArgs e)
         {
 
@@ -268,14 +294,18 @@ namespace p_layer
         }
 
         #region Hent nye målinger
-
         ICommand hentNyeMålingerCommand;
+        /// <summary>
+        /// klikevent fra hent nye målinger, en anden måde at køre den normale click_event
+        /// </summary>
         public ICommand HentNyeMålingerCommand
         {
             get { return hentNyeMålingerCommand ?? (hentNyeMålingerCommand = new RelayCommand(HentNyeMålingerHandler, HentNyeMålingerHandlerCanExecute)); }
         }
 
-
+        /// <summary>
+        /// henter de nye målinger fra den lokale database
+        /// </summary>
         public void HentNyeMålingerHandler()
         {
             FindNyPatientTrykket = false;
@@ -289,8 +319,10 @@ namespace p_layer
             }
         }
 
-        Stopwatch sw = new Stopwatch();
-        int antalNyeMåinger = 0;
+        /// <summary>
+        /// tjekker om der er nye(ukommenterede) målinger i databasen
+        /// </summary>
+        /// <returns></returns>
         public bool HentNyeMålingerHandlerCanExecute()
         {
             sw.Start();
@@ -308,17 +340,34 @@ namespace p_layer
             return false;
         }
         #endregion 
+
+        /// <summary>
+        /// lukker appen, når der trykkes på krydset
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             App.Current.Shutdown();
         }
 
+        /// <summary>
+        /// sker når vinduet er loadet. tilføjer medarbejderID'et, der bliver logget ind med i loginoplysninger
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             loginInfoTB.Text = "MedarbejderID: " + medarbejderID;
 
         }
 
+
+        /// <summary>
+        /// metoden opdatere CPR nummeret på den givne måling hvis brugeren vælger at bekræfte at opdatere. ellers fokusere den i cpr textboxen
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OpdaterCprB_Click(object sender, RoutedEventArgs e)
         {
             if (ekgMåling != null)
@@ -351,9 +400,14 @@ namespace p_layer
                 //patientInfoTB.Text = hentPinfo.hentPinfo(cprTB.Text);
             }
         }
+
+        /// <summary>
+        /// kaldes af listboxen bliver ændret,
+        ///Ansvar: sætter mainvindue "tilbage til start" alt ser ud som, hvis man lige var logget på systemet
+        /// </summary>
         private void NulstilGUI()
         {
-            Line1.Values.Clear();
+            threshold.Values.Clear();
             ekgMåling = null;
             OpdaterCprB.IsEnabled = false;
             SletEKGB.IsEnabled = false;
@@ -370,7 +424,12 @@ namespace p_layer
             patientInfoTB.Text = "";
 
         }
-        UploadToOffDb UploadToOffDb = new UploadToOffDb();
+        /// <summary>
+        /// kaldes af tryk på upload måling
+        ///Ansvar: uploader måling til den offentlige database
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UploadMålingB_Click(object sender, RoutedEventArgs e)
         {
             bool uploaded = UploadToOffDb.UploadToOff(ekgMåling);
@@ -384,6 +443,13 @@ namespace p_layer
             { MessageBox.Show("Der gik noget galt da den valgte måling skulle uploades til databasen. Prøv igen eller tjek din database-forbindelse"); }
         }
 
+        /// <summary>
+        /// kaldes af tryk på slet EKG knap
+        /// Ansvar: giver brugeren et valg, om vedkommende ønsker at slette den valgte måling.
+        /// udkom: sletter i den lokale database, hvis der trykkes ok.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SletEKGB_Click(object sender, RoutedEventArgs e)
         {
             if (ekgMåling != null)
@@ -404,6 +470,12 @@ namespace p_layer
             }
         }
 
+        /// <summary>
+        /// kaldes hvis der kommer ændringer i textboxen
+        /// Ansvar gør knappen tilføj kommentar enabled
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SPKommentar_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (ekgMåling != null)
@@ -424,6 +496,12 @@ namespace p_layer
             }
         }
 
+        /// <summary>
+        /// metoden kaldes når der er ændringer i cpr-textboxen
+        /// ansvar: når antallet af karaktere i cprtextboxen er 11, enables opdaterCPR knappen
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cprTB_TextChanged(object sender, TextChangedEventArgs e)
         {
             if (cprTB.Text.Length == 11)

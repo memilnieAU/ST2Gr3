@@ -28,6 +28,13 @@ namespace p_layer
             MedarbejderIDTB.Focus();
         }
 
+        /// <summary>
+        /// metoden bliver kaldt når der trykkes på opret ny bruger
+        ///Ansvar tjekker om de indtastede data stemmer overens med de krav, der er til det MedarbejderID og password, der bliver indtastet
+        ///hvis dataen opfylder de stillede krav, bliver brugeren oprettet i databasen og programmet viser loginvinduet, hvor brugeren kan logge ind
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OpretNyBrugerB_Click(object sender, RoutedEventArgs e)
         {
             logicObj = new LoginRequest();
@@ -71,11 +78,23 @@ namespace p_layer
             
            
         }
+        /// <summary>
+        /// bliver kaldt, hvis der trykkes på krydset
+        /// Ansvar lukker hele programmet
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             App.Current.Shutdown();
         }
 
+        /// <summary>
+        /// metoden bliver kaldt, når der trykkes allerede oprettet
+        /// Ansvar viser login vinduet. lukker opret bruger
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AlleredeOprettetB_Click(object sender, RoutedEventArgs e)
         {
             loginView lWRef = new loginView();
