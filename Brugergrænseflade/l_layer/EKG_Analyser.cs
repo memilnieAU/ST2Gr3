@@ -11,6 +11,17 @@ namespace l_layer
     /// Denne klasse vil kunne analysere et ekg signal
     /// Vi finder baseline ved at inddele alle punkter i grupper af 0.1mV
     /// Et Dictionary er et 2Dimensionelt liste/array system som er, som er hurtigt at søge igennem
+    /// 
+    /// SUDO Kode:
+    /// 1. Laver et hoizontal histogram med opdeling i bins af 0.1V
+    /// 2. Find baseline ved at tage den bin med flest forekomster
+    /// 3. Find dynamisk threshold så man kan detektere p-taker, threshold er 40% af amplityden
+    /// 4. Ud fra threshold skal der tælles r-takker (Plusslag), der tages højde for støj
+    /// 5. Ud fra sampleraten [hz] kan målingens længde berenges, derefter fra rengnes alt frem til anden p-tak
+    /// 6. Der efter tages antalet af pulsslag og devideres med målingens længde, og ganger efterfølgene med 60 for at få det pulsslag pr. minut
+    /// 7. Analyse af atrieflimmer, sker ved at kigge på de 2 nærmeste bins omkring baseline.
+    ///     Hvis der er mere end 60% af forekomsterne end baseline, indikere det atrieflimmer
+    /// 8. Det retuneres om der er sygdom eller ej
     /// </summary>
     public class EKG_Analyser
     {
@@ -30,11 +41,11 @@ namespace l_layer
         /// Patientens puls
         /// </summary>
         double pulsPrMin;
+       
+        private DTO_EkgMåling måling;
         /// <summary>
         /// Det måling, som der gennems i undervejs i løbet af analysen
         /// </summary>
-        private DTO_EkgMåling måling;
-
         public DTO_EkgMåling Måling
         {
             get { return måling; }
@@ -62,14 +73,15 @@ namespace l_layer
             string sygdom = AnalyserSygdom();
             return sygdom;
         }
+        /// <summary>
+        /// Hvis punkter er over dette nivoue betyder det at det er en r-tak, altså et plus slag
+        /// </summary>
         public double threshold;
         /// <summary>
         /// Denne metode beregner pulsen
         /// </summary>
         private void FindPuls()
         {
-            //TODO Find en dynamisk måde at berenge threshold
-            threshold = baseline.Key + 0.6;
             bool underThreshold = true;
             double toppunkt = baseline.Key;
             double bundpunkt = baseline.Key;
