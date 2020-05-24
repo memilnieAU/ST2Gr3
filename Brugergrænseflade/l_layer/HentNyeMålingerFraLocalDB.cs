@@ -31,12 +31,8 @@ namespace l_layer
         /// </summary>
         public int HentAlleMålingerFraLocalDB()
         {
-
-           
             int[] id_målinger = downloadEkg.HentAlleMåleIDer();
-
             int AntalNyeMålinger = 0;
-
             foreach (int item in id_målinger)
             {
                 DTO_EkgMåling dTO_EkgMåling = (downloadEkg.HentEnMåling(item));

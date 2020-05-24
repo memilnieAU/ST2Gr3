@@ -116,16 +116,14 @@ namespace p_layer
             ekgLine.Values.Clear();
             if (ekgMåling.raa_data.Length != 0)
             {
-
-                
                 double højesteVærdi = ekgMåling.raa_data[0];
                 double lavesteVærdi = ekgMåling.raa_data[0];
                 this.threshold.Values.Clear();
 
-                for (int i = Convert.ToInt32(ekgMåling.raa_data.Length*0.1); i < ekgMåling.raa_data.Length; i++)
+                for (int i = Convert.ToInt32(ekgMåling.raa_data.Length*0.1); i < ekgMåling.raa_data.Length-10; i++)
                 {
-
-                    this.threshold.Values.Add(threshold);
+                    double gns = (ekgMåling.raa_data[i] + ekgMåling.raa_data[i + 1] + ekgMåling.raa_data[i + 2] + ekgMåling.raa_data[i + 3] + ekgMåling.raa_data[i + 4]+ ekgMåling.raa_data[i+5] + ekgMåling.raa_data[i + 6] + ekgMåling.raa_data[i + 7] + ekgMåling.raa_data[i + 8] + ekgMåling.raa_data[i + 9]) / 10;
+                    this.threshold.Values.Add(gns);
                     ekgLine.Values.Add(ekgMåling.raa_data[i]);
                    
                     if (ekgMåling.raa_data[i] > højesteVærdi)

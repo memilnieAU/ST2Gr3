@@ -22,7 +22,7 @@ namespace l_layer
     /// 6. Derefter tages antallet af pulsslag og divideres med målingens længde,
     ///     og ganges efterfølgende med 60 for at få det i pulsslag pr. minut 
     /// 7. Analyse af atrieflimren, sker ved at kigge på de 2 nærmeste bins omkring baseline.
-    ///     Hvis der er mere end 60% af forekomsterne end baseline, indikerer det atrieflimren
+    ///     Hvis der er mere end 50% af forekomsterne end baseline, indikerer det atrieflimren
     /// 8. Det returneres om der er sygdom eller ej
     /// </code>
     /// </example>
@@ -150,19 +150,19 @@ namespace l_layer
             //TODO OBS det er ikke den rigtige samplerate vi får med fra uPc
             if (måling.samplerate_hz == 0.0005)
             {
-                måling.samplerate_hz = 200;
+                måling.samplerate_hz = 500;
             }
 
             double samepltid = 1 / måling.samplerate_hz;
             double antalfaktiskePunkter = 0;
             if (pulsslag.Count != 0)
             {
-                antalfaktiskePunkter = (måling.antal_maalepunkter - pulsslag2[0] - (måling.antal_maalepunkter - pulsslag2[pulsslag2.Count - 2]));
+                antalfaktiskePunkter = (måling.antal_maalepunkter - pulsslag2[0] - (måling.antal_maalepunkter - pulsslag2[pulsslag2.Count - 1]));
 
             }
 
             double målingsLængde = antalfaktiskePunkter * samepltid;
-            pulsPrMin = ((antalpulsslag2 - 2) / målingsLængde) * 60;
+            pulsPrMin = ((antalpulsslag2 - 1) / målingsLængde) * 60;
 
 
         }
@@ -217,7 +217,7 @@ namespace l_layer
             //  [-0.2-0.1] 131 > [-0.1-0.0]   3300*0.9=3000 ||  [-0.1-0.0] 320 > [0.0-0.1]   3500*0.9=3000
             //  [-0.1-0.0] 1288 > [0.0-0.1]   1580*0.9=1422 ||  [0.1-0.2] 1518 > [0.0-0.1]   1580*0.9=1422
 
-            if (baseline1.Value > baseline.Value * 0.6 || baseline2.Value > baseline.Value * 0.6)
+            if (baseline1.Value > baseline.Value * 0.5 || baseline2.Value > baseline.Value * 0.5)
             {
                 return $"ADVARSEL: \r\nEKG-målingen indikerer atrieflimmer \nPuls: {pulsPrMin.ToString("f2")}";
             }

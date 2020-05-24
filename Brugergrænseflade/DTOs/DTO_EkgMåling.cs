@@ -5,7 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace DTOs
-{   /// <summary>
+{
+    
+
+    /// <summary>
     /// Et DTO som indholder relveante data'er som tilhører en målling
     /// </summary>
     public class DTO_EkgMåling
