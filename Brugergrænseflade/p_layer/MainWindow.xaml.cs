@@ -73,7 +73,7 @@ namespace p_layer
             MyCollectionEkg = new SeriesCollection();
 
             MyCollectionEkg.Add(ekgLine);
-            MyCollectionEkg.Add(threshold);
+            //MyCollectionEkg.Add(threshold);
             Formatter = value => "";
             DataContext = this;
 
@@ -122,8 +122,7 @@ namespace p_layer
 
                 for (int i = Convert.ToInt32(ekgMåling.raa_data.Length*0.1); i < ekgMåling.raa_data.Length-10; i++)
                 {
-                    double gns = (ekgMåling.raa_data[i] + ekgMåling.raa_data[i + 1] + ekgMåling.raa_data[i + 2] + ekgMåling.raa_data[i + 3] + ekgMåling.raa_data[i + 4]+ ekgMåling.raa_data[i+5] + ekgMåling.raa_data[i + 6] + ekgMåling.raa_data[i + 7] + ekgMåling.raa_data[i + 8] + ekgMåling.raa_data[i + 9]) / 10;
-                    this.threshold.Values.Add(gns);
+                  // this.threshold.Values.Add(threshold);
                     ekgLine.Values.Add(ekgMåling.raa_data[i]);
                    
                     if (ekgMåling.raa_data[i] > højesteVærdi)
